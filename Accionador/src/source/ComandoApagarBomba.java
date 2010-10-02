@@ -6,7 +6,6 @@ public class ComandoApagarBomba implements Command {
 	
 	private Tanque tanque;
 	
-	@Override
 	public void ejecutar() {
 		bomba.setEncendida(false);
 		bomba.mostrarEstadoBomba();

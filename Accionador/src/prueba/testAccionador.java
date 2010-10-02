@@ -21,8 +21,6 @@ public class testAccionador extends TestCase {
 	
 	private Evento evento2;
 	
-	private Evento evento3;
-	
 	private List<Evento> lista;	
 	
 	private Command commandPrenderBomba;

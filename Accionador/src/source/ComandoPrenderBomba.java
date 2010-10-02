@@ -3,7 +3,7 @@ package source;
 public class ComandoPrenderBomba implements Command{
 
 	private Bomba bomba;
-	@Override
+	
 	public void ejecutar() {
 		this.bomba.setEncendida(true);
 		this.bomba.mostrarEstadoBomba();
