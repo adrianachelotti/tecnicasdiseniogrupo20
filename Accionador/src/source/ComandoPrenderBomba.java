@@ -1,6 +1,6 @@
 package source;
 
-public class ComandoPrenderBomba implements Command{
+public class ComandoPrenderBomba implements Accion{
 
 	private Bomba bomba;
 	
