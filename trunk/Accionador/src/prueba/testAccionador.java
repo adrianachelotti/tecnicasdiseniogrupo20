@@ -7,37 +7,37 @@ import java.util.List;
 import source.*;
 import junit.framework.TestCase;
 
-public class testAccionador extends TestCase {
+public class testAccionador extends  TestCase {
 
-	private Accionador accionador;
+	private ManejadorDeSucesos accionador;
 	
 	private Tanque tanque;
 	
 	private Bomba bomba;
 	
-	private Evento evento;
+	private Suceso evento;
 	
-	private Evento evento1;
+	private Suceso evento1;
 	
-	private Evento evento2;
+	private Suceso evento2;
 	
-	private List<Evento> lista;	
+	private List<Suceso> lista;	
 	
-	private Command commandPrenderBomba;
+	private Accion commandPrenderBomba;
 	
-	private Command commandApagarBomba;
+	private Accion commandApagarBomba;
 	
 	@Override
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
 		super.setUp();		
-		this.accionador = Accionador.getInstancia();
+		this.accionador = ManejadorDeSucesos.getInstancia();
 		this.bomba = new Bomba();
 		this.tanque = new Tanque();
-		this.evento = new Evento();
-		this.evento1 = new Evento();
-		this.evento2 = new Evento();
-		this.lista = new LinkedList<Evento>();
+		this.evento = new Suceso();
+		this.evento1 = new Suceso();
+		this.evento2 = new Suceso();
+		this.lista = new LinkedList<Suceso>();
 		this.commandApagarBomba = new ComandoApagarBomba();
 		
 		((ComandoApagarBomba)this.commandApagarBomba).setBomba(bomba);
@@ -47,9 +47,9 @@ public class testAccionador extends TestCase {
 		((ComandoPrenderBomba)this.commandPrenderBomba).setBomba(bomba);
 		
 		
-		this.evento.setIdEvento("pocaAgua");
-		this.evento1.setIdEvento("tanqueLleno");
-		this.evento2.setIdEvento("presionAlta");
+		this.evento.setIdSuceso("pocaAgua");
+		this.evento1.setIdSuceso("tanqueLleno");
+		this.evento2.setIdSuceso("presionAlta");
 
 	
 		
@@ -57,24 +57,24 @@ public class testAccionador extends TestCase {
 	
 	public void testSuscribirEvento(){
 		//si pocaAgua ---> comando=PrenderBomba
-		this.accionador.suscribirEventoYRespuesta(commandPrenderBomba, evento);
+		this.accionador.suscribirImplicacion(commandPrenderBomba, evento);
 	}
 	
 	public void testSuscribirEventosObjeto(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		lista.add(evento);
 		lista.add(evento2);
-		this.accionador.suscribirEventosYRespuesta(commandPrenderBomba, lista);
+		this.accionador.suscribirImplicacion(commandPrenderBomba, lista);
 		
 	}
 	public void testEventoOcurrido(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		lista.add(evento);
 		lista.add(evento2);
-		this.accionador.suscribirEventosYRespuesta(commandPrenderBomba, lista);
+		this.accionador.suscribirImplicacion(commandPrenderBomba, lista);
 		//Si muchaAgua -----------------> apagarBomba
-		this.accionador.suscribirEventoYRespuesta(commandApagarBomba, evento1);
-		this.accionador.update(evento1);	
+		this.accionador.suscribirImplicacion(commandApagarBomba, evento1);
+		this.accionador.notificar(evento1);	
 		assertEquals(10,tanque.getNivelAgua());
 		assertEquals(false,bomba.isEncendida());
 	}
@@ -83,9 +83,9 @@ public class testAccionador extends TestCase {
 		
 		lista.add(evento);
 		lista.add(evento2);
-		this.accionador.suscribirEventosYRespuesta(commandPrenderBomba, lista);
-		this.accionador.suscribirEventoYRespuesta(commandApagarBomba, evento1);
-		this.accionador.update(lista);		
+		this.accionador.suscribirImplicacion(commandPrenderBomba, lista);
+		this.accionador.suscribirImplicacion(commandApagarBomba, evento1);
+		this.accionador.notificar(lista);		
 	}
 	
 	
