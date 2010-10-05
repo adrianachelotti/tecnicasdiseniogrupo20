@@ -47,7 +47,7 @@ public class testManejadorDeSucesos extends  TestCase {
 		this.accionPrenderBomba.setBomba(bomba);
 	}
 	
-	public void testSuscribirImplicacionYNotificarEvento(){
+	public void testSuscribirImplicacionYNotificarSuceso(){
 		//si pocaAgua ---> accionPrenderBomba
 		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
 		assertEquals(false, this.bomba.isEncendida());
@@ -56,7 +56,7 @@ public class testManejadorDeSucesos extends  TestCase {
 		assertEquals(true, this.bomba.isEncendida());
 	}
 	
-	public void testSuscribirImplicacionYNotificarEventoInvalido(){
+	public void testSuscribirImplicacionYNotificarSucesoInvalido(){
 		//si pocaAgua ---> accionPrenderBomba
 		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
 		assertEquals(false, this.bomba.isEncendida());
@@ -66,7 +66,7 @@ public class testManejadorDeSucesos extends  TestCase {
 	}
 	
 		
-	public void testSuscribirImplicacionYNotificarMultiplesEventos(){
+	public void testSuscribirImplicacionYNotificarMultiplesSucesos(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
@@ -84,10 +84,60 @@ public class testManejadorDeSucesos extends  TestCase {
 		List<Suceso> sucesosNuevos = new ArrayList<Suceso>();
 		sucesosNuevos.add(nuevoSucesoPocaAgua);
 		sucesosNuevos.add(nuevoSucesoPresionAlta);
+		//notificacion pocaAgua ^ presionAlta
 		this.manejadorSucesos.notificar(sucesosNuevos);
 		assertEquals(true, this.bomba.isEncendida());
-		
 	}
+	
+	public void testSuscribirImplicacionYNotificarMultiplesSucesosInvalidos(){
+		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
+		sucesos.add(sucesoPocaAgua);
+		sucesos.add(sucesoPresionAlta);
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, this.bomba.isEncendida());
+		
+		Suceso nuevoSucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso nuevoSucesoTanqueLleno = new Suceso("tanqueLleno");
+		List<Suceso> sucesosNuevos = new ArrayList<Suceso>();
+		sucesosNuevos.add(nuevoSucesoPocaAgua);
+		sucesosNuevos.add(nuevoSucesoTanqueLleno);
+		//notificacion pocaAgua ^ presionAlta
+		this.manejadorSucesos.notificar(sucesosNuevos);
+		assertEquals(false, this.bomba.isEncendida());
+	}
+	
+	
+	public void testAgregarSucesosYNotificar(){
+		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
+		sucesos.add(sucesoPocaAgua);
+		sucesos.add(sucesoPresionAlta);
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, this.bomba.isEncendida());
+		
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		this.manejadorSucesos.notificar();
+		assertEquals(true, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
+		this.manejadorSucesos.notificar();
+		assertEquals(true, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
+		this.manejadorSucesos.notificar();
+		assertEquals(false, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.notificar();
+		assertEquals(false, this.bomba.isEncendida());
+	}
+	
+	
 	public void testEventoOcurrido(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
