@@ -1,4 +1,5 @@
 package source;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,10 +10,8 @@ public class ManejadorDeSucesos {
 	 * Instancia unica de la API 
 	 */
 	private static ManejadorDeSucesos instancia ;
-	
-	
-	private Configuracion configuracion;
-	
+		
+	private Evaluador evaluador;
 		
 	/**
 	 * Lista de implicaciones que van a ser notificados por la API
@@ -30,21 +29,14 @@ public class ManejadorDeSucesos {
 	 */
 	private List<Suceso> sucesosNuevos;
 	
-	public Configuracion getConfiguracion() {
-		return configuracion;
-	}
-
-	public void setConfiguracion(Configuracion configuracion) {
-		this.configuracion = configuracion;
-	}
-
 	/**
 	 * Constructor de la API.
 	 */	
 	private ManejadorDeSucesos(){
-		implicaciones = new LinkedList<Implicacion> (); 
-		sucesosPendientesNotificacion = new LinkedList<Suceso>();
-		sucesosNuevos = new LinkedList<Suceso>();
+		implicaciones = new ArrayList<Implicacion>(); 
+		sucesosPendientesNotificacion = new ArrayList<Suceso>();
+		sucesosNuevos = new ArrayList<Suceso>();
+		evaluador = new EvaluadorPorDefecto();
 	}
 	
 	/**
@@ -61,11 +53,32 @@ public class ManejadorDeSucesos {
 	/**
 	 * Cambia la configuracion a Secuencia de sucesos
 	 */
-	public void setConfiguracionSecuencia(){
-		this.configuracion = new ConfiguracionSecuencia();
+	public void establecerConfiguracionSecuenciaContinua(){
+		this.evaluador = new EvaluadorSecuenciaContinua();
 	}
 	
 	/**
+	 * Cambia la configuracion a Secuencia de sucesos
+	 */
+	public void establecerConfiguracionSecuenciaDiscontinua(){
+		this.evaluador = new EvaluadorSecuenciaDiscontinua();
+	}
+	
+	/**
+	 * Cambia la configuracion a Secuencia de sucesos
+	 */
+	public void establecerConfiguracionPorDefecto(){
+		this.evaluador = new EvaluadorPorDefecto();
+	}
+	
+	/**
+	 * Cambia la configuracion a Secuencia de sucesos
+	 */
+	public void establecerConfiguracionIgualdadConjunto(){
+		this.evaluador = new EvaluadorIgualdadConjunto();
+	}
+	
+	/**	
 	 * Se suscribe los sucesos que deben suceder y la accion que implementa 
 	 * el cliente   
 	 * @param accionCliente: accion a ejecutar si se cumplen los suceso 
@@ -88,8 +101,6 @@ public class ManejadorDeSucesos {
 		List<Suceso> lista = new LinkedList<Suceso>();
 		lista.add(suceso);
 		this.suscribirImplicacion(accionCliente, lista);
-		
-		
 	}
 	
 	/**
@@ -99,9 +110,8 @@ public class ManejadorDeSucesos {
 	public void notificar(Suceso sucesoActual){
 		this.agregarSuceso(sucesoActual);
 		for (Implicacion relacion : this.implicaciones) {
-			relacion.avisarSucesosOcurridos(this.sucesosPendientesNotificacion);
+			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
 		}
-		//una vez terminada la notificacion
 		this.sucesosPendientesNotificacion.clear();
 	}
 	
@@ -113,10 +123,8 @@ public class ManejadorDeSucesos {
 	public void notificar(List<Suceso> sucesos){
 		this.agregarSucesos(sucesos);
 		for (Implicacion relacion : this.implicaciones) {
-			relacion.avisarSucesosOcurridos(this.sucesosPendientesNotificacion);			
+			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
 		}
-		
-		//una vez terminada la notificacion
 		this.sucesosPendientesNotificacion.clear();
 	}
 	
@@ -125,10 +133,8 @@ public class ManejadorDeSucesos {
 	 */
 	public void notificar(){
 		for (Implicacion relacion : this.implicaciones) {
-			relacion.avisarSucesosOcurridos(this.sucesosPendientesNotificacion);			
+			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
 		}
-		
-		//una vez terminada la notificacion
 		this.sucesosPendientesNotificacion.clear();
 	}
 	

@@ -1,5 +1,5 @@
 package source;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +14,7 @@ public class Implicacion {
 	/**
 	 * Conjunto de sucesos que tienen que ocurrir para que el objeto de realiza una accion
 	 */
-	private List<Suceso> sucesos = new LinkedList<Suceso>();
+	private List<Suceso> sucesos = new ArrayList<Suceso>();
 	
 	
 	/**
@@ -48,55 +48,5 @@ public class Implicacion {
 	public void setAccion(Accion accion) {
 		this.accion = accion;
 	}
-
-	
-	/**
-	 * Se verifica si un suceso ocurrido es igual al de la implicacion 
-	 * @param sucesoOcurrido: suceso que ha ocurrido y notificado
-	 * @return resultado de la notificacion
-	 */
-	public void avisarSucesoOcurrido(Suceso sucesoOcurrido){
-		// Si mi lista de sucesos solo tiene un solo, entonces puede 
-		// ser posible que haya sido el mismo
-		if (this.sucesos.size()==1){
-			for (Suceso suceso : this.sucesos) {
-				if (suceso.getIdSuceso().equals(sucesoOcurrido.getIdSuceso())){
-					if (this.getAccion()!=null)
-							this.getAccion().ejecutar();
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Verifica si la implicacion de sucesos fue cumplida
-	 * En caso de hacerlo, se ejecuta la accion 
-	 * @param sucesosOcurridos: conjunto de sucesos ocurridos
-	 */
-	public void avisarSucesosOcurridos(List<Suceso> sucesosOcurridos){
-		
-		if (sucesosOcurridos.containsAll(this.sucesos))
-				this.accion.ejecutar();
-	}
-
-	
-	/**
-	 * Verifica si la implicacion de sucesos ocurrieron en la secuencia 
-	 * especificada
-	 * @param sucesosOcurridos
-	 */
-	public void avisarSucesosOcurridosSecuencia(List<Suceso> sucesosOcurridos){
-		
-		
-	}
-	
-	/**
-	 * Verifica si la implicacion de sucesos ocurrieron en la secuencia 
-	 * especificada
-	 * @param sucesosOcurridos
-	 */
-	public void avisarSucesosOcurridosSecuenciaPerfecta(List<Suceso> sucesosOcurridos){
-		
-	}
-		
+			
 }
