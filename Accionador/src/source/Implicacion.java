@@ -1,5 +1,4 @@
 package source;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -77,21 +76,8 @@ public class Implicacion {
 	 */
 	public void avisarSucesosOcurridos(List<Suceso> sucesosOcurridos){
 		
-		//si la lista de sucesos de la implicacion esta incluido en los sucesos ocurridos  
-		if(sucesosOcurridos.size()>=this.sucesos.size()){
-			
-			Iterator<Suceso> it = this.sucesos.iterator();
-			boolean conjSucesosSucedidos = true;
-			
-			while (it.hasNext()&&conjSucesosSucedidos){				
-				// Itero los sucesos del objeto actual
-				Suceso sucesoActual = (Suceso)it.next();
-				conjSucesosSucedidos=sucesosOcurridos.contains(sucesoActual);
-			}
-			//Si termina de recorrer la lista y no salio previamente entonces
-			if (conjSucesosSucedidos )
+		if (sucesosOcurridos.containsAll(this.sucesos))
 				this.accion.ejecutar();
-		}
 	}
 
 	
@@ -113,5 +99,5 @@ public class Implicacion {
 	public void avisarSucesosOcurridosSecuenciaPerfecta(List<Suceso> sucesosOcurridos){
 		
 	}
-	
+		
 }
