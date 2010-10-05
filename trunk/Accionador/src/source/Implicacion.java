@@ -72,7 +72,6 @@ public class Implicacion {
 	 * Verifica si la implicacion de sucesos fue cumplida
 	 * En caso de hacerlo, se ejecuta la accion 
 	 * @param sucesosOcurridos: conjunto de sucesos ocurridos
-	 * @return
 	 */
 	public void avisarSucesosOcurridos(List<Suceso> sucesosOcurridos){
 		
