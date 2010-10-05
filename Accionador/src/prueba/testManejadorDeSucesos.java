@@ -1,6 +1,7 @@
 package prueba;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,9 +34,9 @@ public class testManejadorDeSucesos extends  TestCase {
 		this.manejadorSucesos = ManejadorDeSucesos.getInstancia();
 		this.bomba = new Bomba();
 		this.tanque = new Tanque();
-		this.sucesoPocaAgua = new Suceso();
-		this.sucesoTanqueLleno = new Suceso();
-		this.sucesoPresionAlta = new Suceso();
+		this.sucesoPocaAgua = new Suceso("pocaAgua");
+		this.sucesoTanqueLleno = new Suceso("tanqueLleno");
+		this.sucesoPresionAlta = new Suceso("presionAlta");
 		this.sucesos = new LinkedList<Suceso>();
 		this.accionApagarBomba = new AccionApagarBomba();
 		
@@ -44,10 +45,6 @@ public class testManejadorDeSucesos extends  TestCase {
 		
 		this.accionPrenderBomba = new AccionPrenderBomba();
 		this.accionPrenderBomba.setBomba(bomba);
-				
-		this.sucesoPocaAgua.setIdSuceso("pocaAgua");
-		this.sucesoTanqueLleno.setIdSuceso("tanqueLleno");
-		this.sucesoPresionAlta.setIdSuceso("presionAlta");
 	}
 	
 	public void testSuscribirImplicacionYNotificarEvento(){
@@ -74,6 +71,21 @@ public class testManejadorDeSucesos extends  TestCase {
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
 		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, this.bomba.isEncendida());
+		//notificacion presionAlta
+		this.manejadorSucesos.notificar(sucesoPresionAlta);
+		assertEquals(false, this.bomba.isEncendida());
+		//notificacion pocaAgua
+		this.manejadorSucesos.notificar(sucesoPocaAgua);
+		assertEquals(false, this.bomba.isEncendida());
+		
+		Suceso nuevoSucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso nuevoSucesoPresionAlta = new Suceso("presionAlta");
+		List<Suceso> sucesosNuevos = new ArrayList<Suceso>();
+		sucesosNuevos.add(nuevoSucesoPocaAgua);
+		sucesosNuevos.add(nuevoSucesoPresionAlta);
+		this.manejadorSucesos.notificar(sucesosNuevos);
+		assertEquals(true, this.bomba.isEncendida());
 		
 	}
 	public void testEventoOcurrido(){

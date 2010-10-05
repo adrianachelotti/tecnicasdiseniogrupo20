@@ -12,6 +12,13 @@ public class Suceso {
 	 */
 	private String idSucesoCancelador;	
 	
+	
+	public Suceso(String idSuceso)
+	{
+		this.idSuceso = idSuceso;
+	}
+	
+	
 	/**
 	 * Obtiene el id del suceso cancelador
 	 * @return id del suceso
@@ -50,13 +57,14 @@ public class Suceso {
 	 * @return true: si los id son iguales
 	 * 		false: en caso contrario 
 	 */
-	public boolean equals(Suceso suceso){
-		if (suceso.getIdSuceso()== this.idSuceso)
+		
+	@Override
+	public boolean equals(Object obj) {
+		if (((Suceso)obj).getIdSuceso()== this.idSuceso)
 			return true;
 		else 
 			return false;
-	
 	}
-		
+	
 	
 }
