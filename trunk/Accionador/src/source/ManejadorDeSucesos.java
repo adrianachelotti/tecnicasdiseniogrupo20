@@ -115,6 +115,7 @@ public class ManejadorDeSucesos {
 		for (Implicacion relacion : this.implicaciones) {
 			relacion.avisarSucesosOcurridos(this.sucesosPendientesNotificacion);			
 		}
+		
 		//una vez terminada la notificacion
 		this.sucesosPendientesNotificacion.clear();
 	}
@@ -126,6 +127,7 @@ public class ManejadorDeSucesos {
 		for (Implicacion relacion : this.implicaciones) {
 			relacion.avisarSucesosOcurridos(this.sucesosPendientesNotificacion);			
 		}
+		
 		//una vez terminada la notificacion
 		this.sucesosPendientesNotificacion.clear();
 	}
