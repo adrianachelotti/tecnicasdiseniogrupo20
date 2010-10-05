@@ -13,9 +13,5 @@ public class Bomba {
 	public String toString(){
 		return this.getClass().toString();
 	}
-	public void mostrarEstadoBomba(){
-		if (encendida)System.out.println("Bomba encendida...");
-		else System.out.println("Bomba apagada...");
-	}
-
+	
 }

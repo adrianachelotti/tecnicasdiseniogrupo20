@@ -64,13 +64,9 @@ public class Implicacion {
 				if (suceso.getIdSuceso().equals(sucesoOcurrido.getIdSuceso())){
 					if (this.getAccion()!=null)
 							this.getAccion().ejecutar();
-					System.out.println("Suceso ocurrido ");
 				}
 			}
-			System.out.println("No sucede");
 		}
-		System.out.println("No sucede");
-		
 	}
 	
 	/**
@@ -81,27 +77,21 @@ public class Implicacion {
 	 */
 	public void avisarSucesosOcurridos(List<Suceso> sucesosOcurridos){
 		
-		//si la lista de sucesos ocurridos esta incluido en los sucesos de la implicacion  
+		//si la lista de sucesos de la implicacion esta incluido en los sucesos ocurridos  
 		if(sucesosOcurridos.size()>=this.sucesos.size()){
 			
 			Iterator<Suceso> it = this.sucesos.iterator();
 			boolean conjSucesosSucedidos = true;
-			while (!it.hasNext()&&conjSucesosSucedidos){				
+			
+			while (it.hasNext()&&conjSucesosSucedidos){				
 				// Itero los sucesos del objeto actual
 				Suceso sucesoActual = (Suceso)it.next();
-				conjSucesosSucedidos=seEncuentraSucesoEnLista(sucesosOcurridos, sucesoActual);
-				
+				conjSucesosSucedidos=sucesosOcurridos.contains(sucesoActual);
 			}
 			//Si termina de recorrer la lista y no salio previamente entonces
-			if (!conjSucesosSucedidos )
-			System.out.println( "No cumple conjunto");
-			else{
+			if (conjSucesosSucedidos )
 				this.accion.ejecutar();
-				System.out.println("Se Cumplio con todos los suceso");
-			}
 		}
-		
-		System.out.println("No sucede");
 	}
 
 	
@@ -122,25 +112,6 @@ public class Implicacion {
 	 */
 	public void avisarSucesosOcurridosSecuenciaPerfecta(List<Suceso> sucesosOcurridos){
 		
-		
 	}
 	
-	/**
-	 * Se fija si un sucesoActual se encuentra dentro de una lista de susesos ocurridos.
-	 * @param sucesosOcurridos: lista de sucesos
-	 * @param sucesoActual: suceso que se busca
-	 * @return
-	 */
-	private boolean seEncuentraSucesoEnLista(List<Suceso> sucesosOcurridos,	Suceso sucesoActual) {
-		boolean seEncuentraSuceso = false;
-		for (Suceso suceso : sucesosOcurridos ) {
-								
-			if (!suceso.equals(sucesoActual)){
-				seEncuentraSuceso = true;
-			}
-			
-		}
-		return seEncuentraSuceso;
-	}
-
 }
