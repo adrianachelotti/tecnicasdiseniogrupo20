@@ -196,8 +196,6 @@ public class testManejadorDeSucesos extends  TestCase {
 	
 	
 	
-	
-	
 	/*public void testEventoOcurrido(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
