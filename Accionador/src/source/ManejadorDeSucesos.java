@@ -48,7 +48,7 @@ public class ManejadorDeSucesos {
 	 * Se obtiene una instancia del Accionador
 	 * @return instancia de Accionador
 	 */
-	public static ManejadorDeSucesos getInstancia(){
+	public static ManejadorDeSucesos obtenerInstancia(){
 		if (instancia==null){
 			instancia=new ManejadorDeSucesos();
 		}
@@ -203,25 +203,5 @@ public class ManejadorDeSucesos {
 	private void agregarNuevosSucesos(Suceso sucesoAgregar){
 		this.sucesosNuevos.add(sucesoAgregar);
 	}
-	
-	
-	/**
-	 * El suceso se agrega a la lista de sucesos pendiente de notificacion
-	 * solo si no se cancela con alguno de la lista
-	 * @param sucesoCancelable: suceso con un id de suceso cancelador
-	 */
-	//TODO: ver como cancelar
-	public void agregarSucesoCancelable(Suceso sucesoCancelable){
-		List<Suceso> listaABorrar = new LinkedList<Suceso>();
-		
-		for (Suceso suceso: this.sucesosPendientesNotificacion) {
-			if (sucesoCancelable.getIdSucesoCancelador()== suceso.getIdSuceso()){
-				//recopilo los sucesos en una lista a borrar
-				listaABorrar.add(suceso);			
-			}
 			
-		}
-		this.sucesosPendientesNotificacion.removeAll(listaABorrar);
-	}
-	
 }
