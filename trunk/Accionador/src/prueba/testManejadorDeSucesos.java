@@ -29,7 +29,7 @@ public class testManejadorDeSucesos extends  TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();		
-		this.manejadorSucesos = ManejadorDeSucesos.getInstancia();
+		this.manejadorSucesos = ManejadorDeSucesos.obtenerInstancia();
 		this.bomba = new Bomba();
 		this.tanque = new Tanque();
 		this.sucesoPocaAgua = new Suceso("pocaAgua");
