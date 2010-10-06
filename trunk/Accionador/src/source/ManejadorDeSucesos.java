@@ -12,6 +12,10 @@ public class ManejadorDeSucesos {
 	private static ManejadorDeSucesos instancia ;
 		
 	private Evaluador evaluador;
+	
+	private Cancelador cancelador;
+	
+	private boolean canceladorActivo;
 		
 	/**
 	 * Lista de implicaciones que van a ser notificados por la API
@@ -37,6 +41,7 @@ public class ManejadorDeSucesos {
 		sucesosPendientesNotificacion = new ArrayList<Suceso>();
 		sucesosNuevos = new ArrayList<Suceso>();
 		evaluador = new EvaluadorPorDefecto();
+		cancelador = CanceladorPorDefecto.obtenerInstancia();
 	}
 	
 	/**
@@ -76,6 +81,32 @@ public class ManejadorDeSucesos {
 	 */
 	public void establecerConfiguracionIgualdadConjunto(){
 		this.evaluador = new EvaluadorIgualdadConjunto();
+	}
+	
+	
+	public void establecerCanceladorPorDefecto()
+	{
+		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
+	}
+	
+	public void establecerCanceladorTotal()
+	{
+		this.cancelador = CanceladorTotal.obtenerInstancia();
+	}
+	
+	public void deshabilitarCancelador()
+	{
+		this.canceladorActivo = false;
+	}
+	
+	public void habilitarCancelador()
+	{
+		this.canceladorActivo = true;
+	}
+	
+	public boolean estaCanceladorActivo()
+	{
+		return this.canceladorActivo;
 	}
 	
 	/**	
@@ -144,7 +175,7 @@ public class ManejadorDeSucesos {
 	 * @param sucesoAgregar: se agrega el suceso, pero no se notifica
 	 */
 	public void agregarSuceso(Suceso sucesoAgregar){
-		
+		if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosPendientesNotificacion,sucesoAgregar);
 		this.sucesosPendientesNotificacion.add(sucesoAgregar);
 	}
 	
@@ -153,7 +184,9 @@ public class ManejadorDeSucesos {
 	 * @param sucesoAgregar: se agrega el suceso, pero no se notifica
 	 */
 	public void agregarSucesos(List<Suceso> sucesosAgregar){
+		if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosPendientesNotificacion,sucesosAgregar);
 		this.sucesosPendientesNotificacion.addAll(sucesosAgregar);
+		 
 	}
 	
 	/**

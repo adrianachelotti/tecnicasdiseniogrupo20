@@ -18,6 +18,12 @@ public class Suceso {
 		this.idSuceso = idSuceso;
 	}
 	
+	public Suceso(String idSuceso, String idSucesoCancelador)
+	{
+		this(idSuceso);
+		this.idSucesoCancelador = idSucesoCancelador;
+	}
+	
 	
 	/**
 	 * Obtiene el id del suceso cancelador
@@ -26,15 +32,6 @@ public class Suceso {
 	public String getIdSucesoCancelador() {
 		return idSucesoCancelador;
 	}
-
-	/**
-	 * Se carga el id del suceso cancelador
-	 * @param idSucesoCancelador: valor a ser seteado
-	 */
-	public void setIdSucesoCancelador(String idSucesoCancelador) {
-		this.idSucesoCancelador = idSucesoCancelador;
-	}
-	
 	
 	/**
 	 * Se obtiene una cadena de caracteres que representa el id del suceso actual
@@ -44,13 +41,6 @@ public class Suceso {
 		return idSuceso;
 	}
 
-	/**
-	 * Se carga el valor del id del suceso actual
-	 * @param idSuceso: valor del id del suceso a ser seteado
-	 */
-	public void setIdSuceso(String idSuceso) {
-		this.idSuceso = idSuceso;
-	}
 	/**
 	 * Compara dos suceso por id
 	 * @param suceso: suceso a ser comparado con el actual
