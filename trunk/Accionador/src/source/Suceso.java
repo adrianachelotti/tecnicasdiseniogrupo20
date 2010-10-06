@@ -56,5 +56,8 @@ public class Suceso {
 			return false;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return idSuceso+"-"+idSucesoCancelador;
+	}
 }

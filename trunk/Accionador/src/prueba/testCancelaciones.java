@@ -152,9 +152,6 @@ private ManejadorDeSucesos manejadorSucesos;
 		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
 		this.manejadorSucesos.notificar(sucesosCanceladores);
 		assertEquals(false, this.bomba.isEncendida());
-		
-		
-		
 	}
 	
 	public void testHabilitacionDeshabilitacionCancelador(){
@@ -178,4 +175,31 @@ private ManejadorDeSucesos manejadorSucesos;
 		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
 	}
+	
+	public void testCancelacionTotal(){
+		
+		this.manejadorSucesos.habilitarCancelador();
+		
+		//Si pocaAgua-------->PrenderBomBa
+		sucesos.add(sucesoPocaAgua);
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);			
+		
+		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		this.manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
+		this.manejadorSucesos.notificar();
+		assertEquals(true, this.bomba.isEncendida());
+		
+		this.manejadorSucesos.establecerCanceladorTotal();
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		this.manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
+		this.manejadorSucesos.notificar();
+		assertEquals(false, this.bomba.isEncendida());
+		
+	}
+	
 }
