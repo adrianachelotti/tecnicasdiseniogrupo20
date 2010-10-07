@@ -56,7 +56,7 @@ public class Suceso {
 			
 	@Override
 	public boolean equals(Object obj) {
-		if (((Suceso)obj).getIdSuceso()== this.idSuceso)
+		if (((Suceso)obj).getIdSuceso().equals(this.idSuceso))
 			return true;
 		else 
 			return false;
@@ -66,4 +66,5 @@ public class Suceso {
 	public String toString() {
 		return idSuceso+"-"+idSucesoCancelador;
 	}
+		
 }
