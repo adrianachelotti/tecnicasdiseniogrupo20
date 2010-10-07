@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import cliente.AccionApagarBomba;
+import cliente.AccionPrenderBomba;
+import cliente.Bomba;
+import cliente.Tanque;
+
 import source.*;
 import junit.framework.TestCase;
 
@@ -42,6 +47,7 @@ public class testManejadorDeSucesos extends  TestCase {
 		
 		this.accionPrenderBomba = new AccionPrenderBomba();
 		this.accionPrenderBomba.setBomba(bomba);
+		this.manejadorSucesos.borrarImplicaciones();
 	}
 	
 	public void testSuscribirImplicacionYNotificarSuceso(){
@@ -196,26 +202,5 @@ public class testManejadorDeSucesos extends  TestCase {
 	
 	
 	
-	/*public void testEventoOcurrido(){
-		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
-		sucesos.add(sucesoPocaAgua);
-		sucesos.add(sucesoPresionAlta);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		//Si muchaAgua -----------------> apagarBomba
-		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba, sucesoTanqueLleno);
-		this.manejadorSucesos.notificar(sucesoTanqueLleno);	
-		assertEquals(10,tanque.getNivelAgua());
-		assertEquals(false,bomba.isEncendida());
-	}
-	
-	public void testEventosOcurridos(){
-		
-		sucesos.add(sucesoPocaAgua);
-		sucesos.add(sucesoPresionAlta);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba, sucesoTanqueLleno);
-		this.manejadorSucesos.notificar(sucesos);		
-	}
-	*/
 	
 }

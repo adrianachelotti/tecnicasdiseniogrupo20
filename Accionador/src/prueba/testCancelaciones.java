@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import source.AccionApagarBomba;
-import source.AccionPrenderBomba;
-import source.Bomba;
+import cliente.AccionApagarBomba;
+import cliente.AccionPrenderBomba;
+import cliente.Bomba;
+import cliente.Tanque;
+
 import source.ManejadorDeSucesos;
 import source.Suceso;
-import source.Tanque;
 import junit.framework.TestCase;
 
 public class testCancelaciones extends TestCase {
@@ -46,6 +47,7 @@ private ManejadorDeSucesos manejadorSucesos;
 		
 		this.accionPrenderBomba = new AccionPrenderBomba();
 		this.accionPrenderBomba.setBomba(bomba);
+		this.manejadorSucesos.borrarImplicaciones();
 	}
 	
 	
