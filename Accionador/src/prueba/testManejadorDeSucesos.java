@@ -269,8 +269,7 @@ public class testManejadorDeSucesos extends  TestCase {
 		this.manejadorSucesos.notificar();
 		assertEquals(false,maquina.isRota());
 		
-		
-		assertEquals(false,maquina.isRota());
+				
 		//la implicacion de la lista 8 espera este conjunto de sucesos
 		this.manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
@@ -314,14 +313,7 @@ public class testManejadorDeSucesos extends  TestCase {
 		assertEquals(15,accionQuitarGaseosa.getGaseosa().getStock());
 		assertEquals(11,accionAgregarGaseosa.getGaseosa().getStock());
 		
-
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 	}
