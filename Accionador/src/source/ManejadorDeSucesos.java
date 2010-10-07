@@ -199,6 +199,14 @@ public class ManejadorDeSucesos {
 		this.sucesosPendientesNotificacion.addAll(sucesosAgregar);
 		 
 	}
+	/**
+	 * Metodo que borra las implicaciones que tiene la api 
+	 * al momento
+	 */
+	public void borrarImplicaciones(){
+		this.sucesosPendientesNotificacion.clear();
+	}
+	
 	
 	/**
 	 * Agrega nuevos sucesos cuando la api se encuentra notificando
