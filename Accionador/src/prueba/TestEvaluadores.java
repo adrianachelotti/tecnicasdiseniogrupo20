@@ -13,7 +13,7 @@ import source.ManejadorDeSucesos;
 import source.Suceso;
 import junit.framework.TestCase;
 
-public class testConfiguraciones extends TestCase {
+public class TestEvaluadores extends TestCase {
 	private ManejadorDeSucesos manejadorSucesos;
 	
 	private Tanque tanque;
@@ -31,7 +31,7 @@ public class testConfiguraciones extends TestCase {
 	private AccionApagarBomba accionApagarBomba;
 	protected void setUp() throws Exception {
 		super.setUp();		
-		this.manejadorSucesos = ManejadorDeSucesos.obtenerInstancia();
+		this.manejadorSucesos = new ManejadorDeSucesos();
 		this.bomba = new Bomba();
 		this.tanque = new Tanque();
 		this.sucesoPocaAgua = new Suceso("pocaAgua");

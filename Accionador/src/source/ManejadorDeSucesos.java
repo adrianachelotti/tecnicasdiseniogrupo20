@@ -11,12 +11,7 @@ import java.util.List;
  *
  */
 public class ManejadorDeSucesos {
-
-	/**
-	 * Instancia unica de la clase. 
-	 */
-	private static ManejadorDeSucesos instancia ;
-		
+			
 	/**
 	 * Evaluador de sucesos ocurridos.
 	 */
@@ -50,24 +45,13 @@ public class ManejadorDeSucesos {
 	/**
 	 * Constructor de la clase.
 	 */	
-	private ManejadorDeSucesos(){
+	public ManejadorDeSucesos(){
 		implicaciones = new ArrayList<Implicacion>(); 
 		sucesosPendientesNotificacion = new ArrayList<Suceso>();
 		evaluador = EvaluadorPorDefecto.obtenerInstancia();
 		cancelador = CanceladorPorDefecto.obtenerInstancia();
 	}
-	
-	/**
-	 * Obtiene la instancia de la clase.
-	 * @return instancia del manejador de sucesos.
-	 */
-	public static ManejadorDeSucesos obtenerInstancia(){
-		if (instancia==null){
-			instancia=new ManejadorDeSucesos();
-		}
-		return instancia;
-	}
-	
+			
 	/**
 	 * Cambia la configuracion a secuencia continua de sucesos.
 	 */
@@ -209,8 +193,7 @@ public class ManejadorDeSucesos {
 			this.sucesosPendientesNotificacion.clear();
 		}
 	}
-	
-	
+		
 	/**
 	 * Agrega un suceso al conjunto de sucesos pendientes de notificacion.
 	 * @param sucesoAgregar suceso a agregar.
