@@ -41,6 +41,7 @@ public class testManejadorDeSucesos extends  TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();		
 		this.manejadorSucesos = ManejadorDeSucesos.obtenerInstancia();
+		this.manejadorSucesos.establecerConfiguracionPorDefecto();
 		this.bomba = new Bomba();
 		this.tanque = new Tanque();
 		this.sucesoPocaAgua = new Suceso("pocaAgua");
