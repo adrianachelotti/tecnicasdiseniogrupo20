@@ -1,8 +1,14 @@
 package source;
-
-public interface Accion {
 /**
- * Este metodo debe ser implementado por los objetos clientes
+ * Interfaz que deben implementar las acciones a efectuar.
+ * 
+ * @author Grupo20
+ *
  */
+public interface Accion {
+
+	/**
+	 * Metodo en donde se deben implementar las acciones a realizar.
+	 */
 	public void ejecutar();
 }
