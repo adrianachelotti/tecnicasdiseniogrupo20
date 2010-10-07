@@ -16,6 +16,8 @@ public class ManejadorDeSucesos {
 	private Cancelador cancelador;
 	
 	private boolean canceladorActivo;
+	
+	private boolean notificado = false;
 		
 	/**
 	 * Lista de implicaciones que van a ser notificados por la API
@@ -139,11 +141,15 @@ public class ManejadorDeSucesos {
 	 * @param sucesoActual: suceso que se notifica
 	 */
 	public void notificar(Suceso sucesoActual){
-		this.agregarSuceso(sucesoActual);
-		for (Implicacion relacion : this.implicaciones) {
-			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
+		if (notificado!=true){
+			notificado=true;
+			this.agregarSuceso(sucesoActual);
+			for (Implicacion relacion : this.implicaciones) {
+				this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
+			}
+			this.sucesosPendientesNotificacion.clear();
+			notificado=false;
 		}
-		this.sucesosPendientesNotificacion.clear();
 	}
 	
 	/**
@@ -163,10 +169,15 @@ public class ManejadorDeSucesos {
 	 * notifica los sucesos que se han acumulado al momento
 	 */
 	public void notificar(){
-		for (Implicacion relacion : this.implicaciones) {
-			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
-		}
+		if (notificado!=true){
+			notificado=true;
+			for (Implicacion relacion : this.implicaciones) {
+				this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
+			}
+			
+		notificado=false;
 		this.sucesosPendientesNotificacion.clear();
+		}
 	}
 	
 	
@@ -203,5 +214,6 @@ public class ManejadorDeSucesos {
 	private void agregarNuevosSucesos(Suceso sucesoAgregar){
 		this.sucesosNuevos.add(sucesoAgregar);
 	}
-			
+	
+	
 }
