@@ -203,5 +203,5 @@ private ManejadorDeSucesos manejadorSucesos;
 		assertEquals(false, this.bomba.isEncendida());
 		
 	}
-	
+			
 }
