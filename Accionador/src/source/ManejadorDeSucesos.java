@@ -118,10 +118,15 @@ public class ManejadorDeSucesos {
 	 * @param sucesos: conjuntos de sucesos 
 	 */
 	public void suscribirImplicacion(Accion accionCliente, List<Suceso> sucesos){
-		Implicacion nuevaImplicacion =  new Implicacion();
-		nuevaImplicacion.setAccion(accionCliente);
-		nuevaImplicacion.setSucesos(sucesos);
-		this.implicaciones.add(nuevaImplicacion);
+		//Si la lista de sucesos es nula no suscribimos la implicacion
+		if (sucesos!=null){
+			//sacamos los suceso que son nulos de la lista
+			this.eliminarSucesosNulos(sucesos);
+			Implicacion nuevaImplicacion =  new Implicacion();
+			nuevaImplicacion.setAccion(accionCliente);
+			nuevaImplicacion.setSucesos(sucesos);
+			this.implicaciones.add(nuevaImplicacion);
+		}
 	}
 	
 	
@@ -131,9 +136,12 @@ public class ManejadorDeSucesos {
 	 * @param suceso: suceso que se debe cumplir
 	 */
 	public void suscribirImplicacion(Accion accionCliente, Suceso suceso){
-		List<Suceso> lista = new LinkedList<Suceso>();
-		lista.add(suceso);
-		this.suscribirImplicacion(accionCliente, lista);
+		//Si el suceso es nulo no suscribimos la implicacion 
+		if(suceso!=null){
+			List<Suceso> lista = new LinkedList<Suceso>();
+			lista.add(suceso);
+			this.suscribirImplicacion(accionCliente, lista);
+		}
 	}
 	
 	/**
@@ -158,6 +166,7 @@ public class ManejadorDeSucesos {
 	 * @param sucesos que se corroboran
 	 */
 	public void notificar(List<Suceso> sucesos){
+		
 		this.agregarSucesos(sucesos);
 		for (Implicacion relacion : this.implicaciones) {
 			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
@@ -175,8 +184,8 @@ public class ManejadorDeSucesos {
 				this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
 			}
 			
-		notificado=false;
-		this.sucesosPendientesNotificacion.clear();
+			notificado=false;
+			this.sucesosPendientesNotificacion.clear();
 		}
 	}
 	
@@ -186,17 +195,37 @@ public class ManejadorDeSucesos {
 	 * @param sucesoAgregar: se agrega el suceso, pero no se notifica
 	 */
 	public void agregarSuceso(Suceso sucesoAgregar){
-		if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosPendientesNotificacion,sucesoAgregar);
-		this.sucesosPendientesNotificacion.add(sucesoAgregar);
+		if (sucesoAgregar!=null){
+			if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosPendientesNotificacion,sucesoAgregar);
+			this.sucesosPendientesNotificacion.add(sucesoAgregar);
+		}
 	}
 	
+	/**
+	 * Metodos para sacar los elementos nulos de una lista de sucesos
+	 */
+	private void eliminarSucesosNulos(List<Suceso> listaSucesos){
+		List<Suceso> listaCopia = new ArrayList<Suceso>();
+		for (Suceso suceso : listaSucesos) {
+			if(suceso!=null){
+				listaCopia.add(suceso);
+			}
+		}
+		listaSucesos=listaCopia;
+	}
 	/**
 	 * Agrega un suceso en la lista de sucesos pendientes de notificacion
 	 * @param sucesoAgregar: se agrega el suceso, pero no se notifica
 	 */
 	public void agregarSucesos(List<Suceso> sucesosAgregar){
-		if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosPendientesNotificacion,sucesosAgregar);
-		this.sucesosPendientesNotificacion.addAll(sucesosAgregar);
+		//controlo que la lista no sea null
+		if (sucesosAgregar!=null){
+			//Puede contener elementos que sean nulos, entonces lo sacamos
+			this.eliminarSucesosNulos(sucesosAgregar);
+			if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosPendientesNotificacion,sucesosAgregar);
+			this.sucesosPendientesNotificacion.addAll(sucesosAgregar);
+		}
+
 		 
 	}
 	/**
