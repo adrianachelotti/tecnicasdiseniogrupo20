@@ -10,6 +10,7 @@ import cliente.AccionApagarBomba;
 import cliente.AccionPrenderBomba;
 import cliente.AccionQuitarGaseosa;
 import cliente.AccionRepararMaquinaGasesosa;
+import cliente.AccionTirarGaseosa;
 import cliente.Bomba;
 import cliente.Gaseosa;
 import cliente.MaquinaGaseosa;
@@ -97,6 +98,10 @@ public class testManejadorDeSucesos extends  TestCase {
 		assertEquals(true, this.bomba.isEncendida());
 	}
 	
+	/**
+	 * Se testea la suscripcion de implicaciones y la notificacion de varios suceos
+	 * ocurridos
+	 */
 	public void testSuscribirImplicacionYNotificarMultiplesSucesosInvalidos(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
@@ -114,7 +119,10 @@ public class testManejadorDeSucesos extends  TestCase {
 		assertEquals(false, this.bomba.isEncendida());
 	}
 	
-	
+	/**
+	 * Se realizan pruebas para ver si la funcionalidad de suscribir
+	 * sucesos y acciones se realizan de la forma correcta
+	 */
 	public void testAgregarSucesosYNotificar(){
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
@@ -147,7 +155,11 @@ public class testManejadorDeSucesos extends  TestCase {
 		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 	}
-	
+	/**
+	 * En este test se evalua que el manejador de sucesos controle si 
+	 * el suceso o conjuntos de sucesos que le llegan sean nulos o si la
+	 * lista contiene algun elemento nulo  
+	 */
 	public void testNotificacionSucesosNulos(){
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
@@ -185,7 +197,10 @@ public class testManejadorDeSucesos extends  TestCase {
 		assertEquals(true, this.bomba.isEncendida());		
 		
 	}
-	
+	/**
+	 * En esta test se prueba el funcionamiento del manejador de Sucesos
+	 * con 10 implicaciones y se evaluan los resultados de las accion.
+	 */
 	public void testDeEstres(){
 		List<Suceso> lista0 = new ArrayList<Suceso>();
 		List<Suceso> lista1 = new ArrayList<Suceso>();
@@ -313,7 +328,27 @@ public class testManejadorDeSucesos extends  TestCase {
 		assertEquals(15,accionQuitarGaseosa.getGaseosa().getStock());
 		assertEquals(11,accionAgregarGaseosa.getGaseosa().getStock());
 		
+			
+	}
 	
+	public void testAgregarSucesoEnNotificar(){
+		MaquinaGaseosa maquina = new MaquinaGaseosa();
+		//Esta accion agrega un suceso dentro del ejecutar
+		AccionTirarGaseosa accionTirarGaseosa = new AccionTirarGaseosa();
+		AccionAgregarGaseosa accionAgregarGaseosa = new AccionAgregarGaseosa();
+		accionAgregarGaseosa.setGaseosa(new Gaseosa("Fanta",10,false));
+
+		sucesos.add(new Suceso("ponerFicha"));
+		sucesos.add(new Suceso("seleccionaCoca"));
+		sucesos.add(new Suceso("apretaBoton"));
+		assertEquals(false, maquina.isRota());
+				
+		this.manejadorSucesos.suscribirImplicacion(accionTirarGaseosa, sucesos);
+		this.manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, new Suceso("pocaGaseosa"));
+		
+		
+		this.manejadorSucesos.notificar();
+		assertEquals(10, accionAgregarGaseosa.getGaseosa().getStock());
 		
 		
 	}
