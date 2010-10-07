@@ -83,7 +83,7 @@ public class testConfiguraciones extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueRoto"));
 		this.manejadorSucesos.notificar();
-		assertEquals(false, this.bomba.isEncendida());
+		assertEquals(true, this.bomba.isEncendida());
 	}
 	
 	public void testEvaluadorSecuenciaDiscontinua(){
@@ -104,6 +104,37 @@ public class testConfiguraciones extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
 		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("algoDeAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
+		this.manejadorSucesos.notificar();
+		assertEquals(true, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(new Suceso("AlgoDeAgua"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.notificar();
+		assertEquals(false, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		this.manejadorSucesos.notificar();
+		assertEquals(false, this.bomba.isEncendida());
+		
+		this.bomba.setEncendida(false);
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaLuz"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocoAire"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaTierra"));
+		this.manejadorSucesos.notificar();
+		assertEquals(false, this.bomba.isEncendida());
 		
 	}
 	
