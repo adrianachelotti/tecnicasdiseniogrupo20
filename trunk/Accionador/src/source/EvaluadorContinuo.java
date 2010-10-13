@@ -41,7 +41,7 @@ public class EvaluadorContinuo extends Evaluador {
 		int tamanioSucesos = sucesos.size(); 
 		
 		if(tamanioAntecedente == tamanioSucesos){
-			if (implicacion.getSucesos().equals(sucesos))
+			if (implicacion.getSucesos().containsAll(sucesos))
 				implicacion.getAccion().ejecutar();
 		}
 		else if(tamanioSucesos >= tamanioAntecedente)
