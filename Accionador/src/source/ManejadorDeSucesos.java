@@ -48,7 +48,7 @@ public class ManejadorDeSucesos {
 	public ManejadorDeSucesos(){
 		implicaciones = new ArrayList<Implicacion>(); 
 		sucesosPendientesNotificacion = new ArrayList<Suceso>();
-		evaluador = EvaluadorPorDefecto.obtenerInstancia();
+		evaluador = EvaluadorDiscontinuo.obtenerInstancia();
 		cancelador = CanceladorPorDefecto.obtenerInstancia();
 	}
 			
@@ -67,10 +67,17 @@ public class ManejadorDeSucesos {
 	}
 	
 	/**
-	 * Cambia la configuracion a secuencia por defecto de sucesos.
+	 * Cambia la configuracion a conjunto de sucesos discontinuos sin importar el orden
 	 */
-	public void establecerConfiguracionPorDefecto(){
-		this.evaluador = EvaluadorPorDefecto.obtenerInstancia();
+	public void establecerConfiguracionDiscontinuo(){
+		this.evaluador = EvaluadorDiscontinuo.obtenerInstancia();
+	}
+	
+	/**
+	 * Cambia la configuracion a conjunto de sucesos continuos sin importar el orden
+	 */
+	public void establecerConfiguracionContinuo(){
+		this.evaluador = EvaluadorContinuo.obtenerInstancia();
 	}
 	
 	/**
