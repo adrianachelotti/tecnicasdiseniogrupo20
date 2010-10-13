@@ -32,8 +32,12 @@ public class EvaluadorIgualdadConjunto extends Evaluador {
 	
 	@Override
 	public void avisarSucesosOcurridos(Implicacion implicacion,	List<Suceso> sucesos) {
-		if (sucesos.containsAll(implicacion.getSucesos())&&(implicacion.getSucesos().size()==sucesos.size()))
-			implicacion.getAccion().ejecutar();		
+		EvaluadorContinuo evaluador = EvaluadorContinuo.obtenerInstancia();
+		if (sucesos.size()==implicacion.getSucesos().size()){
+			System.out.println("tieen el mismo tamaño");
+			evaluador.avisarSucesosOcurridos(implicacion, sucesos);
+		}
+				
 	}
 
 }
