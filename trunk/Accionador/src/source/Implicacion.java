@@ -17,13 +17,16 @@ public class Implicacion {
 	 * Accion que representa al consecuente.	 
 	 */
 	private Accion accion;
-	
-
+		
 	/**
 	 * Conjunto de sucesos que representan al antecedente.
 	 */
 	private List<Suceso> sucesos = new ArrayList<Suceso>();
 	
+	/**
+	 * Orden de la ultima vez que se ejecuta la accion.
+	 */
+	long ordenUltimaSuscripcion;
 	
 	/**
 	 * Obtiene el conjunto de sucesos del antecedente.
@@ -55,6 +58,22 @@ public class Implicacion {
 	 */
 	public void setAccion(Accion accion) {
 		this.accion = accion;
+	}
+
+	/**
+	 * Obtiene el orden de la ultima suscripcion de la implicacion.
+	 * @return orden de la ultima suscripcion de la implicacion.
+	 */
+	long getOrdenUltimaSuscripcion() {
+		return ordenUltimaSuscripcion;
+	}
+
+	/**
+	 * Carga el orden de la ultima suscripcion de la implicacion.
+	 * @param ordenUltimaEjecucion orden de la ultima suscripcion de la implicacion.
+	 */
+	void setOrdenUltimaSuscripcion(long ordenUltimaSucripcion) {
+		this.ordenUltimaSuscripcion = ordenUltimaSucripcion;
 	}
 			
 }

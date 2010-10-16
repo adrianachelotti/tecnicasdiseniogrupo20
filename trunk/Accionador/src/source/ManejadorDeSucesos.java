@@ -1,6 +1,7 @@
 package source;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -38,18 +39,24 @@ public class ManejadorDeSucesos {
 	private List<Implicacion> implicaciones;
 	
 	/**
-	 * Sucesos no notificados.
+	 * Sucesos ocurridos.
 	 */
-	private List<Suceso> sucesosPendientesNotificacion;
+	private List<Suceso> sucesosOcurridos;
+	
+	
+	/**
+	 * Orden en que se suscribe una implicacion o suceso.
+	 */
+	private static long ordenDeSuscripcion = 0;
 	
 	/**
 	 * Constructor de la clase.
 	 */	
 	public ManejadorDeSucesos(){
-		implicaciones = new ArrayList<Implicacion>(); 
-		sucesosPendientesNotificacion = new ArrayList<Suceso>();
-		evaluador = EvaluadorDiscontinuo.obtenerInstancia();
-		cancelador = CanceladorPorDefecto.obtenerInstancia();
+		this.implicaciones = new ArrayList<Implicacion>(); 
+		this.sucesosOcurridos = new ArrayList<Suceso>();
+		this.evaluador = EvaluadorDiscontinuo.obtenerInstancia();
+		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
 	}
 			
 	/**
@@ -128,6 +135,16 @@ public class ManejadorDeSucesos {
 		return this.canceladorActivo;
 	}
 	
+	/**
+	 * Obtiene el orden de suscripcion.
+	 * @return orden de suscripcion.
+	 */
+	static long obtenerOrdenDeSuscripcion() {
+		ordenDeSuscripcion++;
+		return ordenDeSuscripcion;
+	}
+		
+
 	/**	
 	 * Suscribe una implicacion a evaluar.
 	 * @param accionCliente accion a ejecutar si se cumplen los sucesos. 
@@ -135,12 +152,13 @@ public class ManejadorDeSucesos {
 	 */
 	public void suscribirImplicacion(Accion accionCliente, List<Suceso> sucesos){
 		//Si la lista de sucesos es nula no suscribimos la implicacion
-		if (sucesos!=null){
+		if (sucesos!=null && !sucesos.isEmpty()){
 			//sacamos los suceso que son nulos de la lista
 			this.eliminarSucesosNulos(sucesos);
 			Implicacion nuevaImplicacion =  new Implicacion();
 			nuevaImplicacion.setAccion(accionCliente);
 			nuevaImplicacion.setSucesos(sucesos);
+			nuevaImplicacion.setOrdenUltimaSuscripcion(obtenerOrdenDeSuscripcion());
 			this.implicaciones.add(nuevaImplicacion);
 		}
 	}
@@ -158,46 +176,19 @@ public class ManejadorDeSucesos {
 			this.suscribirImplicacion(accionCliente, lista);
 		}
 	}
-	
-	/**
-	 * Notifica los sucesos pendientes junto con el pasado como parametro.
-	 * @param sucesoActual suceso a notificar.
-	 */
-	public void notificar(Suceso sucesoActual){
-		if (notificado!=true){
-			notificado=true;
-			this.agregarSuceso(sucesoActual);
-			for (Implicacion relacion : this.implicaciones) {
-				this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
-			}
-			this.sucesosPendientesNotificacion.clear();
-			notificado=false;
-		}
-	}
-	
-	/**
-	 * Notifica los sucesos pendientes junto con los pasados como parametro.
-	 * @param sucesos sucesos a notificar.
-	 */
-	public void notificar(List<Suceso> sucesos){
-		this.agregarSucesos(sucesos);
-		for (Implicacion relacion : this.implicaciones) {
-			this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
-		}
-		this.sucesosPendientesNotificacion.clear();
-	}
-	
+		
 	/**
 	 * Notifica los sucesos pendientes.
 	 */
-	public void notificar(){
+	private void notificar(){
 		if (notificado!=true){
 			notificado=true;
+			List<Suceso> sucesosANotificar = null;
 			for (Implicacion relacion : this.implicaciones) {
-				this.evaluador.avisarSucesosOcurridos(relacion, this.sucesosPendientesNotificacion);
+				sucesosANotificar = filtrarSucesosPorTiempoDeImplicacion(relacion);
+				this.evaluador.avisarSucesosOcurridos(relacion, sucesosANotificar);
 			}
 			notificado=false;
-			this.sucesosPendientesNotificacion.clear();
 		}
 	}
 		
@@ -207,8 +198,10 @@ public class ManejadorDeSucesos {
 	 */
 	public void agregarSuceso(Suceso sucesoAgregar){
 		if (sucesoAgregar!=null){
-			if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosPendientesNotificacion,sucesoAgregar);
-			this.sucesosPendientesNotificacion.add(sucesoAgregar);
+			//if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosOcurridos,sucesoAgregar);
+			sucesoAgregar.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
+			this.sucesosOcurridos.add(sucesoAgregar);
+			this.notificar();
 		}
 	}
 	
@@ -221,8 +214,9 @@ public class ManejadorDeSucesos {
 		if (sucesosAgregar!=null){
 			//Puede contener elementos que sean nulos, entonces los sacamos
 			this.eliminarSucesosNulos(sucesosAgregar);
-			if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosPendientesNotificacion,sucesosAgregar);
-			this.sucesosPendientesNotificacion.addAll(sucesosAgregar);
+			//if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosOcurridos,sucesosAgregar);
+			this.sucesosOcurridos.addAll(sucesosAgregar);
+			this.notificar();
 		}
 	}
 
@@ -230,7 +224,7 @@ public class ManejadorDeSucesos {
 	 * Elimina las implicaciones almacenadas.
 	 */
 	public void borrarImplicaciones(){
-		this.sucesosPendientesNotificacion.clear();
+		this.implicaciones.clear();
 	}
 		
 	/**
@@ -245,5 +239,32 @@ public class ManejadorDeSucesos {
 		}
 		listaSucesos=listaCopia;
 	}
+	
+	/**
+	 * Filtra los sucesos ocurridos segun el tiempo de la implicacion pasada coo parametro.
+	 * @param implicacion implicacion sobre la que se obtendra el tiempo para filtrar.
+	 * @return Coleccion de sucesos filtrados.
+	 */
+	private List<Suceso> filtrarSucesosPorTiempoDeImplicacion(Implicacion implicacion) {
+		List<Suceso> sucesosANotificar = new ArrayList<Suceso>();
+		boolean encontrado = false;
+		int posicionInicio = 0;
+		int tamanioSucesos = sucesosOcurridos.size();
+		Iterator<Suceso> it = this.sucesosOcurridos.iterator();
+		Suceso sucesoActual = null;
 		
+		while(it.hasNext() && !encontrado){
+			sucesoActual = it.next();
+			if(sucesoActual.getOrdenDeSuscripcion()> implicacion.getOrdenUltimaSuscripcion()){
+				encontrado = true;
+			}else{
+				posicionInicio++;
+			}
+		}
+		if (encontrado) 
+			sucesosANotificar = this.sucesosOcurridos.subList(posicionInicio, tamanioSucesos);
+		
+		return sucesosANotificar;
+	}
+			
 }

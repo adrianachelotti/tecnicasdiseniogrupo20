@@ -39,8 +39,10 @@ public class EvaluadorSecuenciaContinua extends Evaluador {
 		int tamanioSucesos = sucesos.size(); 
 		
 		if(tamanioAntecedente == tamanioSucesos){
-			if (implicacion.getSucesos().equals(sucesos))
+			if (implicacion.getSucesos().equals(sucesos)){
 				implicacion.getAccion().ejecutar();
+				implicacion.setOrdenUltimaSuscripcion(ManejadorDeSucesos.obtenerOrdenDeSuscripcion());
+			}
 		}
 		else if(tamanioSucesos >= tamanioAntecedente)
 		{
@@ -56,6 +58,7 @@ public class EvaluadorSecuenciaContinua extends Evaluador {
 					listAux = sucesos.subList(posicionInicio, posicionFin);
 					if (implicacion.getSucesos().equals(listAux)){
 						implicacion.getAccion().ejecutar();
+						implicacion.setOrdenUltimaSuscripcion(ManejadorDeSucesos.obtenerOrdenDeSuscripcion());
 						valido= false;
 					}
 					posicionInicio++;
