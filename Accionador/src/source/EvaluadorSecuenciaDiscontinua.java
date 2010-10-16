@@ -40,8 +40,10 @@ public class EvaluadorSecuenciaDiscontinua extends Evaluador {
 		int tamanioSucesos = sucesos.size(); 
 		
 		if(tamanioAntecedente == tamanioSucesos){
-			if (implicacion.getSucesos().equals(sucesos))
+			if (implicacion.getSucesos().equals(sucesos)){
 				implicacion.getAccion().ejecutar();
+				implicacion.setOrdenUltimaSuscripcion(ManejadorDeSucesos.obtenerOrdenDeSuscripcion());
+			}
 		}
 		else if(tamanioSucesos >= tamanioAntecedente){
 			int posicionInicio = 0;
@@ -63,8 +65,10 @@ public class EvaluadorSecuenciaDiscontinua extends Evaluador {
 						encontrado = false;
 				}
 			}
-			if(encontrado) 
+			if(encontrado){
 				implicacion.getAccion().ejecutar();
+				implicacion.setOrdenUltimaSuscripcion(ManejadorDeSucesos.obtenerOrdenDeSuscripcion());
+			}
 		}
 	}
 	

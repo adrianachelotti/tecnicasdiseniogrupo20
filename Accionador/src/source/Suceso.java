@@ -1,5 +1,6 @@
 package source;
 
+
 /**
  * Clase que modela un suceso.
  * 
@@ -17,6 +18,12 @@ public class Suceso {
 	 * Identificador del suceso con el que se cancela.
 	 */
 	private String idSucesoCancelador;	
+	
+	
+	/**
+	 * Orden en que se suscribe el suceso.
+	 */
+	private long ordenDeSuscripcion;
 	
 	/**
 	 * Constructor.
@@ -54,6 +61,22 @@ public class Suceso {
 		return idSuceso;
 	}
 			
+	/**
+	 * Obtiene el orden en que se suscribe el suceso.
+	 * @return orden de suscripcion.
+	 */
+	long getOrdenDeSuscripcion() {
+		return ordenDeSuscripcion;
+	}
+
+	/**
+	 * Carga el orden en que se suscribe el suceso.
+	 * @param ordenDeSuscripcion orden de suscripcion a cargar.
+	 */
+	void setOrdenDeSuscripcion(long ordenDeSuscripcion) {
+		this.ordenDeSuscripcion = ordenDeSuscripcion;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (((Suceso)obj).getIdSuceso().equals(this.idSuceso))
@@ -64,7 +87,7 @@ public class Suceso {
 	
 	@Override
 	public String toString() {
-		return idSuceso+"-"+idSucesoCancelador;
+		return idSuceso+"-"+idSucesoCancelador+"-"+ordenDeSuscripcion;
 	}
 		
 }

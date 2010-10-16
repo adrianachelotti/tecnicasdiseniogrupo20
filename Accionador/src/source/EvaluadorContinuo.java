@@ -32,19 +32,13 @@ public class EvaluadorContinuo extends Evaluador {
 	public static EvaluadorContinuo obtenerInstancia(){
 		return EvaluadorContinuo.INSTANCIA;
 	}
-	
-	
-	
+		
 	@Override
 	public void avisarSucesosOcurridos(Implicacion implicacion,List<Suceso> sucesos) {
 		int tamanioAntecedente = implicacion.getSucesos().size();
 		int tamanioSucesos = sucesos.size(); 
 		
-		if(tamanioAntecedente == tamanioSucesos){
-			if (implicacion.getSucesos().containsAll(sucesos))
-				implicacion.getAccion().ejecutar();
-		}
-		else if(tamanioSucesos >= tamanioAntecedente)
+		if(tamanioSucesos >= tamanioAntecedente)
 		{
 			int posicionInicio = 0;
 			int posicionFin = 0;
@@ -59,6 +53,7 @@ public class EvaluadorContinuo extends Evaluador {
 					
 					if (evaluar(implicacion.getSucesos(),listAux)){
 						implicacion.getAccion().ejecutar();
+						implicacion.setOrdenUltimaSuscripcion(ManejadorDeSucesos.obtenerOrdenDeSuscripcion());
 						valido= false;
 					}
 					posicionInicio++;

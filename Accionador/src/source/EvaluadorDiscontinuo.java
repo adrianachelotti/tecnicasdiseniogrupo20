@@ -34,7 +34,10 @@ public class EvaluadorDiscontinuo extends Evaluador {
 	@Override
 	public void avisarSucesosOcurridos(Implicacion implicacion,List<Suceso> sucesos) {
 		if (sucesos.containsAll(implicacion.getSucesos()))
+		{
 			implicacion.getAccion().ejecutar();
+			implicacion.setOrdenUltimaSuscripcion(ManejadorDeSucesos.obtenerOrdenDeSuscripcion());
+		}
 	}
 
 }
