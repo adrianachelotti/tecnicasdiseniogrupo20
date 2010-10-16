@@ -5,7 +5,7 @@ import source.Suceso;
 
 /**
  * Test de funcionamiento del cancelador.
- * @author Dario
+ * @author Grupo20
  *
  */
 public class TestCancelador extends TestCase {
