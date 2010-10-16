@@ -60,21 +60,18 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueRoto"));
-		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
@@ -82,7 +79,6 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueRoto"));
-		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
 	}
 	
@@ -102,7 +98,6 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("algoDeAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
@@ -113,7 +108,6 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("algoDeAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
@@ -121,32 +115,37 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 		
 		this.bomba.setEncendida(false);
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaLuz"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocoAire"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaTierra"));
-		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 		
 	}
 	
+<<<<<<< .mine
+	
+	public void testEvaluadorContinuo(){
+		// muchoViento ^ pocaAgua ----------------->accionApagarBomba
+		
+=======
 	public void testEvaluadorContinuo(){
 		//muchoViento ^ pocaAgua ----------------->accionApagarBomba
+>>>>>>> .r52
 		sucesos.add(new Suceso("muchoViento"));
 		sucesos.add(new Suceso("pocaAgua"));
 		
-		this.bomba.setEncendida(true);
-				
-		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
+		//this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
 		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados
+<<<<<<< .mine
+		this.manejadorSucesos.establecerConfiguracionContinuo();
+=======
 		this.manejadorSucesos.establecerConfiguracionContinuo();
 
 		//no ocurren en forma continua
@@ -156,7 +155,13 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
 		
 		this.manejadorSucesos.notificar();
+>>>>>>> .r52
 		
+<<<<<<< .mine
+		//this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
+				
+		this.bomba.setEncendida(false);
+=======
 		assertEquals(true, this.bomba.isEncendida());
 		//no ocurren la totalidad de sucesos
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
@@ -199,6 +204,7 @@ public class TestEvaluadores extends TestCase {
 		sucesos.add(new Suceso("muchoViento"));
 		sucesos.add(new Suceso("pocaAgua"));
 		
+>>>>>>> .r52
 		this.bomba.setEncendida(true);
 				
 		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
@@ -208,12 +214,17 @@ public class TestEvaluadores extends TestCase {
 		// ocurren en forma discontinua
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoRuido"));
+		
+		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
+<<<<<<< .mine
+=======
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
 		
 		this.manejadorSucesos.notificar();
 		
 		assertEquals(false, this.bomba.isEncendida());
+>>>>>>> .r52
 		this.bomba.setEncendida(true);
 		//no ocurren la totalidad de sucesos
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
@@ -222,24 +233,46 @@ public class TestEvaluadores extends TestCase {
 		
 		assertEquals(true, this.bomba.isEncendida());
 		
+<<<<<<< .mine
+		bomba.setEncendida(false);
+		
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba,sucesos);
+=======
 		//solo sucede uno de ellos
+>>>>>>> .r52
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		this.manejadorSucesos.notificar();
 		assertEquals(true, this.bomba.isEncendida());
 		
 		
 		List<Suceso> listaSucesos = new ArrayList<Suceso>();
 		//sucede los 2 sucesos en forma continua pero desordenado
 		//deberia apagarse
+		sucesos.add(new Suceso("presionBaja"));
+		sucesos.add(new Suceso("muchoRuido"));
 		listaSucesos.add(new Suceso("pocaAgua"));
 		listaSucesos.add(new Suceso("muchoViento"));
 		listaSucesos.add(new Suceso("muchoRuido"));
 		listaSucesos.add(new Suceso("presionBaja"));
 		
+<<<<<<< .mine
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba,sucesos);
+		
+		this.manejadorSucesos.agregarSucesos(listaSucesos);
+		assertEquals(true, this.bomba.isEncendida());
+		
+		
+		sucesos.add(new Suceso("muchoViento"));
+		sucesos.add(new Suceso("muchoRuido"));
+=======
+>>>>>>> .r52
 		
 		this.manejadorSucesos.notificar(listaSucesos);
 		assertEquals(false, this.bomba.isEncendida());
 		
+<<<<<<< .mine
+		this.manejadorSucesos.agregarSucesos(listaSucesos);
+		assertEquals(true, this.bomba.isEncendida());
+=======
 		this.bomba.setEncendida(true);
 		//ocurren la totalidad de sucesos en el mismo orden
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
@@ -248,20 +281,39 @@ public class TestEvaluadores extends TestCase {
 		
 		assertEquals(false, this.bomba.isEncendida());
 	
+>>>>>>> .r52
 			
 	}
+<<<<<<< .mine
+	public void testEvaluadorDiscontinuo(){
+=======
 
 	public void testEvaluadorIgualdadConjunto(){
+>>>>>>> .r52
 		
+			
+		List<Suceso> listaSucesoImplicacion = new ArrayList<Suceso>();
+		listaSucesoImplicacion.add(new Suceso("muchoViento"));
+		listaSucesoImplicacion.add(new Suceso("pocaAgua"));
+			
+		this.bomba.setEncendida(true);
+				
+		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,listaSucesoImplicacion);
+		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados sin 
+		//importar el orden
+		this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+	
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoRuido"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
 		// muchoViento ^ pocaAgua ^ muchoCalor ----------------->accionApagarBomba
-		sucesos.add(new Suceso("muchoViento"));
-		sucesos.add(new Suceso("pocaAgua"));
+		assertEquals(false, this.bomba.isEncendida());
 		sucesos.add(new Suceso("muchoCalor"));
 		
+<<<<<<< .mine
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
+=======
 
 		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
 		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados
@@ -270,26 +322,65 @@ public class TestEvaluadores extends TestCase {
 		// La implicacion tiene sucesos de menos
 		this.bomba.setEncendida(true);
 		this.manejadorSucesos.notificar();
+>>>>>>> .r52
 		assertEquals(true, this.bomba.isEncendida());		
 		
+<<<<<<< .mine
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba,sucesos);
+		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
+		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
+		assertEquals(false, this.bomba.isEncendida());
+=======
+>>>>>>> .r52
 		
+<<<<<<< .mine
+=======
 		//La implicacion tiene sucesos de mas
 
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoCalor"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		
-		this.manejadorSucesos.notificar();
-		assertEquals(true, this.bomba.isEncendida());
-			
+>>>>>>> .r52
+<<<<<<< .mine
+		sucesos.add(new Suceso("muchoViento"));
+		sucesos.add(new Suceso("pocaAgua"));
 		
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba,sucesos);
+		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
+=======
+		this.manejadorSucesos.notificar();
+>>>>>>> .r52
+		assertEquals(true, this.bomba.isEncendida());
+				
+		List<Suceso> listaSucesos = new ArrayList<Suceso>();
+		
+<<<<<<< .mine
+		listaSucesos.add(new Suceso("pocaAgua"));
+		listaSucesos.add(new Suceso("muchoRuido"));
+		listaSucesos.add(new Suceso("muchoViento"));
+		listaSucesos.add(new Suceso("presionBaja"));
+		
+		sucesos.add(new Suceso("muchoViento"));
+		sucesos.add(new Suceso("pocaAgua"));
+		
+		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba,sucesos);
+=======
 		// los sucesos son iguales pero desordenados
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoCalor"));
+>>>>>>> .r52
+<<<<<<< .mine
+		
+		this.manejadorSucesos.agregarSucesos(listaSucesos);
+		assertEquals(true, this.bomba.isEncendida());	
+=======
 		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		
 		this.manejadorSucesos.notificar();
 		assertEquals(false, this.bomba.isEncendida());
 					
+>>>>>>> .r52
 	}
-
+	
+	
 }
