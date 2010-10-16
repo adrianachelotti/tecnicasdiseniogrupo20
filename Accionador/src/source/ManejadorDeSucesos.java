@@ -86,14 +86,7 @@ public class ManejadorDeSucesos {
 	public void establecerConfiguracionContinuo(){
 		this.evaluador = EvaluadorContinuo.obtenerInstancia();
 	}
-	
-	/**
-	 * Cambia la configuracion a igualdad de conjunto de sucesos.
-	 */
-	public void establecerConfiguracionIgualdadConjunto(){
-		this.evaluador = EvaluadorIgualdadConjunto.obtenerInstancia();
-	}
-	
+			
 	/**
 	 * Establece el cancelador por defecto.
 	 * El modo de cancelacion por defecto proporciona la cancelacion uno a uno de
@@ -211,10 +204,13 @@ public class ManejadorDeSucesos {
 	 */
 	public void agregarSucesos(List<Suceso> sucesosAgregar){
 		//controlo que la lista no sea null
-		if (sucesosAgregar!=null){
+		if (sucesosAgregar!=null && !sucesosAgregar.isEmpty()){
 			//Puede contener elementos que sean nulos, entonces los sacamos
 			this.eliminarSucesosNulos(sucesosAgregar);
 			//if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosOcurridos,sucesosAgregar);
+			for(Suceso sucesoActual: sucesosAgregar){
+				sucesoActual.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
+			}			
 			this.sucesosOcurridos.addAll(sucesosAgregar);
 			this.notificar();
 		}
