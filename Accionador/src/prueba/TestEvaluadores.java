@@ -47,7 +47,10 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.borrarImplicaciones();
 	}
 	
+	
+	
 	public void testEvaluadorSecuenciaContinua(){
+		
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
