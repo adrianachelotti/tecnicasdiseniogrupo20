@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class ManejadorDeSucesos {
 			
+	
 	/**
 	 * Evaluador de sucesos ocurridos.
 	 */
@@ -50,6 +51,12 @@ public class ManejadorDeSucesos {
 	private static long ordenDeSuscripcion = 0;
 	
 	/**
+	 * Tamaño maximo de la lista de sucesos que almacena la API
+	 */
+	private int tamanioMaximoDeSucesosOcurridos;
+
+
+	/**
 	 * Constructor de la clase.
 	 */	
 	public ManejadorDeSucesos(){
@@ -57,6 +64,8 @@ public class ManejadorDeSucesos {
 		this.sucesosOcurridos = new ArrayList<Suceso>();
 		this.evaluador = EvaluadorDiscontinuo.obtenerInstancia();
 		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
+		// por default la API trabajar con una lista de 50 sucesos ocurrridos
+		this.tamanioMaximoDeSucesosOcurridos = 50;
 	}
 			
 	/**
@@ -96,14 +105,7 @@ public class ManejadorDeSucesos {
 		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
 	}
 	
-	/**
-	 * Establece el cancelador total.
-	 * El modo de cancelacion total proporciona la cancelacion de todos los sucesos
-	 * que sean cancelables.
-	 */
-	public void establecerCanceladorTotal(){
-		this.cancelador = CanceladorTotal.obtenerInstancia();
-	}
+	
 	
 	/**
 	 * Deshabilita la cancelacion de sucesos.
@@ -194,6 +196,12 @@ public class ManejadorDeSucesos {
 			//if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosOcurridos,sucesoAgregar);
 			sucesoAgregar.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			this.sucesosOcurridos.add(sucesoAgregar);
+			// verificamos que la lista no este llena
+			if (this.sucesosOcurridos.size()>=(this.tamanioMaximoDeSucesosOcurridos+1) && tamanioMaximoDeSucesosOcurridos>0){
+				// me quedo con los primeros				
+				this.sucesosOcurridos = this.sucesosOcurridos.subList(0,this.tamanioMaximoDeSucesosOcurridos-1);
+				
+			}
 			this.notificar();
 		}
 	}
@@ -212,6 +220,13 @@ public class ManejadorDeSucesos {
 				sucesoActual.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			}			
 			this.sucesosOcurridos.addAll(sucesosAgregar);
+			//Verificamos de no salirnos del maximo
+			if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
+				// me quedo con los primeros				
+				this.sucesosOcurridos = this.sucesosOcurridos.subList(this.sucesosOcurridos.size()-this.tamanioMaximoDeSucesosOcurridos,this.sucesosOcurridos.size()-1);
+				
+			}
+			
 			this.notificar();
 		}
 	}
@@ -263,4 +278,21 @@ public class ManejadorDeSucesos {
 		return sucesosANotificar;
 	}
 			
+	/**
+	 * Obtiene el tamanio de la lista de sucesos ocurridos que almacena la API
+	 * @return Tamaño de la lista de sucesos ocurridos
+	 */
+	public int obtenerTamanioMaximoaDeSucesosOcurridos() {
+		return tamanioMaximoDeSucesosOcurridos;
+	}
+	/**
+	 * Se configurar el tamaño de la lista de sucesos ocurridos
+	 * @param tamanioDeListaDeSucesosOcurridos
+	 */
+	public void establecerTamanioMaximoaDeSucesosOcurridos(int tamanioMaximoDeSucesosOcurridos) {
+		//controlo que no sean valores negativo o cero
+		if (tamanioMaximoDeSucesosOcurridos>=1){
+			this.tamanioMaximoDeSucesosOcurridos = tamanioMaximoDeSucesosOcurridos;
+		}
+	}
 }
