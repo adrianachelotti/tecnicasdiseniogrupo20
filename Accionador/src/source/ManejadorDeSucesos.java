@@ -32,19 +32,12 @@ public class ManejadorDeSucesos {
 	 * Sucesos ocurridos.
 	 */
 	private List<Suceso> sucesosOcurridos;
-	
-	
+		
 	/**
 	 * Orden en que se suscribe una implicacion o suceso.
 	 */
 	private static long ordenDeSuscripcion = 0;
 	
-	/**
-	 * Tamaño maximo de la lista de sucesos que almacena la API
-	 */
-	private int tamanioMaximoDeSucesosOcurridos;
-
-
 	/**
 	 * Constructor de la clase.
 	 */	
@@ -52,8 +45,6 @@ public class ManejadorDeSucesos {
 		this.configuracion = new Configuracion();
 		this.implicaciones = new ArrayList<Implicacion>(); 
 		this.sucesosOcurridos = new ArrayList<Suceso>();
-		// por default la API trabajar con una lista de 50 sucesos ocurrridos
-		this.tamanioMaximoDeSucesosOcurridos = 50;
 	}
 	
 	/**
@@ -146,14 +137,25 @@ public class ManejadorDeSucesos {
 			}			
 		}
 	}
+	
+	/**
+	 * Elimina las implicaciones almacenadas.
+	 */
+	public void borrarImplicaciones(){
+		this.implicaciones.clear();
+	}
+		
+	
 	/**
 	 * Segun el tamanio maximo de la lista se quitan los mas viejos 
 	 */
 	private void quitarSucesosExcedentes() {
 		//Verificamos de no salirnos del maximo
-		if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
+		if (this.sucesosOcurridos.size()>this.configuracion.obtenerTamanioMaximoaDeSucesosOcurridos()){
 			// me quedo con los primeros				
-			this.sucesosOcurridos = this.sucesosOcurridos.subList(this.sucesosOcurridos.size()-this.tamanioMaximoDeSucesosOcurridos,this.sucesosOcurridos.size());
+			int posicionInicio = this.sucesosOcurridos.size()-this.configuracion.obtenerTamanioMaximoaDeSucesosOcurridos();
+			int posicionFinal = this.sucesosOcurridos.size();
+			this.sucesosOcurridos = this.sucesosOcurridos.subList(posicionInicio,posicionFinal);
 		}
 	}
 	
@@ -177,13 +179,6 @@ public class ManejadorDeSucesos {
 		return sucesosAValidar!=null && !sucesosAValidar.isEmpty();
 	}	
 	
-	/**
-	 * Elimina las implicaciones almacenadas.
-	 */
-	public void borrarImplicaciones(){
-		this.implicaciones.clear();
-	}
-		
 	/**
 	 * Elimina los elementos nulos de un conjunto de sucesos.
 	 */
@@ -223,22 +218,6 @@ public class ManejadorDeSucesos {
 		
 		return sucesosANotificar;
 	}
-			
-	/**
-	 * Obtiene el tamanio de la lista de sucesos ocurridos que almacena la API
-	 * @return Tamaño de la lista de sucesos ocurridos
-	 */
-	public int obtenerTamanioMaximoaDeSucesosOcurridos() {
-		return tamanioMaximoDeSucesosOcurridos;
-	}
-	/**
-	 * Se configurar el tamaño de la lista de sucesos ocurridos
-	 * @param tamanioDeListaDeSucesosOcurridos
-	 */
-	public void establecerTamanioMaximoaDeSucesosOcurridos(int tamanioMaximoDeSucesosOcurridos) {
-		//controlo que no sean valores negativo o cero
-		if (tamanioMaximoDeSucesosOcurridos>=1){
-			this.tamanioMaximoDeSucesosOcurridos = tamanioMaximoDeSucesosOcurridos;
-		}
-	}
+		
+	
 }

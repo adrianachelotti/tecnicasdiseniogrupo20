@@ -14,174 +14,134 @@ import source.Suceso;
  *
  */
 public class TestCanceladorPorDefecto extends TestCase {
-	
-	private CanceladorPorDefecto cancelador;
-		
-	private List<Suceso> sucesosExistentes;	
-	
-	private List<Suceso> sucesosNuevos;
-	
-	private List<Suceso> sucesosResultantes;
-	
-	private Suceso suceso;
-		
-	protected void setUp() throws Exception {
-		super.setUp();
-		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
-		this.sucesosExistentes = new ArrayList<Suceso>();
-		this.sucesosNuevos = new ArrayList<Suceso>();
-		this.sucesosResultantes = new ArrayList<Suceso>();
-	}
-	
-	public void testCancelarSuceso(){
-		
-		this.suceso = new Suceso("pocaAgua");
+			
+	public void testCancelacionValidaDeSuceso(){
+		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
+		Suceso sucesoCancelador = new Suceso("pocaAgua","muchaPresion");
+		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
+		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
 		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosExistentes.add(new Suceso("muchaAgua"));
 		
-		cancelador.cancelarSuceso(sucesosExistentes, suceso);
+		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
 		
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosResultantes.add(new Suceso("muchaAgua"));
-		
-		assertEquals(sucesosResultantes, sucesosExistentes);
-		
-		sucesosExistentes.clear();
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		cancelador.cancelarSuceso(sucesosExistentes, suceso);
-		
-		sucesosResultantes.clear();
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua"));
-		
-		assertEquals(sucesosResultantes, sucesosExistentes);
-				
-		sucesosExistentes.clear();
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		cancelador.cancelarSuceso(sucesosExistentes, new Suceso("pocaTemperatura"));
-		
-		assertEquals(sucesosExistentes, sucesosExistentes);
-		
-		sucesosExistentes.clear();
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		cancelador.cancelarSuceso(sucesosExistentes, new Suceso("pocaPresion","pocaTemperatura"));
-		
-		sucesosResultantes.clear();
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua"));
-		
+					
 		assertEquals(sucesosResultantes, sucesosExistentes);
 	}
-		
-	public void testCancelarSucesos(){
-		
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
+	
+	public void testCancelacionValidaUnitariaDeSucesos(){
+		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
+		Suceso sucesoCancelador = new Suceso("pocaAgua","muchaPresion");
+		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
+		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
+		sucesosExistentes.add(new Suceso("muchaPresion","muchaAgua"));
 		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		sucesosNuevos.add(new Suceso("muchaAgua"));
-		sucesosNuevos.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosNuevos.add(new Suceso("muchaAgua","pocaAgua"));
-		
-		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevos);
+		sucesosExistentes.add(new Suceso("muchaPresion","muchaTemperatura"));
+				
+		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
 		
 		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua"));
-		
-		assertEquals(sucesosResultantes, sucesosExistentes);
-		
-		sucesosExistentes.clear();
-		sucesosNuevos.clear();
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		sucesosNuevos.add(new Suceso("muchaAgua"));
-		sucesosNuevos.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosNuevos.add(new Suceso("pocaAgua","muchaAgua"));
-		
-		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevos);
-		
-		sucesosResultantes.clear();
-		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua"));
-		
-		assertEquals(sucesosResultantes, sucesosExistentes);
-				
-		sucesosExistentes.clear();
-		sucesosNuevos.clear();
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		sucesosNuevos.add(new Suceso("bajaTemperatura"));
-		sucesosNuevos.add(new Suceso("altaTemperatura","bajaTemperatura"));
-		sucesosNuevos.add(new Suceso("pocaLuz","muchaLuz"));
-		
-		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevos);
-		
-		assertEquals(sucesosExistentes, sucesosExistentes);
-		
-		sucesosExistentes.clear();
-		sucesosNuevos.clear();
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
-		sucesosNuevos.add(new Suceso("bajaTemperatura"));
-		sucesosNuevos.add(new Suceso("pocaPresion","bajaTemperatura"));
-		sucesosNuevos.add(new Suceso("pocaAgua","muchaLuz"));
-		
-		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevos);
-		
-		sucesosResultantes.clear();
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
-		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
-		sucesosResultantes.add(new Suceso("muchaAgua"));
-				
+		sucesosResultantes.add(new Suceso("muchaPresion","muchaTemperatura"));
+							
 		assertEquals(sucesosResultantes, sucesosExistentes);
 	}
-
+	
+	
+	public void testCancelacionFallidaDeSucesoPorIdCanceladorNoEncontrado(){
+		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
+		Suceso sucesoCancelador = new Suceso("pocaAgua","muchaTemperatura");
+		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
+		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
+		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosExistentes.add(new Suceso("muchaAgua"));
+		
+		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
+		
+		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosResultantes.add(new Suceso("muchaAgua"));
+					
+		assertEquals(sucesosResultantes, sucesosExistentes);
+	}	
+	
+	public void testCancelacionFallidaDeSucesoPorIdCanceladorInexistente(){
+		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
+		Suceso sucesoCancelador = new Suceso("pocaAgua");
+		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
+		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
+		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosExistentes.add(new Suceso("muchaPresion","pocaAgua"));
+		sucesosExistentes.add(new Suceso("muchaAgua"));
+		
+		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
+		
+		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosResultantes.add(new Suceso("muchaPresion","pocaAgua"));
+		sucesosResultantes.add(new Suceso("muchaAgua"));
+					
+		assertEquals(sucesosResultantes, sucesosExistentes);
+	}	
+	
+					
+	public void testCancelarMultiplesSucesosValidos(){
+	
+		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
+		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
+		List<Suceso> sucesosNuevosCanceladores = new ArrayList<Suceso>();
+		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
+		
+		sucesosExistentes.add(new Suceso("pocaAgua"));
+		sucesosExistentes.add(new Suceso("muchaPresion"));
+		sucesosExistentes.add(new Suceso("muchaAgua"));
+		sucesosExistentes.add(new Suceso("pocaPresion"));
+		sucesosExistentes.add(new Suceso("muchaTemperatura"));
+		
+		sucesosNuevosCanceladores.add(new Suceso("muchaAgua"));
+		sucesosNuevosCanceladores.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosNuevosCanceladores.add(new Suceso("muchaAgua","pocaAgua"));
+		
+		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevosCanceladores);
+		
+		sucesosResultantes.add(new Suceso("muchaPresion"));
+		sucesosResultantes.add(new Suceso("muchaAgua"));
+		sucesosResultantes.add(new Suceso("muchaTemperatura"));
+		
+		assertEquals(sucesosResultantes, sucesosExistentes);
+	}
+	
+	public void testCancelacionFallidaDeMultiplesSucesosPorIdCanceladorInexistenteONoEncontrado(){
+		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
+		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
+		List<Suceso> sucesosNuevosCanceladores = new ArrayList<Suceso>();
+		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
+		
+		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
+		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
+		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosExistentes.add(new Suceso("muchaAgua"));
+		
+		sucesosNuevosCanceladores.add(new Suceso("muchaAgua"));
+		sucesosNuevosCanceladores.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosNuevosCanceladores.add(new Suceso("pocaAgua","muchaTemperatura"));
+		
+		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevosCanceladores);
+		
+		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
+		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
+		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
+		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
+		sucesosResultantes.add(new Suceso("muchaAgua"));
+		
+		assertEquals(sucesosResultantes, sucesosExistentes);
+	}
+		
 }
