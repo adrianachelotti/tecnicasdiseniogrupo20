@@ -55,16 +55,6 @@ public class Configuracion {
 	}
 			
 	/**
-	 * Establece el cancelador por defecto.
-	 * El modo de cancelacion por defecto proporciona la cancelacion uno a uno de
-	 * sucesos cancelables.
-	 */
-	public void establecerCanceladorPorDefecto(){
-		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
-	}
-	
-		
-	/**
 	 * Deshabilita la cancelacion de sucesos.
 	 */
 	public void deshabilitarCancelador(){
