@@ -13,21 +13,10 @@ import java.util.List;
  */
 public class ManejadorDeSucesos {
 			
-	
 	/**
-	 * Evaluador de sucesos ocurridos.
+	 * Configuracion del manejador de sucesos.
 	 */
-	private Evaluador evaluador;
-	
-	/**
-	 * Cancelador de sucesos.
-	 */
-	private Cancelador cancelador;
-	
-	/**
-	 * Estado del cancelador.
-	 */
-	private boolean canceladorActivo;
+	private Configuracion configuracion;
 	
 	/**
 	 * Estado de etapa de notificacion.
@@ -60,76 +49,21 @@ public class ManejadorDeSucesos {
 	 * Constructor de la clase.
 	 */	
 	public ManejadorDeSucesos(){
+		this.configuracion = new Configuracion();
 		this.implicaciones = new ArrayList<Implicacion>(); 
 		this.sucesosOcurridos = new ArrayList<Suceso>();
-		this.evaluador = EvaluadorDiscontinuo.obtenerInstancia();
-		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
 		// por default la API trabajar con una lista de 50 sucesos ocurrridos
 		this.tamanioMaximoDeSucesosOcurridos = 50;
 	}
-			
-	/**
-	 * Cambia la configuracion a secuencia continua de sucesos.
-	 */
-	public void establecerConfiguracionSecuenciaContinua(){
-		this.evaluador = EvaluadorSecuenciaContinua.obtenerInstancia();
-	}
 	
 	/**
-	 * Cambia la configuracion a secuencia discontinua de sucesos.
+	 * Obtiene la configuracion del manejador de sucesos.
+	 * @return Configuracion del manejador de sucesos.
 	 */
-	public void establecerConfiguracionSecuenciaDiscontinua(){
-		this.evaluador = EvaluadorSecuenciaDiscontinua.obtenerInstancia();
+	public Configuracion getConfiguracion() {
+		return configuracion;
 	}
-	
-	/**
-	 * Cambia la configuracion a conjunto de sucesos discontinuos sin importar el orden
-	 */
-	public void establecerConfiguracionDiscontinuo(){
-		this.evaluador = EvaluadorDiscontinuo.obtenerInstancia();
-	}
-	
-	/**
-	 * Cambia la configuracion a conjunto de sucesos continuos sin importar el orden
-	 */
-	public void establecerConfiguracionContinuo(){
-		this.evaluador = EvaluadorContinuo.obtenerInstancia();
-	}
-			
-	/**
-	 * Establece el cancelador por defecto.
-	 * El modo de cancelacion por defecto proporciona la cancelacion uno a uno de
-	 * sucesos cancelables.
-	 */
-	public void establecerCanceladorPorDefecto(){
-		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
-	}
-	
-	
-	
-	/**
-	 * Deshabilita la cancelacion de sucesos.
-	 */
-	public void deshabilitarCancelador(){
-		this.canceladorActivo = false;
-	}
-	
-	/**
-	 * Habilita la cancelacion de sucesos. 
-	 */
-	public void habilitarCancelador(){
-		this.canceladorActivo = true;
-	}
-	
-	/**
-	 * Obtiene el estado del cancelador.
-	 * @return true si el cancelador esta activo.
-	 * 		   false en caso contrario.
-	 */
-	public boolean estaCanceladorActivo(){
-		return this.canceladorActivo;
-	}
-	
+
 	/**
 	 * Obtiene el orden de suscripcion.
 	 * @return orden de suscripcion.
@@ -146,13 +80,10 @@ public class ManejadorDeSucesos {
 	 * @param sucesos conjuntos de sucesos a evaluar. 
 	 */
 	public void suscribirImplicacion(Accion accionCliente, List<Suceso> sucesos){
-		//Si la lista de sucesos es nula no suscribimos la implicacion
-		if (sucesos!=null && !sucesos.isEmpty()){
+		if (esConjuntoValidoDeSucesos(sucesos)){
 			//sacamos los suceso que son nulos de la lista
 			this.eliminarSucesosNulos(sucesos);
-			Implicacion nuevaImplicacion =  new Implicacion();
-			nuevaImplicacion.setAccion(accionCliente);
-			nuevaImplicacion.setSucesos(sucesos);
+			Implicacion nuevaImplicacion =  new Implicacion(sucesos,accionCliente);
 			nuevaImplicacion.setOrdenUltimaSuscripcion(obtenerOrdenDeSuscripcion());
 			this.implicaciones.add(nuevaImplicacion);
 		}
@@ -181,7 +112,7 @@ public class ManejadorDeSucesos {
 			List<Suceso> sucesosANotificar = null;
 			for (Implicacion relacion : this.implicaciones) {
 				sucesosANotificar = filtrarSucesosPorTiempoDeImplicacion(relacion);
-				this.evaluador.avisarSucesosOcurridos(relacion, sucesosANotificar);
+				this.configuracion.getEvaluador().avisarSucesosOcurridos(relacion, sucesosANotificar);
 			}
 			notificado=false;
 		}
@@ -193,14 +124,13 @@ public class ManejadorDeSucesos {
 	 */
 	public void agregarSuceso(Suceso sucesoAgregar){
 		if (sucesoAgregar!=null){
-			//if(canceladorActivo) this.cancelador.cancelarSuceso(this.sucesosOcurridos,sucesoAgregar);
+			cancelarSuceso(sucesoAgregar);
 			sucesoAgregar.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			this.sucesosOcurridos.add(sucesoAgregar);
 			// verificamos que la lista no este llena
-			if (this.sucesosOcurridos.size()>=(this.tamanioMaximoDeSucesosOcurridos+1) && tamanioMaximoDeSucesosOcurridos>0){
+			if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
 				// me quedo con los primeros				
 				this.sucesosOcurridos = this.sucesosOcurridos.subList(0,this.tamanioMaximoDeSucesosOcurridos-1);
-				
 			}
 			this.notificar();
 		}
@@ -211,11 +141,11 @@ public class ManejadorDeSucesos {
 	 * @param sucesosAgregar conjunto de sucesos a agregar.
 	 */
 	public void agregarSucesos(List<Suceso> sucesosAgregar){
-		//controlo que la lista no sea null
-		if (sucesosAgregar!=null && !sucesosAgregar.isEmpty()){
+		
+		if (esConjuntoValidoDeSucesos(sucesosAgregar)){
 			//Puede contener elementos que sean nulos, entonces los sacamos
 			this.eliminarSucesosNulos(sucesosAgregar);
-			//if(canceladorActivo) this.cancelador.cancelarSucesos(this.sucesosOcurridos,sucesosAgregar);
+			this.cancelarSucesos(sucesosAgregar);
 			for(Suceso sucesoActual: sucesosAgregar){
 				sucesoActual.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			}			
@@ -224,13 +154,46 @@ public class ManejadorDeSucesos {
 			if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
 				// me quedo con los primeros				
 				this.sucesosOcurridos = this.sucesosOcurridos.subList(this.sucesosOcurridos.size()-this.tamanioMaximoDeSucesosOcurridos,this.sucesosOcurridos.size()-1);
-				
 			}
-			
 			this.notificar();
 		}
 	}
 
+	/**
+	 * Efectua la cancelacion de sucesos.
+	 * @param sucesosAgregar sucesos canceladores a agregar.
+	 */
+	private void cancelarSucesos(List<Suceso> sucesosAgregar){
+		if(this.configuracion.estaCanceladorActivo()){
+			List<Suceso> listaAux = new ArrayList<Suceso>();
+			listaAux.addAll(sucesosAgregar);
+			for(Suceso sucesoActual: listaAux){
+				this.configuracion.getCancelador().cancelarSuceso(sucesosAgregar, sucesoActual);
+			}
+			this.configuracion.getCancelador().cancelarSucesos(this.sucesosOcurridos,sucesosAgregar);
+		}
+	}
+	
+	/**
+	 * Efectua la cancelacion del suceso a agregar.
+	 * @param sucesoAgregar suceso cancelador a agegar.
+	 */
+	private void cancelarSuceso(Suceso sucesoAgregar){
+		if(this.configuracion.estaCanceladorActivo()) 
+			this.configuracion.getCancelador().cancelarSuceso(this.sucesosOcurridos,sucesoAgregar);
+	}
+		
+	/**
+	 * Determina si un conjunto de sucesos es valido o no.
+	 * Se considera como valido si no es vacio o nulo.
+	 * @param sucesosAValidar sucesos a validar.
+	 * @return true si el conjunto de sucesos no son vacios o nulos.
+	 *		   false en caso contrario. 
+	 */
+	private boolean esConjuntoValidoDeSucesos(List<Suceso> sucesosAValidar){
+		return sucesosAValidar!=null && !sucesosAValidar.isEmpty();
+	}	
+	
 	/**
 	 * Elimina las implicaciones almacenadas.
 	 */

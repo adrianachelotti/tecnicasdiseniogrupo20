@@ -29,6 +29,16 @@ public class Implicacion {
 	long ordenUltimaSuscripcion;
 	
 	/**
+	 * Constructor de la impicacion.
+	 * @param antecedente conjunto de sucesos que forman el antecedente.
+	 * @param consecuente accion que forman el consecuente.
+	 */
+	public Implicacion(List<Suceso> antecedente,Accion consecuente){
+		this.sucesos = antecedente;
+		this.accion = consecuente;
+	}
+	
+	/**
 	 * Obtiene el conjunto de sucesos del antecedente.
 	 * @return conjuntos de sucesos que forman el antecedente.
 	 */
