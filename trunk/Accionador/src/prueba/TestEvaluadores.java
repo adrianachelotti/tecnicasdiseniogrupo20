@@ -3,11 +3,15 @@ package prueba;
 import java.util.List;
 import cliente.AccionPrenderBomba;
 import cliente.Bomba;
-import cliente.GeneradorDeSuceso;
 import source.ManejadorDeSucesos;
 import source.Suceso;
 import junit.framework.TestCase;
-
+/**
+ * Test de funcionamiento de los Evaluadores.
+ * 
+ * @author Grupo20
+ *
+ */
 public class TestEvaluadores extends TestCase {
 
 	/**

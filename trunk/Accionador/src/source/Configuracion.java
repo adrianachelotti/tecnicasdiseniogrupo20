@@ -1,5 +1,9 @@
 package source;
-
+/**
+ * Clase encargada de representar la configuracion del manejador de sucesos.
+ * @author Grupo20
+ *
+ */
 
 public class Configuracion {
 	/**
@@ -18,12 +22,35 @@ public class Configuracion {
 	private boolean canceladorActivo;
 	
 	/**
+	 * Tamaño maximo de la coleccion de sucesos que se almacenan.
+	 */
+	private int tamanioMaximoDeSucesosOcurridos = 50;
+	
+	/**
 	 * Constructor de la clase.
 	 */	
 	public Configuracion(){
 		this.evaluador = EvaluadorDiscontinuo.obtenerInstancia();
 		this.cancelador = CanceladorPorDefecto.obtenerInstancia();
 		this.canceladorActivo = false;
+	}
+	
+	/**
+	 * Obtiene el tamanio maximo de sucesos ocurridos.
+	 * @return Tamanio de la lista de sucesos ocurridos.
+	 */
+	public int obtenerTamanioMaximoaDeSucesosOcurridos() {
+		return tamanioMaximoDeSucesosOcurridos;
+	}
+	
+	/**
+	 * Carga el tamanio maximo de sucesos ocurridos.
+	 * @param tamanioDeListaDeSucesosOcurridos tamanio maximo de sucesos a almacenar.
+	 */
+	public void establecerTamanioMaximoaDeSucesosOcurridos(int tamanioMaximoDeSucesosOcurridos) {
+		if (tamanioMaximoDeSucesosOcurridos>=1){
+			this.tamanioMaximoDeSucesosOcurridos = tamanioMaximoDeSucesosOcurridos;
+		}
 	}
 	
 	/**

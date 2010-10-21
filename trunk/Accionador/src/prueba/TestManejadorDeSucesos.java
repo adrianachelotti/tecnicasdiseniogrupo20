@@ -12,7 +12,6 @@ import cliente.AccionRepararMaquinaGasesosa;
 import cliente.AccionTirarGaseosa;
 import cliente.Bomba;
 import cliente.Gaseosa;
-import cliente.GeneradorDeSuceso;
 import cliente.MaquinaGaseosa;
 
 public class TestManejadorDeSucesos extends  TestCase {
@@ -805,7 +804,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
 		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
 		List<Suceso> listaSucesos = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, listaSucesos);
 		bomba.setEncendida(false);
@@ -820,7 +819,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		accionPrenderBomba.setBomba(bomba);
 		manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -835,7 +834,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		accionPrenderBomba.setBomba(bomba);
 		manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
 		
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
@@ -853,7 +852,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		
 		manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
 		
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
