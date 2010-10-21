@@ -26,25 +26,25 @@ public abstract class Cancelador {
 	
 	/**
 	 * Determina si dos sucesos son cancelables entre si.
-	 * @param suceso1 suceso a evaluar.
-	 * @param suceso2 suceso a evaluar.
+	 * @param sucesoExistente suceso a evaluar.
+	 * @param sucesoNuevo suceso a evaluar.
 	 * @return true si los sucesos se cancelan.
 	 * 		   false en caso contrario.
 	 */
-	protected boolean seCancelan(Suceso suceso1, Suceso suceso2)
+	protected boolean seCancelan(Suceso sucesoExistente, Suceso sucesoNuevo)
 	{
-		String idSuceso1 = suceso1.getIdSuceso();
-		String idSuceso2 = suceso2.getIdSuceso();
-		String idCanceladorSuceso1 = suceso1.getIdSucesoCancelador();
-		String idCanceladorSuceso2 = suceso2.getIdSucesoCancelador();
+		String idSucesoExistente = sucesoExistente.getIdSuceso();
+		//String idSucesoNuevo = sucesoNuevo.getIdSuceso();
+		String idCanceladorSucesoExistente = sucesoExistente.getIdSucesoCancelador();
+		String idCanceladorSucesoNuevo = sucesoNuevo.getIdSucesoCancelador();
 		
-		if(idCanceladorSuceso1==null && idCanceladorSuceso2==null)
+		if(idCanceladorSucesoExistente==null && idCanceladorSucesoNuevo==null)
 			return false;
 		
-		if(idCanceladorSuceso1!=null && idCanceladorSuceso1.equals(idSuceso2))
-			return true;
+		/*if(idCanceladorSucesoExistente!=null && idCanceladorSucesoExistente.equals(idSucesoNuevo))
+			return true;*/
 		
-		if(idCanceladorSuceso2!=null && idCanceladorSuceso2.equals(idSuceso1))
+		if(idCanceladorSucesoNuevo!=null && idCanceladorSucesoNuevo.equals(idSucesoExistente))
 			return true;
 		
 		return false;
