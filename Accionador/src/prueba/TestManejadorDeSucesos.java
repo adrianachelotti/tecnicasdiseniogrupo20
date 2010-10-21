@@ -1,9 +1,7 @@
 package prueba;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 import junit.framework.TestCase;
 import source.ManejadorDeSucesos;
 import source.Suceso;
@@ -19,10 +17,8 @@ import cliente.MaquinaGaseosa;
 
 public class TestManejadorDeSucesos extends  TestCase {
 
-	//Tanque tanque = new Tanque();
-	//Suceso sucesoPresionAlta = new Suceso("presionAlta");
 	
-	public void testSuscribirImplicacionYNotificarSuceso(){
+	public void testSuscribirImplicacionYNotificarSucesoUnicoValido(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		Bomba bomba = new Bomba();
 		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
@@ -37,38 +33,32 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSuscribirImplicacionYNotificarSucesoInvalido(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		Bomba bomba = new Bomba();
-		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
-		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		Bomba bomba = new Bomba();		
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
 		//si pocaAgua ---> accionPrenderBomba
-		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, new Suceso("pocaAgua"));
 		assertEquals(false,bomba.isEncendida());
 		//notificacion sucesoPresionAlta
-		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		assertEquals(false, bomba.isEncendida());
 	}
 	
-		
+	// El segundo suceso es valido	
 	public void testSuscribirImplicacionYNotificarMultiplesSucesos(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		Bomba bomba = new Bomba();
-		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
-		Suceso sucesoPresionAlta = new Suceso("presionAlta");
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
-		List<Suceso> sucesos = new ArrayList<Suceso>();
-		sucesos.add(sucesoPocaAgua);
-		sucesos.add(sucesoPresionAlta);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
 		assertEquals(false, bomba.isEncendida());
 		//notificacion presionAlta
-		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
 		assertEquals(false, bomba.isEncendida());
 		//notificacion pocaAgua
-		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		assertEquals(true, bomba.isEncendida());
 	}
 	
@@ -89,11 +79,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
 		assertEquals(false, bomba.isEncendida());
 		
-		Suceso nuevoSucesoPocaAgua = new Suceso("pocaAgua");
-		Suceso nuevoSucesoTanqueLleno = new Suceso("tanqueLleno");
-		List<Suceso> sucesosNuevos = new ArrayList<Suceso>();
-		sucesosNuevos.add(nuevoSucesoPocaAgua);
-		sucesosNuevos.add(nuevoSucesoTanqueLleno);
+		List<Suceso> sucesosNuevos = GeneradorDeSuceso.obtenerSucesos("pocaAgua tanqueLleno");
 		//notificacion pocaAgua ^ presionAlta
 		manejadorSucesos.agregarSucesos(sucesosNuevos);
 		assertEquals(false, bomba.isEncendida());
@@ -354,49 +340,12 @@ public class TestManejadorDeSucesos extends  TestCase {
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);
 	}
 	/****************************************************
-	 *                     TODO CASO 6
+	 *                     TODO: CASO 6
 	 *****************************************************/
 	
+			
 	
-	public void testAgregarSucesosYNotificar(){
-		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		Bomba bomba = new Bomba();
-		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
-		Suceso sucesoPresionAlta = new Suceso("presionAlta");
-		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
-		accionPrenderBomba.setBomba(bomba);
-		List<Suceso> sucesos = new ArrayList<Suceso>();
-		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
-		sucesos.add(sucesoPocaAgua);
-		sucesos.add(sucesoPresionAlta);
-		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, bomba.isEncendida());
-		
-		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		assertEquals(true, bomba.isEncendida());
-	
-		bomba.setEncendida(false);
-		//notifica pocaAgua ^ presionAlta ^ tanqueLleno
-		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(true, bomba.isEncendida());
-		
-		bomba.setEncendida(false);
-		//notifica pocaAgua ^  tanqueLleno
-		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		assertEquals(false, bomba.isEncendida());
-		manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(false, bomba.isEncendida());
-
-	}
-	
-	
-	 // En este test se evalua que el manejador de sucesos controle si 
-	 // el suceso o conjuntos de sucesos que le llegan sean nulos o si la
-	 // lista contiene algun elemento nulo  
-	public void testNotificacionSucesosNulos(){
+	public void testAgregoSucesoUnicoNulo(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		Bomba bomba = new Bomba();
 		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
@@ -411,31 +360,68 @@ public class TestManejadorDeSucesos extends  TestCase {
 		//no agrega el suceso nulo,entonces no notifica nada
 		manejadorSucesos.agregarSuceso(null);
 		assertEquals(false, bomba.isEncendida());
+	}
+	public void testAgregoSucesoNuloYOtrosNoNulosQueEjecutanAccion(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba apagada",false, bomba.isEncendida());
+	
+		//ignora el suceso nulo y notifica los sucesos
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		manejadorSucesos.agregarSuceso(null);
+		assertEquals("Bomba encendida",true, bomba.isEncendida());
+		
+	}
+	public void testSuscribirImplicacionConListaNula(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = null;
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba apagada",false, bomba.isEncendida());
+	
+		//ignora el suceso nulo y notifica los sucesos
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		assertEquals("Se mantiene apagada", false, bomba.isEncendida());
+		
+	}
+	public void testSuscribirImplicacionConSucesoNulo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		Suceso sucesoNulo =null;
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoNulo);
+		assertEquals("Bomba apagada",false, bomba.isEncendida());
 		
 		//ignora el suceso nulo y notifica los sucesos
-		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		manejadorSucesos.agregarSuceso(null);
-		assertEquals(true, bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		assertEquals("Se mantiene apagada", false, bomba.isEncendida());
 		
-		bomba.setEncendida(false);
-		manejadorSucesos.agregarSucesos(null);
-		assertEquals(false, bomba.isEncendida());
-		
-		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		List<Suceso> listaNula=null;
-		
-		manejadorSucesos.agregarSucesos(listaNula);
-		assertEquals(true, bomba.isEncendida());
-		
-		bomba.setEncendida(false);
-		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		Suceso sucesoNulo = null;
-		manejadorSucesos.agregarSuceso(sucesoNulo);
-		assertEquals(true, bomba.isEncendida());		
 	}
+	public void testAgregarListaDeSucesosNulos(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba apagada",false, bomba.isEncendida());	
+		
+		manejadorSucesos.agregarSucesos(null);
+		assertEquals("Se mantiene apagada",false, bomba.isEncendida());		
+	}
+	
+ 
+	
 	
 	/**
 	 * En esta test se prueba el funcionamiento del manejador de Sucesos
@@ -539,29 +525,43 @@ public class TestManejadorDeSucesos extends  TestCase {
 					
 	}
 	
-	public void testAgregarSucesoEnNotificar(){
-		
+	public void testImplicacionAgregaSucesoEnEjecucionAntesDeSuscribirOtraQueEsperaEseSuceso(){		
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		List<Suceso> sucesos = new ArrayList<Suceso>();
-		MaquinaGaseosa maquina = new MaquinaGaseosa();
 		//Esta accion agrega un suceso dentro del ejecutar
 		AccionTirarGaseosa accionTirarGaseosa = new AccionTirarGaseosa(manejadorSucesos);
 		AccionAgregarGaseosa accionAgregarGaseosa = new AccionAgregarGaseosa();
 		accionAgregarGaseosa.setGaseosa(new Gaseosa("Fanta",10,false));
-
-		
-		sucesos.add(new Suceso("ponerFicha"));
-		sucesos.add(new Suceso("seleccionaCoca"));
-		sucesos.add(new Suceso("apretaBoton"));
-		assertEquals(false, maquina.isRota());
-				
-		manejadorSucesos.suscribirImplicacion(accionTirarGaseosa, sucesos);
+		assertEquals("Stock Inicial de Gaseosa",10,accionAgregarGaseosa.getGaseosa().getStock());
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("ponerFicha seleccionaCoca apretaBoton");			
+		//Esta implacion agrega un suceso en la ejecucion de la accion
+		manejadorSucesos.suscribirImplicacion(accionTirarGaseosa, sucesos);			
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("ponerFicha seleccionaCoca apretaBoton"));
+		//Esta implicacion no ve el suceso anteriormente agregado al notificar	
 		manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, new Suceso("pocaGaseosa"));
-		
-		
-		assertEquals(10, accionAgregarGaseosa.getGaseosa().getStock());
+		manejadorSucesos.agregarSuceso(new Suceso("cualquiera"));
+		//agrega
+		assertEquals("Se mantuvo el stock",10, accionAgregarGaseosa.getGaseosa().getStock());
+	}
+	public void testImplicacionAgregaSucesoEnEjecucionDespuesDeSuscribirOtraQueEsperaEseSuceso(){		
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		//Esta accion agrega un suceso dentro del ejecutar
+		AccionTirarGaseosa accionTirarGaseosa = new AccionTirarGaseosa(manejadorSucesos);
+		AccionAgregarGaseosa accionAgregarGaseosa = new AccionAgregarGaseosa();
+		accionAgregarGaseosa.setGaseosa(new Gaseosa("Fanta",10,false));
+		assertEquals("Stock Inicial de Gaseosa",10,accionAgregarGaseosa.getGaseosa().getStock());		
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("ponerFicha seleccionaCoca apretaBoton");		
+		//Esta implacion agrega un suceso en la ejecucion de la accion
+		manejadorSucesos.suscribirImplicacion(accionTirarGaseosa, sucesos);		
+		//Esta implicacion no ve el suceso anteriormente agregado al notificar
+		manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, new Suceso("pocaGaseosa"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("ponerFicha seleccionaCoca apretaBoton"));
+				
+		assertEquals("Aumenta el stock",11, accionAgregarGaseosa.getGaseosa().getStock());
 	}
 	
+	/*********************************************************************************
+	 * Test sobre maximos sucesos que puede manejar la API 
+	 *********************************************************************************/
 	public void testTamanioMaximoSucesosOcurridosNoSobrepasadoConImplicacionNoValida(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		Bomba bomba = new Bomba();
@@ -570,8 +570,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 							
 		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
-		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		List<Suceso> listaSucesos = GeneradorDeSuceso.obtenerSucesos("A B");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, listaSucesos);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
 		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B K A"));
@@ -593,7 +593,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
 		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B A F"));
-		assertEquals("Implicancia valida", bomba.isEncendida(),true);
+		assertEquals("Implicacion valida", bomba.isEncendida(),true);
 		
 	}
 	
@@ -612,8 +612,31 @@ public class TestManejadorDeSucesos extends  TestCase {
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
 		// debe quedarse con los 3 ultimos
+		manejadorSucesos.agregarSuceso(new Suceso("A"));
 		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B A F F F"));
+	
 		assertEquals("Implicancia Invalida", bomba.isEncendida(),false);
+		
+	}
+	public void testTamanioMaximoSucesosOcurridosSobrepasadoConImplicacionValida(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		
+		manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		
+		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		//agrego el suceso y notifico
+		bomba.setEncendida(false);
+		// debe quedarse con los 3 ultimos
+			
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("G B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("A S"));
+		assertEquals("Implicancia Valida", bomba.isEncendida(),true);
 		
 	}
 	
@@ -693,7 +716,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		assertEquals(false, bomba.isEncendida());
 		
 	}
-	
+	/*
 	public void testCancelacionPorDefecto4(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		Bomba bomba = new Bomba();
@@ -754,7 +777,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
 		assertEquals(true, bomba.isEncendida());
 	}
-	
+	*/
 	
 	
 }
