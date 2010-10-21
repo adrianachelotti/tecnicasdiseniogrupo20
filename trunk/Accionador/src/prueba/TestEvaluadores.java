@@ -10,9 +10,9 @@ import junit.framework.TestCase;
 
 public class TestEvaluadores extends TestCase {
 
-	/*********************************************************************************
-	 *                 Test para evaluador de Secuencias Continuas
-	*********************************************************************************/
+	/**
+	 * Test para evaluador de Secuencias Continuas
+	 */
 	public void testSucesosContinuosConOrdenConEvaluadorSecuenciaContinua(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
@@ -62,9 +62,9 @@ public class TestEvaluadores extends TestCase {
 		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("pocaAgua tanqueRoto presionAlta tanqueLleno"));
 		assertEquals(false, bomba.isEncendida());
 	}
-	/*********************************************************************************
-	 *                 Test para evaluador de Secuencias Discontinuas
-	*********************************************************************************/
+	/**
+	 * Test para evaluador de Secuencias Discontinuas
+	 */
 	public void testSucesosContinuosConOrdenConEvaluadorSecuenciaDiscontinua(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
@@ -152,9 +152,9 @@ public class TestEvaluadores extends TestCase {
 		assertEquals(false, bomba.isEncendida());
 	}
 	
-	/*********************************************************************************
-	 *                 Test para evaluador de Sucesos Continuos
-	*********************************************************************************/
+	/**
+	 * Test para evaluador de Sucesos Continuos
+	 */
 	public void testSucesosDiscontinuosSinOrdenConEvaluadorContinuo(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
@@ -217,9 +217,9 @@ public class TestEvaluadores extends TestCase {
 		assertEquals(true, bomba.isEncendida());
 	}
 	
-	/*********************************************************************************
-	 *                 Test para evaluador de Sucesos Discontinuos
-	*********************************************************************************/
+	/**
+	 * Test para evaluador de Sucesos Discontinuos
+	 */
 	public void testSucesosExactosContinuosConOrdenConEvaluadorDiscontinuo(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
