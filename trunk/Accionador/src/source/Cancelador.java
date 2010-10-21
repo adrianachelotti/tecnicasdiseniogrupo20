@@ -26,21 +26,17 @@ public abstract class Cancelador {
 	
 	/**
 	 * Determina si dos sucesos son cancelables entre si.
-	 * @param sucesoExistente suceso a evaluar.
-	 * @param sucesoNuevo suceso a evaluar.
+	 * @param sucesoCancelable suceso existente a evaluar si se cancela.
+	 * @param sucesoCancelador suceso nuevo a evaluar si se cancela.
 	 * @return true si los sucesos se cancelan.
 	 * 		   false en caso contrario.
 	 */
-	protected boolean seCancelan(Suceso sucesoExistente, Suceso sucesoNuevo)
+	protected boolean seCancelan(Suceso sucesoCancelable, Suceso sucesoCancelador)
 	{
-		
-		if(sucesoExistente.getIdSucesoCancelador()==null && sucesoNuevo.getIdSucesoCancelador()==null)
+		if(sucesoCancelable.getIdSucesoCancelador()==null && sucesoCancelador.getIdSucesoCancelador()==null)
 			return false;
-		
-		/*if(idCanceladorSucesoExistente!=null && idCanceladorSucesoExistente.equals(idSucesoNuevo))
-			return true;*/
-		
-		if(sucesoNuevo.getIdSucesoCancelador()!=null && sucesoNuevo.getIdSucesoCancelador().equals(sucesoExistente.getIdSuceso()))
+				
+		if(sucesoCancelador.getIdSucesoCancelador()!=null && sucesoCancelador.getIdSucesoCancelador().equals(sucesoCancelable.getIdSuceso()))
 			return true;
 		
 		return false;
