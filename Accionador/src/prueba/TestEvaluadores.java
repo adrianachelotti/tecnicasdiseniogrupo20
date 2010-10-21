@@ -1,230 +1,285 @@
 package prueba;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import cliente.AccionApagarBomba;
 import cliente.AccionPrenderBomba;
 import cliente.Bomba;
-import cliente.Tanque;
-
+import cliente.GeneradorDeSuceso;
 import source.ManejadorDeSucesos;
 import source.Suceso;
 import junit.framework.TestCase;
 
 public class TestEvaluadores extends TestCase {
-	private ManejadorDeSucesos manejadorSucesos;
-	
-	private Tanque tanque;
-	
-	private Bomba bomba;
-	
-	private Suceso sucesoPocaAgua;
-	
-	private Suceso sucesoPresionAlta;
-	
-	private List<Suceso> sucesos;	
-	
-	private AccionPrenderBomba accionPrenderBomba;
-	
-	private AccionApagarBomba accionApagarBomba;
-	protected void setUp() throws Exception {
-		super.setUp();		
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.bomba = new Bomba();
-		this.tanque = new Tanque();
-		this.sucesoPocaAgua = new Suceso("pocaAgua");
-		this.sucesoPresionAlta = new Suceso("presionAlta");
-		this.sucesos = new LinkedList<Suceso>();
-		this.accionApagarBomba = new AccionApagarBomba();
-		
-		this.accionApagarBomba.setBomba(bomba);
-		this.accionApagarBomba.setTanque(tanque);
-		
-		this.accionPrenderBomba = new AccionPrenderBomba();
-		this.accionPrenderBomba.setBomba(bomba);
-		this.manejadorSucesos.borrarImplicaciones();
-	}
-	
-	
-	
-	public void testEvaluadorSecuenciaContinua(){
-		
-		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
-		sucesos.add(sucesoPocaAgua);
-		sucesos.add(sucesoPresionAlta);
-		sucesos.add(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, this.bomba.isEncendida());
-		// Se establece la configuracion de Susecos en secuencia Continua
-		this.manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
-		
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(true, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueRoto"));
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueRoto"));
-		assertEquals(true, this.bomba.isEncendida());
-	}
-	
-	public void testEvaluadorSecuenciaDiscontinua(){
-		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
-		sucesos.add(sucesoPocaAgua);
-		sucesos.add(sucesoPresionAlta);		
-		sucesos.add(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
-		
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("algoDeAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(true, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("algoDeAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(true, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("AlgoDeAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaLuz"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocoAire"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaTierra"));
-		assertEquals(false, this.bomba.isEncendida());
-	}
-	
-	public void testEvaluadorContinuo(){
-		//muchoViento ^ pocaAgua ----------------->accionApagarBomba
-		sucesos.add(new Suceso("muchoViento"));
-		sucesos.add(new Suceso("pocaAgua"));
-		
-		this.bomba.setEncendida(true);
-				
-		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
-		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados
-		this.manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 
-		//no ocurren en forma continua
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoRuido"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-		
-		assertEquals(true, this.bomba.isEncendida());
-		//no ocurren la totalidad de sucesos
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-			
-		assertEquals(true, this.bomba.isEncendida());
-		
-		//solo sucede uno de ellos
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		assertEquals(true, this.bomba.isEncendida());
-			
-		List<Suceso> listaSucesos = new ArrayList<Suceso>();
-		//sucede los 2 sucesos en forma continua pero desordenado
-		//deberia apagarse
-		listaSucesos.add(new Suceso("pocaAgua"));
-		listaSucesos.add(new Suceso("muchoViento"));
-		listaSucesos.add(new Suceso("muchoRuido"));
-		listaSucesos.add(new Suceso("presionBaja"));
-		
-		
-		this.manejadorSucesos.agregarSucesos(listaSucesos);
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(true);
-		//ocurren la totalidad de sucesos en el mismo orden
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-				
-		assertEquals(false, this.bomba.isEncendida());
-				
+	/*********************************************************************************
+	 *                 Test para evaluador de Secuencias Continuas
+	*********************************************************************************/
+	public void testSucesosContinuosConOrdenConEvaluadorSecuenciaContinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
 	}
-
-	public void testEvaluadorDiscontinuo(){
-		//muchoViento ^ pocaAgua ----------------->accionApagarBomba
-		sucesos.add(new Suceso("muchoViento"));
-		sucesos.add(new Suceso("pocaAgua"));
-		
-		this.bomba.setEncendida(true);
-				
-		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
-		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados
-		this.manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
-
-		// ocurren en forma discontinua
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoRuido"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-				
-		assertEquals(false, this.bomba.isEncendida());
-		this.bomba.setEncendida(true);
-		//no ocurren la totalidad de sucesos
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-			
-		assertEquals(true, this.bomba.isEncendida());
-		
-		//solo sucede uno de ellos
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		assertEquals(true, this.bomba.isEncendida());
-			
-		List<Suceso> listaSucesos = new ArrayList<Suceso>();
-		//sucede los 2 sucesos en forma continua pero desordenado
-		//deberia apagarse
-		listaSucesos.add(new Suceso("pocaAgua"));
-		listaSucesos.add(new Suceso("muchoViento"));
-		listaSucesos.add(new Suceso("muchoRuido"));
-		listaSucesos.add(new Suceso("presionBaja"));
-		
-		this.manejadorSucesos.agregarSucesos(listaSucesos);
-		assertEquals(false, this.bomba.isEncendida());
-		
-		this.bomba.setEncendida(true);
-		//ocurren la totalidad de sucesos en el mismo orden
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchoViento"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-				
-		assertEquals(false, this.bomba.isEncendida());
+	public void testSucesosContinuosSinOrdenConEvaluadorSecuenciaContinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("presionAlta pocaAgua tanqueLleno"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesosNoValidosConEvaluadorSecuenciaContinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("presionAlta pocaAgua tanqueRoto"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
 	
+	public void testSucesosNoContinuosConOrdenConEvaluadorSecuenciaContinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("pocaAgua tanqueRoto presionAlta tanqueLleno"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
 	}
+	/*********************************************************************************
+	 *                 Test para evaluador de Secuencias Discontinuas
+	*********************************************************************************/
+	public void testSucesosContinuosConOrdenConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	public void testSucesosDisContinuosConOrdenConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua presionBaja presionAlta algoDeAgua tanqueLleno"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	public void testSucesosDisContinuosConRepeticionesConOrdenConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua pocaAgua presionBaja presionAlta algoDeAgua tanqueLleno tanqueLleno"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	
+	public void testSucesosInvalidosConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("algoDeAgua presionBaja presionAlta pocaAgua"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesoUnicoConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	
+	public void testSucesosContinuosSinOrdenConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("presionAlta tanqueLleno pocaAgua"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesosDiscontinuosSinOrdenConEvaluadorSecuenciaDiscontinua(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("pocaAgua presionAlta tanqueLleno");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("presionAlta tanqueLleno muchoCalor pocaAgua"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	
+	/*********************************************************************************
+	 *                 Test para evaluador de Sucesos Continuos
+	*********************************************************************************/
+	public void testSucesosDiscontinuosSinOrdenConEvaluadorContinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua muchoRuido muchoViento presionBaja"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesosInvalidosConEvaluadorContinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("presionBaja muchoViento"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesosUnicoConEvaluadorContinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("muchoViento"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesosContinuosSinOrdenConEvaluadorContinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua muchoViento muchoRuido presionBaja"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	
+	public void testSucesosContinuosConOrdenConEvaluadorContinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	
+	/*********************************************************************************
+	 *                 Test para evaluador de Sucesos Discontinuos
+	*********************************************************************************/
+	public void testSucesosExactosContinuosConOrdenConEvaluadorDiscontinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	public void testSucesosDiscontinuosSinOrdenConEvaluadorDiscontinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("pocaAgua muchoRuido muchoViento presionBaja"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+	public void testSucesosInvalidosConEvaluadorDiscontinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("presionBaja muchoViento"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	
+	public void testSucesoUnicoConEvaluadorDiscontinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("muchoViento"));
+		assertEquals("Bomba se mantiene apagada",false, bomba.isEncendida());
+	}
+	public void testSucesosContinuosConOrdenConEvaluadorDiscontinuo(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals("Bomba Apagada",false, bomba.isEncendida());
+		manejadorSucesos.agregarSucesos( GeneradorDeSuceso.obtenerSucesos("muchoViento pocaAgua muchoRuido presionBaja"));
+		assertEquals("Bomba Prendida",true, bomba.isEncendida());
+	}
+
 }
