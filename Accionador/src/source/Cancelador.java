@@ -33,18 +33,14 @@ public abstract class Cancelador {
 	 */
 	protected boolean seCancelan(Suceso sucesoExistente, Suceso sucesoNuevo)
 	{
-		String idSucesoExistente = sucesoExistente.getIdSuceso();
-		//String idSucesoNuevo = sucesoNuevo.getIdSuceso();
-		String idCanceladorSucesoExistente = sucesoExistente.getIdSucesoCancelador();
-		String idCanceladorSucesoNuevo = sucesoNuevo.getIdSucesoCancelador();
 		
-		if(idCanceladorSucesoExistente==null && idCanceladorSucesoNuevo==null)
+		if(sucesoExistente.getIdSucesoCancelador()==null && sucesoNuevo.getIdSucesoCancelador()==null)
 			return false;
 		
 		/*if(idCanceladorSucesoExistente!=null && idCanceladorSucesoExistente.equals(idSucesoNuevo))
 			return true;*/
 		
-		if(idCanceladorSucesoNuevo!=null && idCanceladorSucesoNuevo.equals(idSucesoExistente))
+		if(sucesoNuevo.getIdSucesoCancelador()!=null && sucesoNuevo.getIdSucesoCancelador().equals(sucesoExistente.getIdSuceso()))
 			return true;
 		
 		return false;
