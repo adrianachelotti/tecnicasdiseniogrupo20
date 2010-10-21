@@ -58,7 +58,7 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
 		assertEquals(false, this.bomba.isEncendida());
 		// Se establece la configuracion de Susecos en secuencia Continua
-		this.manejadorSucesos.establecerConfiguracionSecuenciaContinua();
+		this.manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
 		
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
@@ -93,7 +93,7 @@ public class TestEvaluadores extends TestCase {
 		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
 		assertEquals(false, this.bomba.isEncendida());
 		
-		this.manejadorSucesos.establecerConfiguracionSecuenciaDiscontinua();
+		this.manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
 		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja"));
@@ -139,7 +139,7 @@ public class TestEvaluadores extends TestCase {
 				
 		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
 		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados
-		this.manejadorSucesos.establecerConfiguracionContinuo();
+		this.manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 
 		//no ocurren en forma continua
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
@@ -188,7 +188,7 @@ public class TestEvaluadores extends TestCase {
 				
 		this.manejadorSucesos.suscribirImplicacion(accionApagarBomba,sucesos);
 		// solo se fija si la lista de sucesos suscriptos esta dentro de los sucesos agregados
-		this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+		this.manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
 
 		// ocurren en forma discontinua
 		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
