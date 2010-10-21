@@ -2,15 +2,12 @@ package prueba;
 
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import junit.framework.TestCase;
 import source.ManejadorDeSucesos;
 import source.Suceso;
 import cliente.AccionAgregarGaseosa;
-import cliente.AccionApagarBomba;
-import cliente.AccionCliente;
 import cliente.AccionPrenderBomba;
 import cliente.AccionQuitarGaseosa;
 import cliente.AccionRepararMaquinaGasesosa;
@@ -19,88 +16,78 @@ import cliente.Bomba;
 import cliente.Gaseosa;
 import cliente.GeneradorDeSuceso;
 import cliente.MaquinaGaseosa;
-import cliente.Tanque;
 
 public class TestManejadorDeSucesos extends  TestCase {
 
-	private ManejadorDeSucesos manejadorSucesos;
-	
-	private Tanque tanque;
-	
-	private Bomba bomba;
-	
-	private Suceso sucesoPocaAgua;
-	
-	private Suceso sucesoPresionAlta;
-	
-	private List<Suceso> sucesos;	
-	
-	private AccionPrenderBomba accionPrenderBomba;
-	
-	private AccionApagarBomba accionApagarBomba;
-	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();		
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionDiscontinuo();
-		this.bomba = new Bomba();
-		this.tanque = new Tanque();
-		this.sucesoPocaAgua = new Suceso("pocaAgua");
-		this.sucesoPresionAlta = new Suceso("presionAlta");
-		this.sucesos = new LinkedList<Suceso>();
-		this.accionApagarBomba = new AccionApagarBomba();
-		
-		this.accionApagarBomba.setBomba(bomba);
-		this.accionApagarBomba.setTanque(tanque);
-		
-		this.accionPrenderBomba = new AccionPrenderBomba();
-		this.accionPrenderBomba.setBomba(bomba);
-		this.manejadorSucesos.borrarImplicaciones();
-	}
+	//Tanque tanque = new Tanque();
+	//Suceso sucesoPresionAlta = new Suceso("presionAlta");
 	
 	public void testSuscribirImplicacionYNotificarSuceso(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
 		//si pocaAgua ---> accionPrenderBomba
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
-		assertEquals(false, this.bomba.isEncendida());
-		// notificacion sucesoPocaAgua
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
+		assertEquals(false, bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		assertEquals(true,bomba.isEncendida());
 	}
 	
 	public void testSuscribirImplicacionYNotificarSucesoInvalido(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
 		//si pocaAgua ---> accionPrenderBomba
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesoPocaAgua);
+		assertEquals(false,bomba.isEncendida());
 		//notificacion sucesoPresionAlta
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		assertEquals(false, bomba.isEncendida());
 	}
 	
 		
 	public void testSuscribirImplicacionYNotificarMultiplesSucesos(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, bomba.isEncendida());
 		//notificacion presionAlta
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		assertEquals(false, bomba.isEncendida());
 		//notificacion pocaAgua
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		assertEquals(true, bomba.isEncendida());
 	}
 	
 	
 	// Se testea la suscripcion de implicaciones y la notificacion de varios suceos
 	// ocurridos
 	public void testSuscribirImplicacionYNotificarMultiplesSucesosInvalidos(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, bomba.isEncendida());
 		
 		Suceso nuevoSucesoPocaAgua = new Suceso("pocaAgua");
 		Suceso nuevoSucesoTanqueLleno = new Suceso("tanqueLleno");
@@ -108,8 +95,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 		sucesosNuevos.add(nuevoSucesoPocaAgua);
 		sucesosNuevos.add(nuevoSucesoTanqueLleno);
 		//notificacion pocaAgua ^ presionAlta
-		this.manejadorSucesos.agregarSucesos(sucesosNuevos);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(sucesosNuevos);
+		assertEquals(false, bomba.isEncendida());
 	}
 	
 	
@@ -120,13 +107,16 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 *                      CASO 1	 
 	 *****************************************************/
 	public void testNotificarUnicoSuceso(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A");
 		bomba.setEncendida(false);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);	
 	}
 	
@@ -134,44 +124,56 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 *                      CASO 2	 
 	 *****************************************************/
 	public void testNotificarSucesosDiscontinuosSinImportarOrdenSinCancelaciones(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	public void testNotificarSucesosDiscontinuosSinImportarOrdenSinCancelaciones2(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	public void testNotificarSucesosDiscontinuosSinImportarOrdenSinCancelaciones3(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	
 	public void testNotificarSucesosDiscontinuosSinImportarOrdenSinCancelaciones4(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionDiscontinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	
@@ -179,93 +181,118 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 *                      CASO 3	 
 	 *****************************************************/
 	public void testNotificarSucesosContinuosSinImportarOrdenSinCancelaciones(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionContinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	
 	
 	public void testNotificarSucesosContinuosSinImportarOrdenSinCancelaciones2(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionContinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	
 	public void testNotificarSucesosContinuosSinImportarOrdenSinCancelaciones3(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionContinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
 	}
+	
 	public void testNotificarSucesosContinuosSinImportarOrdenSinCancelaciones4(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionContinuo();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
 	}
 	/****************************************************
 	 *                      CASO 4	 
 	 *****************************************************/
 	public void testNotificarSucesosDiscontinuosImportaOrdenSinCancelaciones(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-	    this.manejadorSucesos.establecerConfiguracionSecuenciaDiscontinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	
 	public void testNotificarSucesosDiscontinuosImportaOrdenSinCancelaciones2(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaDiscontinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
 	}
 	
 	
 	public void testNotificarSucesosDiscontinuosImportaOrdenSinCancelaciones3(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaDiscontinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	
 	public void testNotificarSucesosDiscontinuosImportaOrdenSinCancelaciones4(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaDiscontinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
 	}
 	
@@ -273,46 +300,58 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 *                      CASO 5	 
 	 *****************************************************/
 	public void testNotificarSucesosContinuosImportaOrdenSinCancelaciones(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaContinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A B"));
 		assertEquals("Implicacion Valida", bomba.isEncendida(),true);		
 	}
 	public void testNotificarSucesosContinuosImportaOrdenSinCancelaciones2(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaContinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B A"));
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
 	}
 	
 	public void testNotificarSucesosContinuosImportaOrdenSinCancelaciones3(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaContinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z A K B"));
 		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
 	}
 	
 	public void testNotificarSucesosContinuosImportaOrdenSinCancelaciones4(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionSecuenciaContinua();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
-		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);		
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("X Y Z B K A"));
+		assertEquals("Implicacion Invalida", bomba.isEncendida(),false);
 	}
 	/****************************************************
 	 *                     TODO CASO 6
@@ -320,30 +359,36 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	
 	public void testAgregarSucesosYNotificar(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		//Si pocaAgua ^ presionAlta-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, bomba.isEncendida());
 		
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		assertEquals(true, bomba.isEncendida());
 	
-		this.bomba.setEncendida(false);
+		bomba.setEncendida(false);
 		//notifica pocaAgua ^ presionAlta ^ tanqueLleno
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		manejadorSucesos.agregarSuceso(new Suceso("presionAlta"));
+		manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
+		assertEquals(true, bomba.isEncendida());
 		
-		this.bomba.setEncendida(false);
+		bomba.setEncendida(false);
 		//notifica pocaAgua ^  tanqueLleno
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
-		assertEquals(false, this.bomba.isEncendida());
-		this.manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		assertEquals(false, bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(new Suceso("tanqueLleno"));
+		assertEquals(false, bomba.isEncendida());
 
 	}
 	
@@ -352,39 +397,44 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 // el suceso o conjuntos de sucesos que le llegan sean nulos o si la
 	 // lista contiene algun elemento nulo  
 	public void testNotificacionSucesosNulos(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		sucesos.add(sucesoPocaAgua);
 		sucesos.add(sucesoPresionAlta);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		assertEquals(false, bomba.isEncendida());
 		//no agrega el suceso nulo,entonces no notifica nada
-		this.manejadorSucesos.agregarSuceso(null);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(null);
+		assertEquals(false, bomba.isEncendida());
 		
 		//ignora el suceso nulo y notifica los sucesos
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSuceso(null);
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(null);
+		assertEquals(true, bomba.isEncendida());
 		
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(null);
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(null);
+		assertEquals(false, bomba.isEncendida());
 		
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
 		List<Suceso> listaNula=null;
 		
-		this.manejadorSucesos.agregarSucesos(listaNula);
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.agregarSucesos(listaNula);
+		assertEquals(true, bomba.isEncendida());
 		
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
 		Suceso sucesoNulo = null;
-		this.manejadorSucesos.agregarSuceso(sucesoNulo);
-		assertEquals(true, this.bomba.isEncendida());		
-		
+		manejadorSucesos.agregarSuceso(sucesoNulo);
+		assertEquals(true, bomba.isEncendida());		
 	}
 	
 	/**
@@ -392,7 +442,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 * con 10 implicaciones y se evaluan los resultados de las accion.
 	 */
 	public void testDeEstres(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
 		List<Suceso> lista0 = GeneradorDeSuceso.obtenerSucesos("ponerFicha seleccionaCoca apretaBoton");
 		List<Suceso> lista1 = GeneradorDeSuceso.obtenerSucesos("noHayCoca noHayCocaLight noHaySprite");
 		List<Suceso> lista2 = GeneradorDeSuceso.obtenerSucesos("ingresaMoneda importeInsuficiente");
@@ -431,199 +481,278 @@ public class TestManejadorDeSucesos extends  TestCase {
 		accionQuitarGaseosa.setGaseosa(new Gaseosa("coca", 20, false));
 		//para mayor facilidad pongo que si cumple la implicancia
 		assertEquals(false,maquina.isRota());
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista0);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista1);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista2);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista3);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista4);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista5);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista6);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista7);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista8);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista9);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista0);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista1);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista2);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista3);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista4);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista5);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista6);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista7);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista8);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista9);
 		
 		//Suceso que ninguna de las implicaciones espera
-		this.manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
+		manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
 		assertEquals(false,maquina.isRota());
 		
 				
 		//la implicacion de la lista 8 espera este conjunto de sucesos
-		this.manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
+		manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
+		manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
 		assertEquals(true,maquina.isRota());
 		
 		
 		//como se que se ejecuta el comando de la implicacion 8, le cambio el comando
 		assertEquals(20,accionQuitarGaseosa.getGaseosa().getStock());
-		this.manejadorSucesos.borrarImplicaciones();
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista0);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista1);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista2);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista3);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista4);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista5);
-		this.manejadorSucesos.suscribirImplicacion(accionReparar, lista6);
-		this.manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, lista7);
-		this.manejadorSucesos.suscribirImplicacion(accionQuitarGaseosa, lista8);
-		this.manejadorSucesos.suscribirImplicacion(accionQuitarGaseosa, lista9);
-		this.manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
+		manejadorSucesos.borrarImplicaciones();
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista0);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista1);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista2);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista3);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista4);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista5);
+		manejadorSucesos.suscribirImplicacion(accionReparar, lista6);
+		manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, lista7);
+		manejadorSucesos.suscribirImplicacion(accionQuitarGaseosa, lista8);
+		manejadorSucesos.suscribirImplicacion(accionQuitarGaseosa, lista9);
+		manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
+		manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
 		assertEquals(19,accionQuitarGaseosa.getGaseosa().getStock());
 		
 		//Para el caso que se ejecute las acciones de las implicaciones de la
 		//lista 8 y 9
-		this.manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("maquinaRota"));
+		manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
+		manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
+		manejadorSucesos.agregarSuceso(new Suceso("maquinaRota"));
 				
 		assertEquals(17,accionQuitarGaseosa.getGaseosa().getStock());
 		
-		this.manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("maquinaRota"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("pocaGaseosa"));
-		this.manejadorSucesos.agregarSuceso(new Suceso("maquinaDesconectada"));
+		manejadorSucesos.agregarSuceso(new Suceso("stockLleno"));
+		manejadorSucesos.agregarSuceso(new Suceso("gaseosaFria"));
+		manejadorSucesos.agregarSuceso(new Suceso("maquinaRota"));
+		manejadorSucesos.agregarSuceso(new Suceso("pocaGaseosa"));
+		manejadorSucesos.agregarSuceso(new Suceso("maquinaDesconectada"));
 		
 		assertEquals(15,accionQuitarGaseosa.getGaseosa().getStock());
 		assertEquals(11,accionAgregarGaseosa.getGaseosa().getStock());
-		
-			
+					
 	}
 	
 	public void testAgregarSucesoEnNotificar(){
+		
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		MaquinaGaseosa maquina = new MaquinaGaseosa();
 		//Esta accion agrega un suceso dentro del ejecutar
-		AccionTirarGaseosa accionTirarGaseosa = new AccionTirarGaseosa(this.manejadorSucesos);
+		AccionTirarGaseosa accionTirarGaseosa = new AccionTirarGaseosa(manejadorSucesos);
 		AccionAgregarGaseosa accionAgregarGaseosa = new AccionAgregarGaseosa();
 		accionAgregarGaseosa.setGaseosa(new Gaseosa("Fanta",10,false));
 
+		
 		sucesos.add(new Suceso("ponerFicha"));
 		sucesos.add(new Suceso("seleccionaCoca"));
 		sucesos.add(new Suceso("apretaBoton"));
 		assertEquals(false, maquina.isRota());
 				
-		this.manejadorSucesos.suscribirImplicacion(accionTirarGaseosa, sucesos);
-		this.manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, new Suceso("pocaGaseosa"));
+		manejadorSucesos.suscribirImplicacion(accionTirarGaseosa, sucesos);
+		manejadorSucesos.suscribirImplicacion(accionAgregarGaseosa, new Suceso("pocaGaseosa"));
 		
 		
 		assertEquals(10, accionAgregarGaseosa.getGaseosa().getStock());
 	}
 	
 	public void testTamanioMaximoSucesosOcurridosNoSobrepasadoConImplicacionNoValida(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionContinuo();
-		this.manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
-		
-	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+							
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B K A"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B K A"));
 		assertEquals("Implicancia Invalida", bomba.isEncendida(),false);
 		
 	}
 	public void testTamanioMaximoSucesosOcurridosNoSobrepasadoConImplicacionValida(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionContinuo();
-		this.manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+				
+		manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
 		
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B A F"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B A F"));
 		assertEquals("Implicancia valida", bomba.isEncendida(),true);
 		
 	}
+	
 	public void testTamanioMaximoSucesosOcurridosSobrepasadoConImplicacionInvalida(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
-		this.manejadorSucesos.establecerConfiguracionContinuo();
-		this.manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+				
+		manejadorSucesos = new ManejadorDeSucesos();
+		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.establecerTamanioMaximoaDeSucesosOcurridos(3);
 		
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		//agrego el suceso y notifico
 		bomba.setEncendida(false);
 		// debe quedarse con los 3 ultimos
-		this.manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B A F F F"));
+		manejadorSucesos.agregarSucesos(GeneradorDeSuceso.obtenerSucesos("B A F F F"));
 		assertEquals("Implicancia Invalida", bomba.isEncendida(),false);
 		
 	}
 	
 	public void testCancelacionPorDefecto(){
 		
-		this.manejadorSucesos.habilitarCancelador();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
+		
+		manejadorSucesos.getConfiguracion().habilitarCancelador();
 		
 		//Si pocaAgua-------->PrenderBomBa
 		sucesos.add(sucesoPocaAgua);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);			
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);			
 		
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		assertEquals(true, bomba.isEncendida());
 		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
-		assertEquals(false, this.bomba.isEncendida());
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
+		assertEquals(true, bomba.isEncendida());
+	}	
+	
+	public void testCancelacionPorDefecto2(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSuceso(new Suceso("presionBaja", "presionAlta"));
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		
+		//Si pocaAgua-------->PrenderBomBa
+		sucesos.add(sucesoPocaAgua);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);			
+
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(new Suceso("presionBaja", "presionAlta"));
+		assertEquals(true, bomba.isEncendida());
+	}
+	
+	public void testCancelacionPorDefecto3(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
+		
+		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		
+		//Si pocaAgua-------->PrenderBomBa
+		sucesos.add(new Suceso("pocaAgua"));
+		sucesos.add(new Suceso("muchaAgua"));
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
 		
 		List<Suceso> sucesosCanceladores = new ArrayList<Suceso>();
+		sucesosCanceladores.add(new Suceso("pocaAgua"));
 		sucesosCanceladores.add(new Suceso("muchaAgua", "pocaAgua"));
-		sucesosCanceladores.add(new Suceso("presionBaja", "presionAlta"));
-		sucesosCanceladores.add(new Suceso("bajaTemperatura", "altaTemperatura"));
 		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSucesos(sucesosCanceladores);
-		assertEquals(false, this.bomba.isEncendida());
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSucesos(sucesosCanceladores);
+		assertEquals(false, bomba.isEncendida());
+	
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(new Suceso("pocaAgua"));
+		manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
+		assertEquals(false, bomba.isEncendida());
 		
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSucesos(sucesosCanceladores);
-		assertEquals(false, this.bomba.isEncendida());
+	}
+	
+	public void testCancelacionPorDefecto4(){
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
+		
+		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		
+		//Si pocaAgua-------->PrenderBomBa
+		sucesos.add(sucesoPocaAgua);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSucesos(sucesosCanceladores);
+		assertEquals(false, bomba.isEncendida());
 		
 		sucesosCanceladores.remove(new Suceso("muchaAgua", "pocaAgua"));
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSucesos(sucesosCanceladores);
-		assertEquals(true, this.bomba.isEncendida());
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSucesos(sucesosCanceladores);
+		assertEquals(true, bomba.isEncendida());
 		
 		sucesosCanceladores.add(new Suceso("muchaAgua", "pocaAgua"));
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSucesos(sucesosCanceladores);
-		assertEquals(false, this.bomba.isEncendida());
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSucesos(sucesosCanceladores);
+		assertEquals(false, bomba.isEncendida());
 	}
 	
 	public void testHabilitacionDeshabilitacionCancelador(){
-		this.manejadorSucesos = new ManejadorDeSucesos();
+		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
+		Bomba bomba = new Bomba();
+		Suceso sucesoPocaAgua = new Suceso("pocaAgua");
+		Suceso sucesoPresionAlta = new Suceso("presionAlta");
+		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
+		accionPrenderBomba.setBomba(bomba);
+		List<Suceso> sucesos = new ArrayList<Suceso>();
 		sucesos.add(sucesoPocaAgua);
-		this.manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
+		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, sucesos);
 		
-		this.manejadorSucesos.habilitarCancelador();
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
-		assertEquals(false, this.bomba.isEncendida());
+		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
+		assertEquals(false, bomba.isEncendida());
 		
-		this.manejadorSucesos.deshabilitarCancelador();
-		this.bomba.setEncendida(false);
-		this.manejadorSucesos.agregarSuceso(sucesoPocaAgua);
-		this.manejadorSucesos.agregarSuceso(sucesoPresionAlta);
-		this.manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
-		assertEquals(true, this.bomba.isEncendida());
+		manejadorSucesos.getConfiguracion().deshabilitarCancelador();
+		bomba.setEncendida(false);
+		manejadorSucesos.agregarSuceso(sucesoPocaAgua);
+		manejadorSucesos.agregarSuceso(sucesoPresionAlta);
+		manejadorSucesos.agregarSuceso(new Suceso("muchaAgua", "pocaAgua"));
+		assertEquals(true, bomba.isEncendida());
 	}
 	
 	
