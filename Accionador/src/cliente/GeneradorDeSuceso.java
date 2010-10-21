@@ -15,8 +15,9 @@ public class GeneradorDeSuceso {
 			if (identificadorActual.contains(";")){
 				String[] identificadores =identificadorActual.split(";"); 
 				listaDeSucesosGeneradas.add(new Suceso(identificadores[0],identificadores[1]));
-			}else
-			listaDeSucesosGeneradas.add(new Suceso(identificadorActual));
+			}
+			else
+				listaDeSucesosGeneradas.add(new Suceso(identificadorActual));
 		}
 		return listaDeSucesosGeneradas;
 	}
