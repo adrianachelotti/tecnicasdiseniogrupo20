@@ -92,7 +92,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A");
 		bomba.setEncendida(false);
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
@@ -108,7 +108,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -121,7 +121,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -134,7 +134,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -147,7 +147,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -163,7 +163,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -176,7 +176,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -189,7 +189,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -202,7 +202,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-	    manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
+	    manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -218,7 +218,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -231,7 +231,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -244,7 +244,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -257,7 +257,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -273,7 +273,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -285,7 +285,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -298,7 +298,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -311,7 +311,7 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -324,8 +324,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 */
 	public void testSucesosContinuosOrdenadosConfiguracionDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -338,8 +338,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosContinuosDesordenadosConfiguracionDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -352,8 +352,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 			
 	public void testSucesosDiscontinuosOrdenadosConfiguracionDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -366,8 +366,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosDesordenadosConfiguracionDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorDiscontinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorDiscontinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -383,8 +383,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 */
 	public void testSucesosContinuosOrdenadosConfiguracionContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -397,8 +397,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosOrdenadosConfiguracionContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -411,8 +411,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 			
 	public void testSucesosContinuosDesordenadosConfiguracionContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -425,8 +425,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosConCanceladorOrdenadosConfiguracionContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -439,8 +439,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosConCanceladorDesordenadosConfiguracionContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -456,8 +456,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 */
 	public void testSucesosContinuosOrdenadosConfiguracionSecuenciaDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -470,8 +470,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosOrdenadosConfiguracionSecuenciaDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -485,8 +485,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 			
 	public void testSucesosContinuosDesordenadosConfiguracionSecuenciaDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -499,8 +499,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosConCanceladorOrdenadosConfiguracionSecuenciaDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -513,8 +513,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosConCanceladorDesordenadosConfiguracionSecuenciaDiscontinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaDiscontinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -530,8 +530,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	 */
 	public void testSucesosContinuosOrdenadosConfiguracionSecuenciaContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -544,8 +544,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosContinuosDesordenadosConfiguracionSecuenciaContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -558,8 +558,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 			
 	public void testSucesosDiscontinuosOrdenadosConfiguracionSecuenciaContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -572,8 +572,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 	
 	public void testSucesosDiscontinuosDesordenadosConfiguracionSecuenciaContinuaCancelaciones(){
 		ManejadorDeSucesos manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorSecuenciaContinua();
-		manejadorSucesos.getConfiguracion().habilitarCancelador();
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorSecuenciaContinua();
+		manejadorSucesos.obtenerConfiguracion().habilitarCancelador();
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
@@ -803,8 +803,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 		Bomba bomba = new Bomba();
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().establecerTamanioMaximoDeSucesosOcurridos(3);
 		List<Suceso> listaSucesos = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, listaSucesos);
 		bomba.setEncendida(false);
@@ -818,8 +818,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
 		manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().establecerTamanioMaximoDeSucesosOcurridos(3);
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
 		bomba.setEncendida(false);
@@ -833,8 +833,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 		AccionPrenderBomba accionPrenderBomba = new AccionPrenderBomba();
 		accionPrenderBomba.setBomba(bomba);
 		manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().establecerTamanioMaximoDeSucesosOcurridos(3);
 		
 	    List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);
@@ -851,8 +851,8 @@ public class TestManejadorDeSucesos extends  TestCase {
 		accionPrenderBomba.setBomba(bomba);
 		
 		manejadorSucesos = new ManejadorDeSucesos();
-		manejadorSucesos.getConfiguracion().establecerEvaluadorContinuo();
-		manejadorSucesos.getConfiguracion().establecerTamanioMaximoaDeSucesosOcurridos(3);
+		manejadorSucesos.obtenerConfiguracion().establecerEvaluadorContinuo();
+		manejadorSucesos.obtenerConfiguracion().establecerTamanioMaximoDeSucesosOcurridos(3);
 		
 		List<Suceso> lista = GeneradorDeSuceso.obtenerSucesos("A B");
 		manejadorSucesos.suscribirImplicacion(accionPrenderBomba, lista);

@@ -45,9 +45,9 @@ public class Configuracion {
 	
 	/**
 	 * Carga el tamanio maximo de sucesos ocurridos.
-	 * @param tamanioDeListaDeSucesosOcurridos tamanio maximo de sucesos a almacenar.
+	 * @param tamanioMaximoDeSucesosOcurridos tamanio maximo de sucesos a almacenar.
 	 */
-	public void establecerTamanioMaximoaDeSucesosOcurridos(int tamanioMaximoDeSucesosOcurridos) {
+	public void establecerTamanioMaximoDeSucesosOcurridos(int tamanioMaximoDeSucesosOcurridos) {
 		if (tamanioMaximoDeSucesosOcurridos>=1){
 			this.tamanioMaximoDeSucesosOcurridos = tamanioMaximoDeSucesosOcurridos;
 		}
