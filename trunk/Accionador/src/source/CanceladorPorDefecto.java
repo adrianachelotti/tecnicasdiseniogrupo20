@@ -32,6 +32,7 @@ public class CanceladorPorDefecto extends Cancelador {
 
 	@Override
 	public void cancelarSucesos(List<Suceso> sucesosExistentes,	List<Suceso> sucesosNuevos) {
+		
 		for(Suceso sucesoActual: sucesosNuevos){
 			cancelarSuceso(sucesosExistentes, sucesoActual);
 		}

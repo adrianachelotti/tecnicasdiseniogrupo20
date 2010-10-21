@@ -127,7 +127,7 @@ public class ManejadorDeSucesos {
 			cancelarSuceso(sucesoAgregar);
 			sucesoAgregar.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			this.sucesosOcurridos.add(sucesoAgregar);
-			quitarSucesosExcedente();
+			quitarSucesosExcedentes();
 			this.notificar();
 		}
 	}
@@ -141,38 +141,19 @@ public class ManejadorDeSucesos {
 		if (esConjuntoValidoDeSucesos(sucesosAgregar)){
 			//Puede contener elementos que sean nulos, entonces los sacamos
 			this.eliminarSucesosNulos(sucesosAgregar);
-			this.cancelarSucesos(sucesosAgregar);
 			for(Suceso sucesoActual: sucesosAgregar){
-				sucesoActual.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
+				agregarSuceso(sucesoActual);
 			}			
-			this.sucesosOcurridos.addAll(sucesosAgregar);
-			this.quitarSucesosExcedente();
-			this.notificar();
 		}
 	}
 	/**
 	 * Segun el tamanio maximo de la lista se quitan los mas viejos 
 	 */
-	private void quitarSucesosExcedente() {
+	private void quitarSucesosExcedentes() {
 		//Verificamos de no salirnos del maximo
 		if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
 			// me quedo con los primeros				
 			this.sucesosOcurridos = this.sucesosOcurridos.subList(this.sucesosOcurridos.size()-this.tamanioMaximoDeSucesosOcurridos,this.sucesosOcurridos.size());
-		}
-	}
-
-	/**
-	 * Efectua la cancelacion de sucesos.
-	 * @param sucesosAgregar sucesos canceladores a agregar.
-	 */
-	private void cancelarSucesos(List<Suceso> sucesosAgregar){
-		if(this.configuracion.estaCanceladorActivo()){
-			List<Suceso> listaAux = new ArrayList<Suceso>();
-			listaAux.addAll(sucesosAgregar);
-			for(Suceso sucesoActual: listaAux){
-				this.configuracion.getCancelador().cancelarSuceso(sucesosAgregar, sucesoActual);
-			}
-			this.configuracion.getCancelador().cancelarSucesos(this.sucesosOcurridos,sucesosAgregar);
 		}
 	}
 	
