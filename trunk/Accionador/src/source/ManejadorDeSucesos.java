@@ -127,11 +127,7 @@ public class ManejadorDeSucesos {
 			cancelarSuceso(sucesoAgregar);
 			sucesoAgregar.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			this.sucesosOcurridos.add(sucesoAgregar);
-			// verificamos que la lista no este llena
-			if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
-				// me quedo con los primeros				
-				this.sucesosOcurridos = this.sucesosOcurridos.subList(0,this.tamanioMaximoDeSucesosOcurridos-1);
-			}
+			quitarSucesosExcedente();
 			this.notificar();
 		}
 	}
@@ -150,12 +146,18 @@ public class ManejadorDeSucesos {
 				sucesoActual.setOrdenDeSuscripcion(obtenerOrdenDeSuscripcion());
 			}			
 			this.sucesosOcurridos.addAll(sucesosAgregar);
-			//Verificamos de no salirnos del maximo
-			if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
-				// me quedo con los primeros				
-				this.sucesosOcurridos = this.sucesosOcurridos.subList(this.sucesosOcurridos.size()-this.tamanioMaximoDeSucesosOcurridos,this.sucesosOcurridos.size()-1);
-			}
+			this.quitarSucesosExcedente();
 			this.notificar();
+		}
+	}
+	/**
+	 * Segun el tamanio maximo de la lista se quitan los mas viejos 
+	 */
+	private void quitarSucesosExcedente() {
+		//Verificamos de no salirnos del maximo
+		if (this.sucesosOcurridos.size()>this.tamanioMaximoDeSucesosOcurridos){
+			// me quedo con los primeros				
+			this.sucesosOcurridos = this.sucesosOcurridos.subList(this.sucesosOcurridos.size()-this.tamanioMaximoDeSucesosOcurridos,this.sucesosOcurridos.size());
 		}
 	}
 
