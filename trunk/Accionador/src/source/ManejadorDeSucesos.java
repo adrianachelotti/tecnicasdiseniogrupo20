@@ -51,7 +51,7 @@ public class ManejadorDeSucesos {
 	 * Obtiene la configuracion del manejador de sucesos.
 	 * @return Configuracion del manejador de sucesos.
 	 */
-	public Configuracion getConfiguracion() {
+	public Configuracion obtenerConfiguracion() {
 		return configuracion;
 	}
 

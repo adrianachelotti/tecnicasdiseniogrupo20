@@ -26,10 +26,10 @@ public class Implicacion {
 	/**
 	 * Orden de la ultima vez que se ejecuta la accion.
 	 */
-	long ordenUltimaSuscripcion;
+	private long ordenUltimaSuscripcion;
 	
 	/**
-	 * Constructor de la impicacion.
+	 * Constructor de la implicacion.
 	 * @param antecedente conjunto de sucesos que forman el antecedente.
 	 * @param consecuente accion que forman el consecuente.
 	 */
