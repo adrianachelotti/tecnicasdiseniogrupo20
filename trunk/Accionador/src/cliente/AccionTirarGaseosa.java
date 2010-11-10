@@ -4,7 +4,7 @@ import source.Accion;
 import source.ManejadorDeSucesos;
 import source.Suceso;
 
-public class AccionTirarGaseosa implements Accion {
+public class AccionTirarGaseosa extends Accion {
 	
 	private ManejadorDeSucesos manejador;
 	

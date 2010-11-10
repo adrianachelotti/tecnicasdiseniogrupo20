@@ -2,7 +2,7 @@ package cliente;
 
 import source.Accion;
 
-public class AccionQuitarGaseosa implements Accion {
+public class AccionQuitarGaseosa extends Accion {
 
 	private Gaseosa gaseosa ;
 	

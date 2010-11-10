@@ -2,7 +2,7 @@ package cliente;
 
 import source.Accion;
 
-public class AccionPrenderBomba implements Accion{
+public class AccionPrenderBomba extends Accion{
 
 	private Bomba bomba;
 	
