@@ -1,0 +1,12 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+<package name="controladores" extends="struts-default">
+
+		<action name="Autenticador" class="controladores.Autenticador">
+			<result name="success">/home.jsp</result>
+			<result name="error">/index.jsp</result>
+		</action>
+	
+</package>
+</struts>
