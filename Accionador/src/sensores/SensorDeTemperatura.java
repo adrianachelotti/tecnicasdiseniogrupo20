@@ -4,7 +4,7 @@ import source.Suceso;
 
 public class SensorDeTemperatura extends Sensor {
 	
-	private int temperatura;
+	private int temperatura =18;
 	
 	private boolean encendido ;
 
@@ -17,7 +17,7 @@ public class SensorDeTemperatura extends Sensor {
 	}
 
 	public Suceso notificarSuceso() {
-		return new Suceso("temperatua_"+temperatura);
+		return new Suceso("temperatura_"+temperatura);
 	}
 
 	public int obtenerMedicion() {

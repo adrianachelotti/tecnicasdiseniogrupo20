@@ -32,7 +32,6 @@ public class Luces extends Dispositivo{
 	}
 
 	protected void apagarDispositivo() {
-		this.establecerEncendido(false);
 		this.nivelLuminosidad=0;
 
 	}
