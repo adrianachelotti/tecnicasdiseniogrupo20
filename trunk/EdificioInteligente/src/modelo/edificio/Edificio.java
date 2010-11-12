@@ -8,12 +8,11 @@ public class Edificio {
 
 	private List<Piso> pisos;
 	
-	private ManejadorDeSucesos manejadorDeSucesos;
+	
 	
 	private static Edificio instancia;
 	
-	private Edificio(){
-		this.manejadorDeSucesos= new ManejadorDeSucesos();
+	private Edificio(){		
 		this.pisos = new ArrayList<Piso>();
 	}
 	public static Edificio obtenerInstancia(){
@@ -26,12 +25,6 @@ public class Edificio {
 	
 	public void agregarPiso(Piso pisoAgregar){
 		this.pisos.add(pisoAgregar);		
-	}
-	public ManejadorDeSucesos getManejadorDeSucesos() {
-		return manejadorDeSucesos;
-	}
-	public void setManejadorDeSucesos(ManejadorDeSucesos manejadorDeSucesos) {
-		this.manejadorDeSucesos = manejadorDeSucesos;
 	}
 	
 	

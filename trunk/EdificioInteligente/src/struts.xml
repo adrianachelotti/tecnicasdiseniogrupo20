@@ -7,6 +7,9 @@
 			<result name="success">/home.jsp</result>
 			<result name="error">/index.jsp</result>
 		</action>
+		<action name="ListadorDePisos" class="controladores.ListadorDePisos">
+			<result name="success">/home.jsp</result>			
+		</action>
 	
 </package>
 </struts>
