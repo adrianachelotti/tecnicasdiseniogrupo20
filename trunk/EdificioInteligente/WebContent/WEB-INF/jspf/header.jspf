@@ -21,19 +21,17 @@
 
 	<li class="top"><a href="#" class="top_link"><span>Dispositivos</span></a>
 		<ul class="sub">
-			<li><a href="#">Ver Dispositivos</a></li>
-			<li><a href="#">Cargar Dispositivos</a></li>			            
+			<li><a href="dispositivo.jsp">Ver Dispositivos</a></li>					            
 		</ul>
 	</li>
 	<li class="top"><a href="#" class="top_link"><span>Sensores</span></a>
 		<ul class="sub">
-			<li><a href="#">Ver Sensores</a></li>			
-			<li><a href="#">Cargar Sensores </a></li>                    
+			<li><a href="sensores.jsp">Ver Sensores</a></li>			                 
 		</ul>
 	</li>
 	<li class="top"><a href="#" class="top_link"><span>Reglas</span></a>
 		<ul class="sub">
-			<li><a href="#">Configurar</a></li>			
+			<li><a href="reglas.jsp">Configurar</a></li>			
 		</ul>
 	</li>
 	
