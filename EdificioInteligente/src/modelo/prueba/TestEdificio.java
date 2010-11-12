@@ -26,12 +26,12 @@ public class TestEdificio extends TestCase {
 		AccionPrenderDispositivo accionPrenderCalefactor = new AccionPrenderDispositivo();
 		accionPrenderCalefactor.establecerDispositivo(calefactor);
 		
-		edificio.getManejadorDeSucesos().suscribirImplicacion(accionPrenderCalefactor, new Suceso("temperatura_18"));
+		piso.getManejadorDeSucesos().suscribirImplicacion(accionPrenderCalefactor, new Suceso("temperatura_18"));
 		edificio.agregarPiso(piso);
 		
 		calefactor.establecerEncendido(false);
 		assertEquals(false,calefactor.estaEncendido());
-		edificio.getManejadorDeSucesos().agregarSuceso(sensor.notificarSuceso());
+		piso.getManejadorDeSucesos().agregarSuceso(sensor.notificarSuceso());
 		assertEquals(true,calefactor.estaEncendido());
 		
 		
