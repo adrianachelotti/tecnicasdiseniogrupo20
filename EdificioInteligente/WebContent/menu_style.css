@@ -45,7 +45,7 @@ h3#header { margin: 0; }
 td.header{color:#fff; background:#999999;}
 td.borde {background:black;}
 td.borderline {background: activeborder;}
-td.fondo {background:#f5f5f5;}
+td.fondo {background:white;}
 table.principal{heigth:400; wid}
 form.elegante input { padding: .2em;}
 
@@ -96,7 +96,7 @@ table.listado td.accion {
 }
 
 .contenido .cuerpo {
-	background-color: #F5F5F5;
+	background-color: white;
 	margin-left: 2.8333px; /* Equivalente en firefox a: **/
 	margin-right: 2.8333px;/* <td width="5" ...         **/
 	padding: 0.6em;
@@ -113,10 +113,10 @@ table.listado td.accion {
 }
 
 .listado_impar{
-	background-color:#F0F0F0;
+	background-color:teal;
 	width: 200;
 }
 .listado_par{
-	background-color:silver;
+	background-color:teal;
 	width: 200;
 }
