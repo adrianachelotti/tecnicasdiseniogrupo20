@@ -10,7 +10,16 @@ public class RegadoraDePasto extends Dispositivo {
 
 	protected void encenderDispositivo() {
 		this.abrirCanilla = true;
-
 	}
+
+	public boolean isAbrirCanilla() {
+		return abrirCanilla;
+	}
+
+	public void setAbrirCanilla(boolean abrirCanilla) {
+		this.abrirCanilla = abrirCanilla;
+	}
+	
+	
 
 }
