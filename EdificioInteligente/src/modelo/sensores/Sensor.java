@@ -7,13 +7,23 @@ public abstract class Sensor {
 	
 	private Ubicacion ubicacion;
 	
+	private boolean encendido;
+	
 	public abstract int obtenerMedicion();
 	
-	public abstract void habilitar();
-	
-	public abstract void deshabilitar();
-	
 	public abstract Suceso notificarSuceso();
+		
+	public void habilitar(){
+		this.encendido=true;
+	}
+	
+	public void deshabilitar(){
+		this.encendido=false;
+	}
+		
+	public boolean estaHabilitado() {
+		return encendido;
+	}
 
 	public Ubicacion getUbicacion() {
 		return ubicacion;

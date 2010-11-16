@@ -22,6 +22,7 @@ public class Piso {
 		this.nivel = nivel;
 		this.manejadorDeSucesos= new ManejadorDeSucesos();
 	}
+	
 	public void agregarDispositivo(Dispositivo dispositivoAgregar){
 		this.dispositivos.add(dispositivoAgregar);
 	}
