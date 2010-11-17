@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import modelo.edificio.*;
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class ListadorDePisos extends ActionSupport {
 	
 	private List<Piso> pisos ;
@@ -17,7 +18,7 @@ public class ListadorDePisos extends ActionSupport {
 		this.pisos = pisos;
 	}
 	
-	private void cargarEdificios(){
+	public void cargarEdificios(){
 		this.pisos = new ArrayList<Piso>();
 		this.pisos.add(new Piso(1));
 		this.pisos.add(new Piso(2));

@@ -4,7 +4,6 @@ public class Calefactor extends Dispositivo {
 
 	private int temperatura;
 	
-
 	public int getTemperatura() {
 		return temperatura;
 	}
@@ -13,12 +12,12 @@ public class Calefactor extends Dispositivo {
 		this.temperatura = temperatura;
 	}
 	
-	protected void apagarDispositivo() {
+	public void apagarDispositivo() {
 		this.establecerEncendido(false);
 		this.temperatura = 0;		
 	}
 
-	protected void encenderDispositivo() {
+	public void encenderDispositivo() {
 		this.establecerEncendido(true);
 		this.temperatura = 50;
 	}

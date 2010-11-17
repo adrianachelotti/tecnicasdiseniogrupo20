@@ -2,6 +2,7 @@ package controladores;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings("serial")
 public class Autenticador extends ActionSupport {
 
 	String usuario;

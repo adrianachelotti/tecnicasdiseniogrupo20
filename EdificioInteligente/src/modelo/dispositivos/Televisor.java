@@ -1,12 +1,9 @@
 package modelo.dispositivos;
 
 public class Televisor extends Dispositivo {
-
 	
 	private int canalActual;
-	
 	private int volumen;
-	
 
 	protected void apagarDispositivo() {			
 		this.volumen = 0;
@@ -52,5 +49,4 @@ public class Televisor extends Dispositivo {
 	public void disminuirVolumen(){
 		this.volumen--;
 	}
-
 }
