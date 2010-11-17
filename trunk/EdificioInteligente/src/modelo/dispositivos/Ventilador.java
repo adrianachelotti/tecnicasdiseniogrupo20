@@ -11,11 +11,11 @@ public class Ventilador extends Dispositivo {
 	protected void encenderDispositivo() {
 		this.velocidad=50;
 	}
+	
 	public void aumentarVelocidad(int aumento){
 		this.velocidad+=aumento;
 		if(velocidad>100){
 			velocidad = 100;
 		}
 	}
-
 }

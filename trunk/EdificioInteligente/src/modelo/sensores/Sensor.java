@@ -32,4 +32,5 @@ public abstract class Sensor {
 	public void establecerUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+		
 }
