@@ -2,9 +2,9 @@ package modelo.prueba;
 
 import java.io.File;
 
-import modelo.dispositivos.Dispositivo;
+import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
-import modelo.sensores.Sensor;
+import modelo.edificio.Sensor;
 
 public class CargadorDeDriver extends Thread {
 	
@@ -53,8 +53,7 @@ public class CargadorDeDriver extends Thread {
 				//TODO ver manejo exception
 				e.printStackTrace();
 			}
-			
-        }
+	   }
 	}
 	
 	public void run() {
