@@ -4,11 +4,14 @@
 <package name="controladores" extends="struts-default">
 
 		<action name="Autenticador" class="controladores.Autenticador">
-			<result name="success">/home.jsp</result>
-			<result name="error">/index.jsp</result>
+			<result name="success">/principal.jsp</result>
+			<result name="error">/autenticacion.jsp</result>
 		</action>
 		<action name="ListadorDePisos" class="controladores.ListadorDePisos">
-			<result name="success">/home.jsp</result>			
+			<result name="success">/pisos.jsp</result>			
+		</action>
+		<action name="AgregarDispositivo" class="controladores.AgregarDispositivo">
+			<result name="success">/agregarDispositivos.jsp</result>			
 		</action>
 	
 </package>
