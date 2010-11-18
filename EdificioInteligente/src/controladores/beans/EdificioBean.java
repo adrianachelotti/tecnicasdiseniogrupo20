@@ -2,7 +2,7 @@ package controladores.beans;
 
 import java.util.List;
 
-import modelo.dispositivos.Dispositivo;
+import modelo.edificio.Dispositivo;
 import modelo.edificio.Piso;
 
 public class EdificioBean {
