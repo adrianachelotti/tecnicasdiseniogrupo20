@@ -1,11 +1,19 @@
 package controladores;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
+
 import modelo.edificio.*;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+import controladores.beans.EdificioBean;
 
 @SuppressWarnings("serial")
 public class ListadorDePisos extends ActionSupport {
+	
+	private Map<String,Object> session ;
+	
 	
 	private List<Piso> pisos ;
 	
@@ -18,16 +26,19 @@ public class ListadorDePisos extends ActionSupport {
 		this.pisos = pisos;
 	}
 	
-	public void cargarEdificios(){
-		this.pisos = new ArrayList<Piso>();
-		this.pisos.add(new Piso(1));
-		this.pisos.add(new Piso(2));
-		this.pisos.add(new Piso(3));
-		this.pisos.add(new Piso(4));
-		this.pisos.add(new Piso(5));
-		this.pisos.add(new Piso(6));
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
+
+
 	public String execute(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		Edificio edificio = Edificio.obtenerInstancia();
+		EdificioBean contenedor = new EdificioBean();
+		contenedor.setListadoDePisos(edificio.getPisos());
+		session.put("edificio", contenedor);
+		setSession(session);
 		return "success";
 	}
 
