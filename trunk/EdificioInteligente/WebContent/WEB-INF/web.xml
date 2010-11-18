@@ -6,7 +6,7 @@
     <display-name>Edificio inteligente</display-name>  
   
     <welcome-file-list>  
-        <welcome-file>index.jsp</welcome-file>  
+        <welcome-file>autenticacion.jsp</welcome-file>  
     </welcome-file-list>  
   
     <filter>  
