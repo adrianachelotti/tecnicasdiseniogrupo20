@@ -1,4 +1,4 @@
-<jsp:include page="/WEB-INF/jspf/header.jspf"></jsp:include>
+<jsp:include page="/WEB-INF/jspf/encabezado.jspf"></jsp:include>
 <%@ page language="java" contentType="text/html" import="java.util.List"%>
 <div class="contenido">
 	<div class="titulo"><h3>Dispositivo</h3></div>
@@ -30,4 +30,4 @@
 		</table>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/jspf/footer.jspf"></jsp:include>
+<jsp:include page="/WEB-INF/jspf/piedepagina.jspf"></jsp:include>

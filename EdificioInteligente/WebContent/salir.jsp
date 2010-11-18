@@ -28,4 +28,4 @@
 	</table>
 	<s:actionerror cssClass="error"/>
 
-<jsp:include page="/WEB-INF/jspf/footer.jspf"></jsp:include>
+<jsp:include page="/WEB-INF/jspf/piedepagina.jspf"></jsp:include>
