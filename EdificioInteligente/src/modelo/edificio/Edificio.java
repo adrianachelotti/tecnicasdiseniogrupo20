@@ -16,6 +16,8 @@ public class Edificio {
 	
 	private Edificio(){		
 		this.pisos = new ArrayList<Piso>();
+		this.pisos.add(new Piso(1));
+		this.pisos.add(new Piso(2));		
 		this.driversDispositivos = new ArrayList<Dispositivo>();
 		this.driversSensores = new ArrayList<Sensor>();
 	}
