@@ -1,6 +1,6 @@
 package modelo.manejadorDeSucesos;
 
-import modelo.dispositivos.Dispositivo;
+import modelo.edificio.Dispositivo;
 
 /**
  * Clase abstracta que deben heredar las acciones que se quieren efectuar.
@@ -20,7 +20,6 @@ public abstract class Accion {
 	 */
 	public abstract void ejecutar();
 	
-	
 	/**
 	 * Metodo para obtener el dispositivo sobre el cual se 
 	 * realiza la accion
@@ -35,7 +34,6 @@ public abstract class Accion {
 	 * realiza la accion
 	 * @param dispositivo a establecer
 	 */
-
 	public void establecerDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
 	}

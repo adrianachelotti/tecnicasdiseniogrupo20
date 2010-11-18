@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.manejadorDeSucesos.ManejadorDeSucesos;
-import modelo.sensores.Sensor;
-import modelo.dispositivos.*;
 
 public class Piso {
 	

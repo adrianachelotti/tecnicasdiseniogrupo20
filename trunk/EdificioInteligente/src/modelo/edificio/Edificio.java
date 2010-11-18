@@ -3,8 +3,6 @@ package modelo.edificio;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.dispositivos.Dispositivo;
-import modelo.sensores.Sensor;
 
 public class Edificio {
 
