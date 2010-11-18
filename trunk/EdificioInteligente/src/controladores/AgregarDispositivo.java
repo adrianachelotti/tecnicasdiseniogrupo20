@@ -3,10 +3,9 @@ package controladores;
 import java.util.List;
 import java.util.Map;
 
-import modelo.dispositivos.Dispositivo;
+import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
