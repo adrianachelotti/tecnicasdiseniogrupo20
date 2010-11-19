@@ -3,11 +3,9 @@ package modelo.cliente.sensores;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.cliente.sensores.SensorDeHumoMock.Humo;
-
 public class DetectorDeMovimientoMock {
 
-	enum Movimiento{EXISTENTE_MOVIMIENTO,NO_EXISTENTE_MOVIMIENTO};
+	private enum Movimiento{EXISTENTE_MOVIMIENTO,NO_EXISTENTE_MOVIMIENTO};
 	private boolean encendido;
 	private String movimiento;
 		
@@ -32,10 +30,10 @@ public class DetectorDeMovimientoMock {
 	}
 	
 	public List<String> medicionesPosibles(){
-		Humo[] valores = Humo.values();
+		Movimiento[] valores = Movimiento.values();
 		List<String> mediciones = new ArrayList<String>();
-		for (Humo humo : valores) {
-			mediciones.add(humo.toString());
+		for (Movimiento movimiento : valores) {
+			mediciones.add(movimiento.toString());
 		}
 		return mediciones;
 	}

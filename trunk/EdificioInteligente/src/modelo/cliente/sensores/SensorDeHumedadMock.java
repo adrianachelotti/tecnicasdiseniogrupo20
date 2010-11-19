@@ -3,18 +3,19 @@ package modelo.cliente.sensores;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SensorDeHumoMock {
+
+public class SensorDeHumedadMock {
 	
-	private enum Humo{HUMO_EXISTENTE,HUMO_NO_EXISTENTE};
+	private enum Humedad{HUMEDAD_BAJA,HUMEDAD_MEDIA,HUMEDAD_ALTA};
 	private boolean encendido;
-	private String humo;
+	private String humedad;
 		
-	public String getHumo() {
-		return humo;
+	public String getHumedad() {
+		return humedad;
 	}
 
-	public void setHumo(String humo) {
-		this.humo = humo;
+	public void setHumedad(String humedad) {
+		this.humedad = humedad;
 	}
 
 	public void encender(){
@@ -30,10 +31,10 @@ public class SensorDeHumoMock {
 	}
 	
 	public List<String> medicionesPosibles(){
-		Humo[] valores = Humo.values();
+		Humedad[] valores = Humedad.values();
 		List<String> mediciones = new ArrayList<String>();
-		for (Humo humo : valores) {
-			mediciones.add(humo.toString());
+		for (Humedad humedad : valores) {
+			mediciones.add(humedad.toString());
 		}
 		return mediciones;
 	}
