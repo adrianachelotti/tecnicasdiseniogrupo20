@@ -15,12 +15,10 @@ public class SensorDeHumedadDriver implements DriverSensor {
 	
 	public void apagar() {
 		sensor.apagar();
-		
 	}
 
 	public void encender() {
 		sensor.encender();
-		
 	}
 
 	public void establecerMedicion(String medicion) {
@@ -38,5 +36,4 @@ public class SensorDeHumedadDriver implements DriverSensor {
 	public String obtenerMedicion() {
 		return sensor.getHumedad();
 	}
-
 }

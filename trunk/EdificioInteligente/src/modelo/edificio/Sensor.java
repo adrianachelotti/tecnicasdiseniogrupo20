@@ -16,6 +16,10 @@ public class Sensor{
 		return this.driver.obtenerMedicion();
 	}
 	
+	public void establecerMedicion(String medicion){
+		this.driver.establecerMedicion(medicion);
+	}
+	
 	public Suceso notificarSuceso(){
 		return new Suceso(obtenerMedicion());
 	}
