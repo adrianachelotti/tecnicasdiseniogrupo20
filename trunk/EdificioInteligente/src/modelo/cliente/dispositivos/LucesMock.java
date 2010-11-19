@@ -19,7 +19,6 @@ public class LucesMock {
 		}else{
 			this.nivelLuminosidad=0;
 		}
-		
 	}
 	
 	public void aumentarLuminosidad(int aumentarLuz){
@@ -30,13 +29,11 @@ public class LucesMock {
 		}
 	}
 
-	public void apagarDispositivo() {
+	public void apagar() {
 		this.nivelLuminosidad=0;
-
 	}
 
-	public void encenderDispositivo() {
+	public void encender() {
 		this.nivelLuminosidad=100;
 	}
-
 }
