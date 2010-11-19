@@ -2,21 +2,21 @@ package controladores.beans;
 
 import java.util.List;
 
-import modelo.edificio.Dispositivo;
+import modelo.driver.DriverDispositivo;
 import modelo.edificio.Piso;
 
 public class EdificioBean {
 	
 	List<Piso> listadoDePisos;
 	
-	List<Dispositivo> listaDeDisposititvos;
+	List<DriverDispositivo> catalogoDriversDeDisposititvos;
 
-	public List<Dispositivo> getListaDeDisposititvos() {
-		return listaDeDisposititvos;
+	public List<DriverDispositivo> getCatalogoDriversDeDisposititvos() {
+		return catalogoDriversDeDisposititvos;
 	}
 
-	public void setListaDeDisposititvos(List<Dispositivo> listaDeDisposititvos) {
-		this.listaDeDisposititvos = listaDeDisposititvos;
+	public void setCatalogoDriversDeDisposititvos(List<DriverDispositivo> listaDriversDeDisposititvos) {
+		this.catalogoDriversDeDisposititvos = listaDriversDeDisposititvos;
 	}
 
 	public List<Piso> getListadoDePisos() {
