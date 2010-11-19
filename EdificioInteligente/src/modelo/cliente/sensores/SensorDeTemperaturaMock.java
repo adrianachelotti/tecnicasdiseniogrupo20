@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SensorDeTemperaturaMock{
-	enum Temperatura{TEMPERATURA_ALTA,TEMPERATURA_MEDIA,TEMPERATURA_BAJA};
+	private enum Temperatura{TEMPERATURA_ALTA,TEMPERATURA_MEDIA,TEMPERATURA_BAJA};
 	private boolean encendido;
 	private String temperatura;
 		
