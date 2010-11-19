@@ -3,23 +3,24 @@ package modelo.edificio;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.driver.DriverDispositivo;
+import modelo.driver.DriverSensor;
+
 
 public class Edificio {
 
 	private List<Piso> pisos;
 	
-	private List<Sensor> driversSensores;
+	private List<DriverSensor> catalogoDriversDeSensores;
 	
-	private List<Dispositivo> driversDispositivos;
+	private List<DriverDispositivo> catalogoDriversDeDispositivos;
 	
 	private static Edificio instancia;
 	
 	private Edificio(){		
 		this.pisos = new ArrayList<Piso>();
-		this.pisos.add(new Piso(1));
-		this.pisos.add(new Piso(2));		
-		this.driversDispositivos = new ArrayList<Dispositivo>();
-		this.driversSensores = new ArrayList<Sensor>();
+		this.catalogoDriversDeDispositivos = new ArrayList<DriverDispositivo>();
+		this.catalogoDriversDeSensores = new ArrayList<DriverSensor>();
 	}
 	
 	/**
@@ -53,36 +54,33 @@ public class Edificio {
 	 * Agrega el driver de un sensor al edificio.
 	 * @param sensor driver del sensor a agregar.
 	 */
-	public void agregarDriverSensor(Sensor sensor){
-		this.driversSensores.add(sensor);
+	public void agregarDriverSensor(DriverSensor sensor){
+		this.catalogoDriversDeSensores.add(sensor);
 	}
 	
 	/**
 	 * Agrega el driver de un dispositivo al edificio.
 	 * @param dispositivo driver del dispositivo a agregar.
 	 */
-	public void agregarDriverDispositivo(Dispositivo dispositivo){
-		this.driversDispositivos.add(dispositivo);
+	public void agregarDriverDispositivo(DriverDispositivo dispositivo){
+		this.catalogoDriversDeDispositivos.add(dispositivo);
 	}
 
 	/**
-	 * Obtiene los drivers de sensores con los que cuenta el edificio.
-	 * @return drivers de sensores del edificio.
+	 * Obtiene el catalgo de los sensores con los que cuenta el edificio.
+	 * @return catalogo de sensores del edificio.
 	 */
-	public List<Sensor> getDriversSensores() {
-		return driversSensores;
+	public List<DriverSensor> getCatalogoDriversDeSensores() {
+		return catalogoDriversDeSensores;
 	}
 
 	/**
-	 * Obtiene los drivers de dsipositivos con los que cuenta el edificio.
-	 * @return drivers de dispositivos del edificio.
+	 * Obtiene el catalog de los dispositivos con los que cuenta el edificio.
+	 * @return catalog de dispositivos del edificio.
 	 */
-	public List<Dispositivo> getDriversDispositivos() {
-		return driversDispositivos;
+	public List<DriverDispositivo> getCataloDriversDeDispositivos() {
+		return catalogoDriversDeDispositivos;
 	}
-
-	
-	
 	
 	
 }

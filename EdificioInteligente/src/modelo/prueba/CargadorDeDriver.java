@@ -2,9 +2,9 @@ package modelo.prueba;
 
 import java.io.File;
 
-import modelo.edificio.Dispositivo;
+import modelo.driver.DriverDispositivo;
+import modelo.driver.DriverSensor;
 import modelo.edificio.Edificio;
-import modelo.edificio.Sensor;
 
 public class CargadorDeDriver extends Thread {
 	
@@ -30,7 +30,7 @@ public class CargadorDeDriver extends Thread {
        		String nombreClase = nombreArchivo.substring(0, nombreArchivo.lastIndexOf("."));
 			try {
 				Class clase = Class.forName(nombreClase);
-				edificio.agregarDriverDispositivo((Dispositivo) clase.newInstance());
+				edificio.agregarDriverDispositivo((DriverDispositivo) clase.newInstance());
 			} catch (Exception e) {
 				//TODO ver manejo exception
 				e.printStackTrace();
@@ -48,7 +48,7 @@ public class CargadorDeDriver extends Thread {
 			String nombreClase = nombreArchivo.substring(0, nombreArchivo.lastIndexOf("."));
 			try {
 				Class clase = Class.forName(nombreClase);
-				edificio.agregarDriverSensor((Sensor)clase.newInstance());
+				edificio.agregarDriverSensor((DriverSensor)clase.newInstance());
 			} catch (Exception e) {
 				//TODO ver manejo exception
 				e.printStackTrace();
@@ -77,8 +77,8 @@ public class CargadorDeDriver extends Thread {
 		CargadorDeDriver uno = new CargadorDeDriver();
 		uno.start();
 		while(true){
-			System.out.println("Drivers Sens.: " + edificio.getDriversSensores().size());
-			System.out.println("Drivers Disp.: " + edificio.getDriversDispositivos().size());
+			System.out.println("Drivers Sens.: " + edificio.getCatalogoDriversDeSensores().size());
+			System.out.println("Drivers Disp.: " + edificio.getCataloDriversDeDispositivos().size());
 		}
 	}
 }
