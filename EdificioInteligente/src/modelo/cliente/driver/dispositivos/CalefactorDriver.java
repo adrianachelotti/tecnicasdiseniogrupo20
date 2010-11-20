@@ -6,6 +6,11 @@ public class CalefactorDriver implements DriverDispositivo{
 
 	private boolean encendido;
 	
+	private static final String nombre ="Calefactor";
+	
+	public String obtenerNombre(){
+		return nombre;
+	}
 	public void apagar() {
 		this.encendido = false;
 	}
