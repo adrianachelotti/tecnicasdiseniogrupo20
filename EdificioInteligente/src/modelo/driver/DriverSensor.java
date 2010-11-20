@@ -8,6 +8,8 @@ public interface DriverSensor {
 	
 	public void apagar();
 	
+	public String obtenerNombre();
+	
 	public boolean isEncendido();
 	
 	public String obtenerMedicion();
