@@ -7,6 +7,8 @@ import modelo.driver.DriverSensor;
 
 public class SensorDeHumedadDriver implements DriverSensor {
 	
+	private static final String nombre = "Sensor Humedad-Driver";
+	
 	private SensorDeHumedadMock sensor;
 	
 	public SensorDeHumedadDriver(){
@@ -35,5 +37,9 @@ public class SensorDeHumedadDriver implements DriverSensor {
 
 	public String obtenerMedicion() {
 		return sensor.getHumedad();
+	}
+	
+	public String obtenerNombre(){
+		return nombre;
 	}
 }

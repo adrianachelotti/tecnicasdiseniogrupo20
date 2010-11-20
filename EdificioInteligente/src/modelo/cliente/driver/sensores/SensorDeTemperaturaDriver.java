@@ -7,6 +7,8 @@ import modelo.driver.DriverSensor;
 
 public class SensorDeTemperaturaDriver implements DriverSensor{
 	
+	private static final String nombre = "Sensor Temperatura-Driver";
+	
 	private SensorDeTemperaturaMock sensor;
 	
 	public SensorDeTemperaturaDriver(){
@@ -35,5 +37,9 @@ public class SensorDeTemperaturaDriver implements DriverSensor{
 	
 	public List<String> medicionesPosibles(){
 		return this.sensor.medicionesPosibles();
+	}
+	
+	public String obtenerNombre(){
+		return nombre;
 	}
 }

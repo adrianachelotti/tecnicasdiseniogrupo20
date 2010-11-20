@@ -9,6 +9,8 @@ public class DetectorDeMovimientoDriver implements DriverSensor{
 
 	private DetectorDeMovimientoMock detector;
 	
+	private static final String nombre = "Detector Movimiento-Driver";
+	
 	public DetectorDeMovimientoDriver(){
 		this.detector = new DetectorDeMovimientoMock();
 	}
@@ -36,6 +38,10 @@ public class DetectorDeMovimientoDriver implements DriverSensor{
 
 	public String obtenerMedicion() {
 		return detector.getMovimiento();
+	}
+	
+	public String obtenerNombre(){
+		return nombre;
 	}
 
 }

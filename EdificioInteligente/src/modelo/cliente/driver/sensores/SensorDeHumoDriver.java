@@ -7,6 +7,8 @@ import modelo.driver.DriverSensor;
 
 public class SensorDeHumoDriver implements DriverSensor{
 
+	private static final String nombre = "Sensor Humo-Driver";
+	
 	private SensorDeHumoMock sensor;
 	
 	public SensorDeHumoDriver(){
@@ -39,4 +41,7 @@ public class SensorDeHumoDriver implements DriverSensor{
 		return sensor.getHumo();
 	}
 
+	public String obtenerNombre(){
+		return nombre;
+	}
 }

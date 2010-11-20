@@ -7,6 +7,8 @@ import modelo.driver.DriverSensor;
 
 public class SensorDeRuidoDriver implements DriverSensor {
 
+	private static final String nombre = "Sensor Ruido-Driver";
+	
 	private SensorDeRuidoMock sensor;
 	
 	public SensorDeRuidoDriver(){
@@ -36,5 +38,8 @@ public class SensorDeRuidoDriver implements DriverSensor {
 	public String obtenerMedicion() {
 		return sensor.getRuido();
 	}
-
+	
+	public String obtenerNombre(){
+		return nombre;
+	}
 }
