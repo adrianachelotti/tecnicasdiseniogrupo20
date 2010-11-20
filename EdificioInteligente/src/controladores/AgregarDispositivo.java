@@ -116,7 +116,7 @@ public class AgregarDispositivo extends ActionSupport {
 			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
 				dispositivoAgregar = new Dispositivo(driver);
-				dispositivoAgregar.setDescripcion(descripcionDispositivo);
+				dispositivoAgregar.establecerDescripcion(descripcionDispositivo);
 				break;
 			}
 		}
