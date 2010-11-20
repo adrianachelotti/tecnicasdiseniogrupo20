@@ -14,9 +14,17 @@
 			<result name="success">/agregarDispositivos.jsp</result>
 			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
 		</action>
+		<action name="AgregarSensor" class="controladores.AgregarSensor">
+			<result name="success">/agregarSensor.jsp</result>
+			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
+		</action>
 		<action name="ListadorDeDispositivos" class="controladores.ListadorDeDispositivos">
-			<result name="listarPisos">/seleccionDePisos.jsp</result>
+			<result name="listarPisos">/seleccionDePisosDispositivo.jsp</result>
 			<result name="success">/dispositivo.jsp</result>
+		</action>
+		<action name="ListadorDeSensores" class="controladores.ListadorDeSensores">
+			<result name="listarPisos">/seleccionDePisosSensor.jsp</result>
+			<result name="success">/sensores.jsp</result>
 		</action>
 	
 </package>
