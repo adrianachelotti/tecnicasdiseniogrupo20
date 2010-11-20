@@ -82,7 +82,7 @@ public class Edificio {
 	 * Obtiene el catalgo de los sensores con los que cuenta el edificio.
 	 * @return catalogo de sensores del edificio.
 	 */
-	public List<DriverSensor> getCatalogoDriversDeSensores() {
+	public List<DriverSensor>	obtenerCatalogoDriversDeSensores() {
 		return catalogoDriversDeSensores;
 	}
 
@@ -90,7 +90,7 @@ public class Edificio {
 	 * Obtiene el catalog de los dispositivos con los que cuenta el edificio.
 	 * @return catalog de dispositivos del edificio.
 	 */
-	public List<DriverDispositivo> getCataloDriversDeDispositivos() {
+	public List<DriverDispositivo> obtenerCataloDriversDeDispositivos() {
 		return catalogoDriversDeDispositivos;
 	}
 	
