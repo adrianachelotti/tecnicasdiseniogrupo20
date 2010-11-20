@@ -23,7 +23,7 @@ public class AgregarDispositivo extends ActionSupport {
 	
 	private String descripcionDispositivo;
 	
-
+	
 	@SuppressWarnings("unused")
 	private Map<String,Object> session ;
 	
@@ -82,7 +82,8 @@ public class AgregarDispositivo extends ActionSupport {
 		this.session = session;
 	}
 	
-	
+
+
 	/**
 	 * Metodo para controlar el flujo de datos entre la vista que 
 	 * agrega dispositivo a un piso del edificio
@@ -112,6 +113,7 @@ public class AgregarDispositivo extends ActionSupport {
 		Piso piso = edificio.getPisos().get(this.nivel);
 		Dispositivo dispositivoAgregar = null;
 		for (DriverDispositivo driver: edificio.getCataloDriversDeDispositivos()){
+			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
 				dispositivoAgregar = new Dispositivo(driver);
 				dispositivoAgregar.setDescripcion(descripcionDispositivo);
@@ -121,7 +123,6 @@ public class AgregarDispositivo extends ActionSupport {
 		piso.agregarDispositivo(dispositivoAgregar);
 		return "grabar";
 	}
-	
 	
 
 }
