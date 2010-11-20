@@ -4,11 +4,11 @@
 <jsp:useBean id="piso" scope="session" class="controladores.beans.EdificioBean"/>
 <script type="text/javascript">
 function cambiar(indice){
-	var idDispositivo = document.getElementById("idDispositivo");
+	var idSensor = document.getElementById("idSensor");
 	var x = document.getElementById("accion"+indice).value;
-	var accion =document.getElementById("accionEjecutar");
+	var accion =document.getElementById("medicionCambiar");
 	accion.value=x;	
-	idDispositivo.value=indice;	
+	idSensor.value=indice;	
 }
 </script>
 <% List<Sensor> sensores = piso.obtenerListadoDeSensores(); %>
@@ -19,7 +19,7 @@ function cambiar(indice){
 		<tr>
 			<td width="800" align="center">
 			<fieldset> <legend>Listado de Sensores </legend>
-				<form class="elegante" id="sensorListado" name="sensorListado" action="ListadorDeDispositivos!ejecutar">
+				<form class="elegante" id="sensorListado" name="sensorListado" action="ListadorDeSensores!cambiarMedicion">
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
 								<td class="listado_par">Sensor</td>
@@ -28,23 +28,29 @@ function cambiar(indice){
 							</tr>	
 						<%	
 							int index = 0 ;
-							for (Sensor sensorActual:sensores) {
-								
+							for (Sensor sensorActual:sensores) {								
 						%>		
 							<tr>
 								<td><%=sensorActual.obtenerDescripcion() %></td>								
 								<td><%=sensorActual.obtenerMedicion() %></td>
-								<td></td>							
+								<td>
+								<select id="accion<%=index%>">								
+									<%for(String medicion:sensorActual.obtenerMedicionesPosibles()){ %>
+										<option value="<%=medicion%>"><%=medicion%></option>
+									<%} %>
+								</select>
+								<input type="submit" value="cambiar" onclick="cambiar('<%=index%>')"></input>
+								</td>							
 							</tr>	
 						<%index++;
 						} %>										
 						</table>
 						<input type="hidden" value="<%=piso.obtenerNivel()%>" name="nivel">
-						<input type="hidden" name="idDispositivo" id="idDispositivo"></input>
-						<input type="hidden" name="accionEjecutar" id="accionEjecutar"></input>
+						<input type="hidden" name="idSensor" id="idSensor"></input>
+						<input type="hidden" name="medicionCambiar" id="medicionCambiar"></input>
 					</form> 
 				</fieldset>
-				<a href="ListadorDeDispositivos!seleccionarPisos">Volver</a>
+				<a href="ListadorDeSensores!seleccionarPisos">Volver</a>
 			</td>
 		</tr>
 		</table>
