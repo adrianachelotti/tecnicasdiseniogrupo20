@@ -94,7 +94,7 @@ public class AgregarDispositivo extends ActionSupport {
 		//catalogo
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();	
-		List<DriverDispositivo> drivers = edificio.getCataloDriversDeDispositivos();
+		List<DriverDispositivo> drivers = edificio.obtenerCataloDriversDeDispositivos();
 
 		// Mediante un bean se pasa a traves de la session objetos para mostrar en la vista	
 		EdificioBean contenedor = new EdificioBean();
@@ -112,7 +112,7 @@ public class AgregarDispositivo extends ActionSupport {
 		Edificio edificio = Edificio.obtenerInstancia();
 		Piso piso = edificio.getPisos().get(this.nivel);
 		Dispositivo dispositivoAgregar = null;
-		for (DriverDispositivo driver: edificio.getCataloDriversDeDispositivos()){
+		for (DriverDispositivo driver: edificio.obtenerCataloDriversDeDispositivos()){
 			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
 				dispositivoAgregar = new Dispositivo(driver);
