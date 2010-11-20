@@ -41,6 +41,22 @@ public class Piso {
 	public void setManejadorDeSucesos(ManejadorDeSucesos manejadorDeSucesos) {
 		this.manejadorDeSucesos = manejadorDeSucesos;
 	}
+
+	public List<Dispositivo> obtenerDispositivos() {
+		return dispositivos;
+	}
+
+	public void establecerDispositivos(List<Dispositivo> dispositivos) {
+		this.dispositivos = dispositivos;
+	}
+
+	public List<Sensor> obtenerSensores() {
+		return sensores;
+	}
+
+	public void establecer(List<Sensor> sensores) {
+		this.sensores = sensores;
+	}
 	
 
 }
