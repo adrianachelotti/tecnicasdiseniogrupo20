@@ -5,6 +5,11 @@ import modelo.driver.DriverDispositivo;
 public class VentiladorDriver implements DriverDispositivo{
 	public boolean encendido;
 	
+	private static final String nombre ="Ventilador";
+	
+	public String obtenerNombre(){
+		return nombre;
+	}
 	public void apagar() {
 		this.encendido=false;
 	}

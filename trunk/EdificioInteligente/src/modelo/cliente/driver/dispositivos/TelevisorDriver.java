@@ -6,6 +6,11 @@ public class TelevisorDriver implements DriverDispositivo {
 
 	public boolean encendida;
 	
+	private static final String nombre ="Televisor-Driver";
+	
+	public String obtenerNombre(){
+		return nombre;
+	}
 	public void apagar() {
 		this.encendida=false;
 	}

@@ -6,6 +6,11 @@ public class RadioDriver implements DriverDispositivo{
 
 	private boolean encendida;
 	
+	private static final String nombre ="Radio-Driver";
+	
+	public String obtenerNombre(){
+		return nombre;
+	}
 	public void apagar() {
 		this.encendida = false;		
 	}

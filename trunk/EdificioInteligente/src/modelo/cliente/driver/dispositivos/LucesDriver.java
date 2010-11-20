@@ -4,7 +4,14 @@ import modelo.driver.DriverDispositivo;
 
 public class LucesDriver implements DriverDispositivo{
 
+	
 	private boolean encendida;
+	
+	private static final String nombre ="Luces-Driver";
+	
+	public String obtenerNombre(){
+		return nombre;
+	}
 	
 	public LucesDriver(){
 		this.encendida = false;
