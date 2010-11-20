@@ -11,7 +11,12 @@
 			<result name="success">/pisos.jsp</result>			
 		</action>
 		<action name="AgregarDispositivo" class="controladores.AgregarDispositivo">
-			<result name="success">/agregarDispositivos.jsp</result>			
+			<result name="success">/agregarDispositivos.jsp</result>
+			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
+		</action>
+		<action name="ListadorDeDispositivos" class="controladores.ListadorDeDispositivos">
+			<result name="listarPisos">/seleccionDePisos.jsp</result>
+			<result name="success">/dispositivo.jsp</result>
 		</action>
 	
 </package>
