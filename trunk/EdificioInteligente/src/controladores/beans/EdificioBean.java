@@ -3,8 +3,8 @@ package controladores.beans;
 import java.util.List;
 
 import modelo.driver.*;
-import modelo.edificio.Dispositivo;
-import modelo.edificio.Piso;
+import modelo.edificio.*;
+
 
 public class EdificioBean {
 	
@@ -15,6 +15,8 @@ public class EdificioBean {
 	List<DriverSensor> catalogoDriversDeSensores;
 
 	List<Dispositivo> listadoDeDispositivos;
+
+	List<Sensor> listadoDeSensores;
 	
 	public List<DriverSensor> obtenerCatalogoDriversDeSensores() {
 		return catalogoDriversDeSensores;
@@ -58,6 +60,14 @@ public class EdificioBean {
 	}
 	public int obtenerNivel() {
 		return nivel;
+	}
+	
+	public List<Sensor> obtenerListadoDeSensores() {
+		return listadoDeSensores;
+	}
+
+	public void establecerListadoDeSensores(List<Sensor> listadoDeSensores) {
+		this.listadoDeSensores = listadoDeSensores;
 	}
 	
 
