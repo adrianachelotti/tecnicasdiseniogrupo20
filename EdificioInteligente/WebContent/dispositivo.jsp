@@ -7,14 +7,7 @@ function cambiar(indice){
 	var idDispositivo = document.getElementById("idDispositivo");
 	var x = document.getElementById("accion"+indice).value;
 	var accion =document.getElementById("accionEjecutar");
-	accion.value=x;
-	
-	
-
-	  
-	  
-		
-	
+	accion.value=x;	
 	idDispositivo.value=indice;	
 }
 </script>
@@ -29,7 +22,7 @@ function cambiar(indice){
 				<form class="elegante" id="dispositivoListado" name="dispositivoListado" action="ListadorDeDispositivos!ejecutar">
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
-								<td class="listado_par">Dospisitivo</td>
+								<td class="listado_par">Dispisitivo</td>
 								<td class="listado_par">Estado</td>
 								<td class="listado_par">Ejecutar</td>									
 							</tr>	
