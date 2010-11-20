@@ -4,6 +4,7 @@ import java.util.Map;
 
 import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
+import modelo.edificio.Sensor;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,6 +17,8 @@ public class ListadorDeSensores extends ActionSupport {
 	private int nivel;
 	
 	private String idSensor;
+	
+	private String medicionCambiar;
 	
 	
 	
@@ -38,6 +41,14 @@ public class ListadorDeSensores extends ActionSupport {
 	public void setIdSensor(String idSensor) {
 		this.idSensor = idSensor;
 	}
+	public String getMedicionCambiar() {
+		return medicionCambiar;
+	}
+
+	public void setMedicionCambiar(String medicionCambiar) {
+		this.medicionCambiar = medicionCambiar;
+	}
+
 	public String execute(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
@@ -57,6 +68,14 @@ public class ListadorDeSensores extends ActionSupport {
 		session.put("edificio", contenedor);
 		setSession(session);
 		return "listarPisos";
+	}
+	
+	public String cambiarMedicion(){
+		Edificio edificio = Edificio.obtenerInstancia();
+		int indice = Integer.parseInt(idSensor);
+		Sensor sensor = edificio.getPisos().get(this.nivel).obtenerSensores().get(indice);
+		sensor.establecerMedicion(medicionCambiar);
+		return execute();
 	}
 	
 	
