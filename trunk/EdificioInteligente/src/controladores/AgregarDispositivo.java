@@ -2,7 +2,7 @@ package controladores;
 
 import java.util.List;
 import java.util.Map;
-import modelo.driver.CalefactorDriver;
+import modelo.cliente.driver.dispositivos.*;
 import modelo.driver.DriverDispositivo;
 import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
@@ -17,7 +17,7 @@ import controladores.beans.EdificioBean;
 @SuppressWarnings("serial")
 public class AgregarDispositivo extends ActionSupport {
 
-	private int |nivel;
+	private int nivel;
 	
 	private String driverElegido;
 	
@@ -82,7 +82,7 @@ public class AgregarDispositivo extends ActionSupport {
 		// Mediante un bean se pasa a traves de la session objetos para mostrar en la vista	
 		EdificioBean contenedor = new EdificioBean();
 		contenedor.setNivel(this.nivel);
-		contenedor.setDispositivosDrivers(drivers);
+		contenedor.setCatalogoDriversDeDisposititvos(drivers);
 		session.put("edificio",contenedor);
 		setSession(session);
 		return SUCCESS;
@@ -96,7 +96,7 @@ public class AgregarDispositivo extends ActionSupport {
 		Piso piso = edificio.getPisos().get(this.nivel);
 		Dispositivo dispositivoAgregar = null;
 		for (DriverDispositivo driver: edificio.getCataloDriversDeDispositivos()){
-			if (driverElegido.equals(driver.getNombre())){
+			if (driverElegido.equals(driver.obtenerNombre())){
 				dispositivoAgregar = new Dispositivo(driver);
 				break;
 			}
