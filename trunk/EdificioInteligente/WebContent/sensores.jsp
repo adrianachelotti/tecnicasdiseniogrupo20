@@ -1,32 +1,50 @@
 <jsp:include page="/WEB-INF/jspf/encabezado.jspf"></jsp:include>
 <%@ page language="java" contentType="text/html" import="java.util.List"%>
+<%@ page language="java" contentType="text/html" import="modelo.edificio.*"%>
+<jsp:useBean id="piso" scope="session" class="controladores.beans.EdificioBean"/>
+<script type="text/javascript">
+function cambiar(indice){
+	var idDispositivo = document.getElementById("idDispositivo");
+	var x = document.getElementById("accion"+indice).value;
+	var accion =document.getElementById("accionEjecutar");
+	accion.value=x;	
+	idDispositivo.value=indice;	
+}
+</script>
+<% List<Sensor> sensores = piso.obtenerListadoDeSensores(); %>
 <div class="contenido">
-	<div class="titulo"><h3>Sensores</h3></div>
+	<div class="titulo"><h3>Sensor</h3></div>
 	<div class="cuerpo" align="center">
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
 			<td width="800" align="center">
 			<fieldset> <legend>Listado de Sensores </legend>
-				<form class="elegante" id="sensoresListado" name="sensoresListado" action="">
+				<form class="elegante" id="sensorListado" name="sensorListado" action="ListadorDeDispositivos!ejecutar">
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
 								<td class="listado_par">Sensor</td>
-								<td class="listado_par">Medicion</td>							
-								<td class="listado_par">Estados</td>																
+								<td class="listado_par">Estado</td>
+								<td class="listado_par">Estado Posibles</td>									
 							</tr>	
 						<%	
-							for (int i=0;i<20;i++) {						
+							int index = 0 ;
+							for (Sensor sensorActual:sensores) {
+								
 						%>		
 							<tr>
-								<td>Sensor&nbsp; <%=i %></td>
-								<td>Estado Actual</td>								
-								<td><select><option>Estado 1</option><option>Estado 2</option></select></td>																		
+								<td><%=sensorActual.obtenerDescripcion() %></td>								
+								<td><%=sensorActual.obtenerMedicion() %></td>
+								<td></td>							
 							</tr>	
-						<%} %>										
+						<%index++;
+						} %>										
 						</table>
+						<input type="hidden" value="<%=piso.obtenerNivel()%>" name="nivel">
+						<input type="hidden" name="idDispositivo" id="idDispositivo"></input>
+						<input type="hidden" name="accionEjecutar" id="accionEjecutar"></input>
 					</form> 
 				</fieldset>
-				
+				<a href="ListadorDeDispositivos!seleccionarPisos">Volver</a>
 			</td>
 		</tr>
 		</table>

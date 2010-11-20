@@ -8,9 +8,9 @@
 	<div class="cuerpo" align="center">
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
-			<td width="800" align="center">
-			<fieldset> <legend>Agregar Dispositivos </legend>
+			<td width="800" align="center">		
 				<form class="elegante" id="dispositivosAgregar" name="dispositivoAgregar" action="AgregarDispositivo!agregar">
+					<fieldset> <legend>Agregar Dispositivos </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >						
 						<tr>
 							<td>Elija Driver:</td>
@@ -28,13 +28,12 @@
 						</tr>	
 										
 						</table>
-						
-						
-					</form> 
-				</fieldset>
-				<input type="hidden" name="nivel" value="<%=edificio.obtenerNivel()%>">
-				<input type="submit" value="Guardar" ></input>&nbsp;<a href="ListadorDePisos">Volver</a>
-						
+					</fieldset>		
+					<input type="hidden" name="nivel" value="<%=edificio.obtenerNivel()%>">
+					<input type="submit" value="Guardar" ></input>&nbsp;<a href="ListadorDePisos">Volver</a>
+				</form> 
+				
+					
 			</td>
 		</tr>
 		</table>
