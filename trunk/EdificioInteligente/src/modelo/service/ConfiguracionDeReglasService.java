@@ -12,7 +12,7 @@ public class ConfiguracionDeReglasService {
 	
 	public Implicacion[] obtenerReglasPorPiso(int nivel){
 		Piso piso = edificio.obtenerPiso(nivel);
-		List<Implicacion> reglas = piso.getManejadorDeSucesos().obtenerImplicaciones();
+		List<Implicacion> reglas = piso.obtenerManejadorDeSucesos().obtenerImplicaciones();
 		return reglas.toArray(new Implicacion[reglas.size()]);
 	}
 	
