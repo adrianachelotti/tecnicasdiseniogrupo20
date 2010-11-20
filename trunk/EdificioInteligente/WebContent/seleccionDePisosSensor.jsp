@@ -23,7 +23,7 @@
 								<td>
 									<select name="nivel">
 									<%for (Piso piso:listadoDePisos) {	%>		
-										<option value="<%=piso.getNivel()%>"><%=piso.getNivel()%></option>
+										<option value="<%=piso.obtenerNivel()%>"><%=piso.obtenerNivel()%></option>
 									<%} %>
 									</select>
 								</td>																				
