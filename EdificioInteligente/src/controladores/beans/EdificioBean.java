@@ -3,6 +3,7 @@ package controladores.beans;
 import java.util.List;
 
 import modelo.driver.DriverDispositivo;
+import modelo.edificio.Dispositivo;
 import modelo.edificio.Piso;
 
 public class EdificioBean {
@@ -11,31 +12,42 @@ public class EdificioBean {
 	
 	List<DriverDispositivo> catalogoDriversDeDisposititvos;
 
-	private int nivel;
-
-	public int getNivel() {
-		return nivel;
+	List<Dispositivo> listadoDeDispositivos;
+	
+	public List<Dispositivo> obtenerListadoDeDispositivos() {
+		return listadoDeDispositivos;
 	}
 
-	public List<DriverDispositivo> getCatalogoDriversDeDisposititvos() {
+	public void establecerListadoDeDispositivos(List<Dispositivo> listadoDeDispositivos) {
+		this.listadoDeDispositivos = listadoDeDispositivos;
+	}
+
+	private int nivel;
+
+	
+
+	public List<DriverDispositivo> obtenerCatalogoDriversDeDisposititvos() {
 		return catalogoDriversDeDisposititvos;
 	}
 
-	public void setCatalogoDriversDeDisposititvos(List<DriverDispositivo> listaDriversDeDisposititvos) {
+	public void establecerCatalogoDriversDeDisposititvos(List<DriverDispositivo> listaDriversDeDisposititvos) {
 		this.catalogoDriversDeDisposititvos = listaDriversDeDisposititvos;
 	}
 
-	public List<Piso> getListadoDePisos() {
+	public List<Piso> obtenerListadoDePisos() {
 		return listadoDePisos;
 	}
 
-	public void setListadoDePisos(List<Piso> listadoDePisos) {
+	public void establecerListadoDePisos(List<Piso> listadoDePisos) {
 		this.listadoDePisos = listadoDePisos;
 	}
 
-	public void setNivel(int nivel) {
+	public void establecerNivel(int nivel) {
 		this.nivel = nivel;
 		
+	}
+	public int obtenerNivel() {
+		return nivel;
 	}
 	
 
