@@ -1,5 +1,7 @@
 package modelo.edificio;
 
+import java.util.List;
+
 import modelo.driver.DriverSensor;
 import modelo.manejadorDeSucesos.Suceso;
 
@@ -99,6 +101,12 @@ public class Sensor{
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-
+	/**
+	 * Obtiene las mediciones posibles que tiene el sensor
+	 * @return mediciones posibles
+	 */
+	public List<String> obtenerMedicionesPosibles(){
+		return this.driver.medicionesPosibles();
+	}
 			
 }
