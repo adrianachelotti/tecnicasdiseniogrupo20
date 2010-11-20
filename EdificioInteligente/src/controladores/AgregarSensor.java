@@ -99,7 +99,7 @@ private int nivel;
 		return SUCCESS;
 	}
 	/**
-	 * Agrega el dispositivo al piso elejido
+	 * Agrega el sensor al piso elejido
 	 * @return "agregar" para redireccionar a la vista
 	 */
 	public String agregar(){
