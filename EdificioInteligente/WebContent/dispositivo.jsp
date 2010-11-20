@@ -32,7 +32,7 @@ function cambiar(indice){
 								
 						%>		
 							<tr>
-								<td><%=dispositivo.getDescripcion() %></td>
+								<td><%=dispositivo.obtenerDescripcion()%></td>
 								<%String estadoActual = dispositivo.isEncendido()?"Encendido":"Apagado";%>
 								<td><%=estadoActual %></td>
 								<td><select  id="accion<%=index%>"><option value="encender">Encender</option><option value="apagar">Apagar</option></select><input type="submit" value="cambiar" onclick="cambiar('<%=index%>')"></input></td>																		
