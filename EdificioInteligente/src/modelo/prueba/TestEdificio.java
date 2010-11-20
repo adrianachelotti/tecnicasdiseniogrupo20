@@ -27,7 +27,7 @@ public class TestEdificio extends TestCase {
 		DriverDispositivo driverVentilador = new VentiladorDriver();
 		Dispositivo ventilador = new Dispositivo(driverVentilador);
 		
-		ventilador.setUbicacion(new Ubicacion(1,2,1));
+		ventilador.establecerUbicacion(new Ubicacion(1,2,1));
 				
 		piso.agregarDispositivo(ventilador);
 		piso.agregarSensores(sensor);
@@ -37,14 +37,14 @@ public class TestEdificio extends TestCase {
 		AccionPrenderDispositivo accionPrenderCalefactor = new AccionPrenderDispositivo();
 		accionPrenderCalefactor.establecerDispositivo(calefactor);
 		
-		piso.getManejadorDeSucesos().suscribirImplicacion(accionPrenderCalefactor, new Suceso("TEMPERATURA_BAJA"));
+		piso.obtenerManejadorDeSucesos().suscribirImplicacion(accionPrenderCalefactor, new Suceso("TEMPERATURA_BAJA"));
 		edificio.agregarPiso(piso);
 		
 		sensor.establecerMedicion("TEMPERATURA_BAJA");
 		
 		calefactor.apagar();
 		assertEquals(false,calefactor.isEncendido());
-		piso.getManejadorDeSucesos().agregarSuceso(sensor.notificarSuceso());
+		piso.obtenerManejadorDeSucesos().agregarSuceso(sensor.notificarSuceso());
 		assertEquals(true,calefactor.isEncendido());
 	}
 
