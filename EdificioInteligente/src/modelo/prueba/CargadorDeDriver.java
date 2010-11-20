@@ -77,8 +77,8 @@ public class CargadorDeDriver extends Thread {
 		CargadorDeDriver uno = new CargadorDeDriver();
 		uno.start();
 		while(true){
-			System.out.println("Drivers Sens.: " + edificio.getCatalogoDriversDeSensores().size());
-			System.out.println("Drivers Disp.: " + edificio.getCataloDriversDeDispositivos().size());
+			System.out.println("Drivers Sens.: " + edificio.obtenerCatalogoDriversDeSensores().size());
+			System.out.println("Drivers Disp.: " + edificio.obtenerCataloDriversDeDispositivos().size());
 		}
 	}
 }
