@@ -11,6 +11,12 @@ public class EdificioBean {
 	
 	List<DriverDispositivo> catalogoDriversDeDisposititvos;
 
+	private int nivel;
+
+	public int getNivel() {
+		return nivel;
+	}
+
 	public List<DriverDispositivo> getCatalogoDriversDeDisposititvos() {
 		return catalogoDriversDeDisposititvos;
 	}
@@ -25,6 +31,11 @@ public class EdificioBean {
 
 	public void setListadoDePisos(List<Piso> listadoDePisos) {
 		this.listadoDePisos = listadoDePisos;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+		
 	}
 	
 
