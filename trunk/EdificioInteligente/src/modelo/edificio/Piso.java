@@ -54,8 +54,13 @@ public class Piso {
 		return sensores;
 	}
 
-	public void establecer(List<Sensor> sensores) {
+	public void establecerSensores(List<Sensor> sensores) {
 		this.sensores = sensores;
+	}
+		
+	@Override
+	public boolean equals(Object obj) {
+		return this.nivel==((Piso)obj).getNivel();
 	}
 	
 

@@ -38,6 +38,7 @@ public class ManejadorDeSucesos {
 	 */
 	private static long ordenDeSuscripcion = 0;
 	
+		
 	/**
 	 * Constructor de la clase.
 	 */	
@@ -145,6 +146,13 @@ public class ManejadorDeSucesos {
 		this.implicaciones.clear();
 	}
 		
+	/**
+	 * Obtiene las implicaciones almacenadas.
+	 * @return implicaciones almacenadas.
+	 */
+	public List<Implicacion> obtenerImplicaciones(){
+		return this.implicaciones;
+	}
 	
 	/**
 	 * Segun el tamanio maximo de la lista se quitan los mas viejos 
@@ -219,5 +227,26 @@ public class ManejadorDeSucesos {
 		return sucesosANotificar;
 	}
 		
+	public void habilitarImplicacion(int identificador){
+		obtenerImplicacionPorIdentificador(identificador).habilitar();
+	}
 	
+	public void deshabilitarImplicacion(int identificador){
+		obtenerImplicacionPorIdentificador(identificador).deshabilitar();
+	}
+	
+	public Implicacion obtenerImplicacionPorIdentificador(int identificador){
+		boolean encontrado = false;
+		Iterator<Implicacion> it =implicaciones.iterator();
+		Implicacion implicacionActual=null;
+		while(it.hasNext() && !encontrado){
+			implicacionActual=it.next();
+			if(identificador==implicacionActual.getIdentificador()){
+				encontrado=true;
+			}
+		}
+		if(!encontrado)
+			return null;
+		return implicacionActual;
+	}
 }

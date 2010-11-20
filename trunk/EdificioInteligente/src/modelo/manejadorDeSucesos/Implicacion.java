@@ -14,6 +14,16 @@ import java.util.List;
 public class Implicacion {
 	
 	/**
+	 * Cantidad de implicaciones existentes.
+	 */
+	private static int cantidadDeImplicaciones = 0;
+	
+	/**
+	 * Identificador de la implicacion.
+	 */
+	private int identificador;
+	
+	/**
 	 * Accion que representa al consecuente.	 
 	 */
 	private Accion accion;
@@ -29,6 +39,11 @@ public class Implicacion {
 	private long ordenUltimaSuscripcion;
 	
 	/**
+	 * Determina si la implicacion esta habilitada.
+	 */
+	private boolean habilitada;
+	
+	/**
 	 * Constructor de la implicacion.
 	 * @param antecedente conjunto de sucesos que forman el antecedente.
 	 * @param consecuente accion que forman el consecuente.
@@ -36,8 +51,49 @@ public class Implicacion {
 	public Implicacion(List<Suceso> antecedente,Accion consecuente){
 		this.sucesos = antecedente;
 		this.accion = consecuente;
+		this.habilitada = true;
+		this.identificador = generarIdentificador(); 
 	}
 	
+	/**
+	 * Genera el identificador de la implicacion.
+	 * @return identificador de la implicacion.
+	 */
+	private static int generarIdentificador(){
+		return cantidadDeImplicaciones++;
+	}
+		
+	/**
+	 * Retorna el identificador de la implicacion.
+	 * @return identificador de la implicacion.
+	 */
+	public int getIdentificador() {
+		return this.identificador;
+	}
+
+	/**
+	 * Obtiene el estado de la implicacion
+	 * @return true si esta habilitada.
+	 * 		   false en caso contrario.
+	 */
+	public boolean estaHabilitada() {
+		return habilitada;
+	}
+
+	/**
+	 * Habilita la implicacion.
+	 */
+	public void habilitar() {
+		this.habilitada = true;
+	}
+	
+	/**
+	 * Deshabilita la implicacion
+	 */
+	public void deshabilitar(){
+		this.habilitada = false;
+	}
+
 	/**
 	 * Obtiene el conjunto de sucesos del antecedente.
 	 * @return conjuntos de sucesos que forman el antecedente.
@@ -86,4 +142,8 @@ public class Implicacion {
 		this.ordenUltimaSuscripcion = ordenUltimaSucripcion;
 	}
 			
+	@Override
+	public boolean equals(Object obj) {
+		return this.identificador==((Implicacion)obj).getIdentificador();
+	}
 }
