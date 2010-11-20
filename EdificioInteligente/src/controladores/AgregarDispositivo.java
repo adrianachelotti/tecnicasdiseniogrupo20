@@ -116,6 +116,7 @@ public class AgregarDispositivo extends ActionSupport {
 			if (driverElegido.equals(driver.obtenerNombre())){
 				try {
 					dispositivoAgregar = new Dispositivo((DriverDispositivo)driver.getClass().newInstance());
+					dispositivoAgregar.establecerDescripcion(descripcionDispositivo);
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -123,7 +124,7 @@ public class AgregarDispositivo extends ActionSupport {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				dispositivoAgregar.establecerDescripcion(descripcionDispositivo);
+				
 				break;
 			}
 		}
