@@ -109,8 +109,17 @@ private int nivel;
 		for (DriverSensor driver: edificio.obtenerCatalogoDriversDeSensores()){
 			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
-				sensorAgregar = new Sensor(driver);
-				sensorAgregar.establecerDescripcion(descripcionSensor);
+				try {
+					sensorAgregar = new Sensor(driver.getClass().newInstance());
+					sensorAgregar.establecerDescripcion(descripcionSensor);
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				break;
 			}
 		}
