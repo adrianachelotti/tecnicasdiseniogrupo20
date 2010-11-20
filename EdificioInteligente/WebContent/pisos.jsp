@@ -24,7 +24,7 @@
 						%>		
 							<tr>
 								<td><%=piso.getNivel() %></td>
-								<td><a href="AgregarDispositivo"<%=piso.getNivel() %>>Agregar Dispositivos</a></td>																		
+								<td><a href="AgregarDispositivo?nivel=<%=piso.getNivel()%>">Agregar Dispositivos</a></td>																		
 								<td><a href="#">Agregar Sensores</a></td>																		
 							</tr>	
 						<%} %>										
