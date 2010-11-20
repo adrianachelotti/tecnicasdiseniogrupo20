@@ -29,12 +29,12 @@
 										
 						</table>
 						
-						<input type="hidden" name="nivel" value="<%=edificio.obtenerNivel()%>">
-						<input type="submit" value="Guardar" ></input>&nbsp;<a href="ListadorDePisos">Volver</a>
 						
 					</form> 
 				</fieldset>
-				
+				<input type="hidden" name="nivel" value="<%=edificio.obtenerNivel()%>">
+				<input type="submit" value="Guardar" ></input>&nbsp;<a href="ListadorDePisos">Volver</a>
+						
 			</td>
 		</tr>
 		</table>

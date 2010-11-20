@@ -52,7 +52,7 @@ function cambiar(indice){
 						<input type="hidden" name="accionEjecutar" id="accionEjecutar"></input>
 					</form> 
 				</fieldset>
-				
+				<a href="ListadorDeDispositivos!seleccionarPisos">Volver</a>
 			</td>
 		</tr>
 		</table>
