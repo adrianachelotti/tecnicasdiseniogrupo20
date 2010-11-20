@@ -1,6 +1,7 @@
 package controladores;
 
 import modelo.cliente.driver.dispositivos.*;
+import modelo.cliente.driver.sensores.*;
 import modelo.edificio.Edificio;
 import modelo.edificio.Piso;
 
@@ -37,6 +38,9 @@ public class Autenticador extends ActionSupport {
 		edificio.agregarDriverDispositivo(new CalefactorDriver());
 		edificio.agregarDriverDispositivo(new LucesDriver());
 		edificio.agregarDriverDispositivo(new PuertaDriver());
+		edificio.agregarDriverSensor(new SensorDeHumoDriver());
+		edificio.agregarDriverSensor(new SensorDeRuidoDriver());
+		edificio.agregarDriverSensor(new SensorDeTemperaturaDriver());
 	}
 
 	public String execute(){
