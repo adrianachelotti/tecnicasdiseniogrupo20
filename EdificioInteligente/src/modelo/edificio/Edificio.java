@@ -101,7 +101,7 @@ public class Edificio {
 	public List<Implicacion> obtenerReglas(){
 		List<Implicacion> reglas=new ArrayList<Implicacion>();
 		for (Piso piso : pisos) {
-			reglas.addAll(piso.getManejadorDeSucesos().obtenerImplicaciones());
+			reglas.addAll(piso.obtenerManejadorDeSucesos().obtenerImplicaciones());
 		}
 		return reglas;
 	}
@@ -118,7 +118,7 @@ public class Edificio {
 		Piso pisoActual = null;
 		while(it.hasNext() && !encontrado){
 			pisoActual=it.next();
-			implicacionActual = pisoActual.getManejadorDeSucesos().obtenerImplicacionPorIdentificador(identificador);
+			implicacionActual = pisoActual.obtenerManejadorDeSucesos().obtenerImplicacionPorIdentificador(identificador);
 			if(implicacionActual!=null){
 				encontrado=true;
 			}

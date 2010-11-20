@@ -14,53 +14,102 @@ public class Piso {
 	
 	private ManejadorDeSucesos manejadorDeSucesos;
 	
+	/**
+	 * Constructor del piso cuyo nivel se pasa por parametro 
+	 * @param nivel del piso
+	 */
 	public Piso(int nivel){
 		this.dispositivos = new ArrayList<Dispositivo>();
 		this.sensores = new ArrayList<Sensor>();
 		this.nivel = nivel;
 		this.manejadorDeSucesos= new ManejadorDeSucesos();
 	}
-	
+	/**
+	 * Agrega un dispositivo a la lista de dispositivos del piso
+	 * @param dispositivoAgregar dispositivo a agregar
+	 */
 	public void agregarDispositivo(Dispositivo dispositivoAgregar){
 		this.dispositivos.add(dispositivoAgregar);
 	}
 	
+	/**
+	 * Agrega un sensor a la lista de sensores del piso
+	 * @param sensorAgregar sensor a agregar
+	 */
 	public void agregarSensores(Sensor sensorAgregar){
 		this.sensores.add(sensorAgregar);
 	}
 	
-	public int getNivel() {
+	/**
+	 * Obtiene el nivel del piso
+	 * @return nivel del piso
+	 */
+	public int obtenerNivel() {
 		return nivel;
 	}
-	public void setNivel(int nivel) {
+	
+	/**
+	 * Establece el nivel del piso
+	 * @param nivel nivel del piso
+	 */
+	public void establecerNivel(int nivel) {
 		this.nivel = nivel;
 	}
-	public ManejadorDeSucesos getManejadorDeSucesos() {
+	
+	/**
+	 * Obtiene el manejador de sucesos del piso
+	 * @return manejador de sucesos del piso
+	 */
+	public ManejadorDeSucesos obtenerManejadorDeSucesos() {
 		return manejadorDeSucesos;
 	}
-	public void setManejadorDeSucesos(ManejadorDeSucesos manejadorDeSucesos) {
+	
+	/**
+	 * Establecer el manejador de sucesos del piso
+	 * @param manejadorDeSucesos manejador de sucesos del piso
+	 */
+	public void establecerManejadorDeSucesos(ManejadorDeSucesos manejadorDeSucesos) {
 		this.manejadorDeSucesos = manejadorDeSucesos;
 	}
 
+	/**
+	 * Obtiene la lista de dispositivos del piso
+	 * @return
+	 */
 	public List<Dispositivo> obtenerDispositivos() {
 		return dispositivos;
 	}
 
+	/**
+	 * Establece los dispositivos del piso
+	 * @param dispositivos dispositivos del piso
+	 */
 	public void establecerDispositivos(List<Dispositivo> dispositivos) {
 		this.dispositivos = dispositivos;
 	}
 
+	/**
+	 * Obtiene los sensores del piso
+	 * @return sensores del piso
+	 */
 	public List<Sensor> obtenerSensores() {
 		return sensores;
 	}
 
+	/**
+	 * Establece los sensores del piso
+	 * @param sensores sensores del piso
+	 */
 	public void establecerSensores(List<Sensor> sensores) {
 		this.sensores = sensores;
 	}
 		
 	@Override
+	/**
+	 * Metodo para comparar un piso con otro a traves del nivel
+	 */
 	public boolean equals(Object obj) {
-		return this.nivel==((Piso)obj).getNivel();
+		return this.nivel==((Piso)obj).obtenerNivel();
 	}
 	
 

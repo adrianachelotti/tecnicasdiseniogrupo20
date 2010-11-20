@@ -10,35 +10,63 @@ public class Dispositivo {
 	
 	private DriverDispositivo driver;
 	
+	/**
+	 * Constructor del dispositivo cuyo driver es pasado como parametro
+	 * @param driver driver del dispositivo
+	 */
 	public Dispositivo(DriverDispositivo driver){
 		this.driver = driver;
 	}
 	
+	/**
+	 * Enciende al dispositivo fisico a traves del driver
+	 */
 	public void encender(){
 		this.driver.encender();
 	};
-	
+	/**
+	 * Apaga al dispositivo fisico a traves del driver
+	 */
 	public void apagar(){
 		this.driver.apagar();
 	};
 	
+	/**
+	 * Obtiene si esta encendido o no el dispositivo
+	 * @return true esta encendido
+	 * 		  false esta apagado 		 
+	 */
 	public boolean isEncendido(){
 		return this.driver.isEncendido();
 	}
-			
-	public Ubicacion getUbicacion() {
+	/**
+	 * Obtiene la ubicacion del dispositivo dentro del piso		
+	 * @return Ubicacion Ubicacion del dispositivo
+	 */
+	public Ubicacion obtenerUbicacion() {
 		return ubicacion;
 	}
-
-	public void setUbicacion(Ubicacion ubicacion) {
+	
+	/**
+	 * Establece una ubicacion para el dispositvo 
+	 * @param ubicacion ubicacion nueva ubicacion del dispositivo
+	 */
+	public void establecerUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
 
-	public String getDescripcion() {
+	/**
+	 * Obtiene la descripcion del dispositivo
+	 * @return descripcion del dispositivo
+	 */
+	public String obtenerDescripcion() {
 		return descripcion;
 	}
-
-	public void setDescripcion(String descripcion) {
+	/**
+	 * Establece la descripcion para el dispositivo
+	 * @param descripcion descripcion del dispositivo
+	 */
+	public void establecerDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	
