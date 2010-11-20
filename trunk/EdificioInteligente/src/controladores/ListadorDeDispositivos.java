@@ -27,7 +27,7 @@ public class ListadorDeDispositivos extends ActionSupport {
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
 		EdificioBean contenedor = new EdificioBean();
-		contenedor.establecerListadoDeDispositivos(edificio.getPisos().get(this.nivel-1).obtenerDispositivos());
+		contenedor.establecerListadoDeDispositivos(edificio.getPisos().get(this.nivel).obtenerDispositivos());
 		contenedor.establecerNivel(this.nivel);
 		session.put("piso", contenedor);
 		setSession(session);
