@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html" import="modelo.edificio.Piso"%>
 <jsp:useBean id="edificio" scope="session" class="controladores.beans.EdificioBean"/>
 <%
-	List<Piso> listadoDePisos = edificio.getListadoDePisos();
+	List<Piso> listadoDePisos = edificio.obtenerListadoDePisos();
 %>
 <div class="contenido">
 	<div class="titulo"><h3>Pisos</h3></div>
