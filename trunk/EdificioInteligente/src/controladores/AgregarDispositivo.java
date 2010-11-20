@@ -2,7 +2,6 @@ package controladores;
 
 import java.util.List;
 import java.util.Map;
-import modelo.cliente.driver.dispositivos.*;
 import modelo.driver.DriverDispositivo;
 import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
@@ -115,7 +114,15 @@ public class AgregarDispositivo extends ActionSupport {
 		for (DriverDispositivo driver: edificio.obtenerCataloDriversDeDispositivos()){
 			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
-				dispositivoAgregar = new Dispositivo(driver);
+				try {
+					dispositivoAgregar = new Dispositivo((DriverDispositivo)driver.getClass().newInstance());
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				dispositivoAgregar.establecerDescripcion(descripcionDispositivo);
 				break;
 			}
