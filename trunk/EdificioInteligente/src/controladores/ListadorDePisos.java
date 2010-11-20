@@ -33,7 +33,7 @@ public class ListadorDePisos extends ActionSupport {
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
 		EdificioBean contenedor = new EdificioBean();
-		contenedor.setListadoDePisos(edificio.getPisos());
+		contenedor.establecerListadoDePisos(edificio.getPisos());
 		session.put("edificio", contenedor);
 		setSession(session);
 		return "success";

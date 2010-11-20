@@ -21,6 +21,8 @@ public class AgregarDispositivo extends ActionSupport {
 	
 	private String driverElegido;
 	
+	private String descripcionDispositivo;
+	
 
 	@SuppressWarnings("unused")
 	private Map<String,Object> session ;
@@ -55,6 +57,23 @@ public class AgregarDispositivo extends ActionSupport {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
+	
+	/**
+	 * Devuelve la descripcion elegida por el usuario
+	 * @return descripcion del dispositivo a agregar
+	 */
+	public String getDescripcionDispositivo() {
+		return descripcionDispositivo;
+	}
+
+	/**
+	 * Establece la descripcion del dispositivo a agregar
+	 * @param descripcionDispositivo
+	 */
+	public void setDescripcionDispositivo(String descripcionDispositivo) {
+		this.descripcionDispositivo = descripcionDispositivo;
+	}
+
 	/**
 	 * Se establece la session 
 	 * @param session
@@ -73,16 +92,13 @@ public class AgregarDispositivo extends ActionSupport {
 		// Se toma la session actual , el edificio y se le agrega los drivers del 
 		//catalogo
 		Map<String,Object> session = ActionContext.getContext().getSession();
-		Edificio edificio = Edificio.obtenerInstancia();			
-		edificio.agregarDriverDispositivo(new CalefactorDriver());
-		edificio.agregarDriverDispositivo(new CalefactorDriver());
-		edificio.agregarDriverDispositivo(new CalefactorDriver());
+		Edificio edificio = Edificio.obtenerInstancia();	
 		List<DriverDispositivo> drivers = edificio.getCataloDriversDeDispositivos();
 
 		// Mediante un bean se pasa a traves de la session objetos para mostrar en la vista	
 		EdificioBean contenedor = new EdificioBean();
-		contenedor.setNivel(this.nivel);
-		contenedor.setCatalogoDriversDeDisposititvos(drivers);
+		contenedor.establecerNivel(this.nivel);
+		contenedor.establecerCatalogoDriversDeDisposititvos(drivers);
 		session.put("edificio",contenedor);
 		setSession(session);
 		return SUCCESS;
@@ -98,6 +114,7 @@ public class AgregarDispositivo extends ActionSupport {
 		for (DriverDispositivo driver: edificio.getCataloDriversDeDispositivos()){
 			if (driverElegido.equals(driver.obtenerNombre())){
 				dispositivoAgregar = new Dispositivo(driver);
+				dispositivoAgregar.setDescripcion(descripcionDispositivo);
 				break;
 			}
 		}

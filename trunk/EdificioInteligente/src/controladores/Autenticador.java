@@ -1,5 +1,9 @@
 package controladores;
 
+import modelo.cliente.driver.dispositivos.*;
+import modelo.edificio.Edificio;
+import modelo.edificio.Piso;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -24,9 +28,20 @@ public class Autenticador extends ActionSupport {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	private void inicializarEdificio(){
+		Edificio edificio = Edificio.obtenerInstancia();	
+		edificio.agregarPiso(new Piso(0));
+		edificio.agregarPiso(new Piso(1));
+		//TODO: cambiar esta hardcodeado
+		edificio.agregarDriverDispositivo(new CalefactorDriver());
+		edificio.agregarDriverDispositivo(new LucesDriver());
+		edificio.agregarDriverDispositivo(new PuertaDriver());
+	}
 
 	public String execute(){
 		if(this.usuario.equalsIgnoreCase("root")&&this.password.equalsIgnoreCase("root")){
+			inicializarEdificio();
 			return SUCCESS;
 		}else{
 			addActionError("Datos Incorrectos");
