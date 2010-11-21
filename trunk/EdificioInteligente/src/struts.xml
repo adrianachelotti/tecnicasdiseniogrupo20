@@ -10,14 +10,6 @@
 		<action name="ListadorDePisos" class="controladores.ListadorDePisos">
 			<result name="success">/pisos.jsp</result>			
 		</action>
-		<action name="AgregarDispositivo" class="controladores.AgregarDispositivo">
-			<result name="success">/agregarDispositivos.jsp</result>
-			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
-		</action>
-		<action name="AgregarSensor" class="controladores.AgregarSensor">
-			<result name="success">/agregarSensor.jsp</result>
-			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
-		</action>
 		<action name="ListadorDeDispositivos" class="controladores.ListadorDeDispositivos">
 			<result name="listarPisos">/seleccionDePisosDispositivo.jsp</result>
 			<result name="success">/dispositivo.jsp</result>
@@ -30,6 +22,17 @@
 			<result name="listarPisos">/seleccionDePisosRegla.jsp</result>
 			<result name="success">/reglas.jsp</result>
 		</action>
-	
+		<action name="AgregarDispositivo" class="controladores.AgregarDispositivo">
+			<result name="success">/agregarDispositivos.jsp</result>
+			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
+		</action>
+		<action name="AgregarSensor" class="controladores.AgregarSensor">
+			<result name="success">/agregarSensor.jsp</result>
+			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
+		</action>
+		<action name="AgregarRegla" class="controladores.AgregarRegla">
+			<result name="success">/agregarRegla.jsp</result>
+			<result name="guardar" type="redirectAction">ListadorDeReglas</result>					
+		</action>
 </package>
 </struts>
