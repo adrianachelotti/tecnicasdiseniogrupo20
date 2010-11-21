@@ -108,7 +108,7 @@ public class Configuracion {
 	 * Obtiene el evaluador de la configuracion.
 	 * @return Evaluador actual de la configuracion.
 	 */
-	public Evaluador getEvaluador() {
+	public Evaluador obtenerEvaluador() {
 		return evaluador;
 	}
 
@@ -116,7 +116,7 @@ public class Configuracion {
 	 * Obtiene el cancelador de la configuracion.
 	 * @return Cancelador actual de la configuracion.
 	 */
-	public Cancelador getCancelador() {
+	public Cancelador obtenerCancelador() {
 		return cancelador;
 	}
 	
