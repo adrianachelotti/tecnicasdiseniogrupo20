@@ -103,7 +103,24 @@ public class Piso {
 	public void establecerSensores(List<Sensor> sensores) {
 		this.sensores = sensores;
 	}
-		
+	
+	/**
+	 * TODO: ver de sacar repetidas
+	 * Obtiene el catalago de todas las mediciones posibles
+	 * @return
+	 */
+	public List<String> obtenerCatalogoMedicionesPosibles(){
+		List<String> medicionesPosibles = new ArrayList<String>();
+		for (Sensor sensor:this.obtenerSensores()){
+			for (String medicion: sensor.obtenerMedicionesPosibles()){
+				if (!medicionesPosibles.contains(medicion)){
+					medicionesPosibles.add(medicion);
+				}
+			}
+			
+		}
+		return medicionesPosibles;
+	}
 	@Override
 	/**
 	 * Metodo para comparar un piso con otro a traves del nivel
