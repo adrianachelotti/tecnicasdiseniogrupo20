@@ -104,7 +104,7 @@ public class ManejadorDeSucesos {
 			List<Suceso> sucesosANotificar = null;
 			for (Implicacion relacion : this.implicaciones) {
 				sucesosANotificar = filtrarSucesosPorTiempoDeImplicacion(relacion);
-				this.configuracion.getEvaluador().avisarSucesosOcurridos(relacion, sucesosANotificar);
+				this.configuracion.obtenerEvaluador().avisarSucesosOcurridos(relacion, sucesosANotificar);
 			}
 			notificado=false;
 		}
@@ -173,7 +173,7 @@ public class ManejadorDeSucesos {
 	 */
 	private void cancelarSuceso(Suceso sucesoAgregar){
 		if(this.configuracion.estaCanceladorActivo()) 
-			this.configuracion.getCancelador().cancelarSuceso(this.sucesosOcurridos,sucesoAgregar);
+			this.configuracion.obtenerCancelador().cancelarSuceso(this.sucesosOcurridos,sucesoAgregar);
 	}
 		
 	/**
