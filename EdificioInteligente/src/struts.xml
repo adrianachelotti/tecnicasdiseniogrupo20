@@ -26,6 +26,10 @@
 			<result name="listarPisos">/seleccionDePisosSensor.jsp</result>
 			<result name="success">/sensores.jsp</result>
 		</action>
+		<action name="ListadorDeReglas" class="controladores.ListadorDeReglas">
+			<result name="listarPisos">/seleccionDePisosRegla.jsp</result>
+			<result name="success">/reglas.jsp</result>
+		</action>
 	
 </package>
 </struts>
