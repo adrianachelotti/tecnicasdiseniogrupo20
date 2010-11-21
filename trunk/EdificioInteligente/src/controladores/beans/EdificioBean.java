@@ -20,6 +20,10 @@ public class EdificioBean {
 
 	List<Sensor> listadoDeSensores;
 	
+	List<String> medicionesPosibles;
+	
+	List<String> medicionesEsperadas;
+	
 	private int nivel;
 	
 	public List<DriverSensor> obtenerCatalogoDriversDeSensores() {
@@ -78,7 +82,24 @@ public class EdificioBean {
 		this.listaDeReglas = listaDeReglas;
 	}
 	
-	 
+
+	public List<String> obtenerMedicionesPosibles() {
+		return medicionesPosibles;
+	}
+
+	public void establecerMedicionesPosibles(List<String> medicionesPosibles) {
+		this.medicionesPosibles = medicionesPosibles;
+	}
+
+	public List<String> obtenerMedicionesEsperadas() {
+		return medicionesEsperadas;
+	}
+
+	public void establecerMedicionesEsperadas(List<String> medicionesEsperadas) {
+		this.medicionesEsperadas = medicionesEsperadas;
+	}
+
+ 
 	
 	
 	
