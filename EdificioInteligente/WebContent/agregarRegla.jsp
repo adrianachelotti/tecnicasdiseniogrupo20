@@ -1,13 +1,21 @@
 <jsp:include page="/WEB-INF/jspf/encabezado.jspf"></jsp:include>
 <%@ page language="java" contentType="text/html" import="java.util.List"%>
+<%@ page language="java" contentType="text/html" import="modelo.edificio.Dispositivo"%>
+<jsp:useBean id="piso" scope="session" class="controladores.beans.EdificioBean"/>
+<%
+	List<String> listaMedicionesPosibles = piso.obtenerMedicionesPosibles();
+	List<String> listaMedicionesEsperadas = piso.obtenerMedicionesEsperadas();
+	List<Dispositivo> dispositivos = piso.obtenerListadoDeDispositivos();
+%>
+
 <div class="contenido">
 	<div class="titulo"><h3>Reglas</h3></div>
 	<div class="cuerpo" align="center">
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
 			<td width="800" align="center">
-			<fieldset> <legend>Configuraci&oacute;n de Reglas </legend>
-				<form class="elegante" id="reglasConfiguracion" name="reglasConfiguracion" action="">
+				<form class="elegante" id="reglasConfiguracion" name="reglasConfiguracion" action="AgregarRegla!agregarSucesoEsperado">
+					<fieldset> <legend>Configuraci&oacute;n de Reglas </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
 								<td class="listado_par">Regla</td>	
@@ -18,17 +26,42 @@
 																								
 							</tr>	
 							<tr>
-								<td>Regla i</td>
-								<td><select><option>Suceso 1</option><option>Suceso 2</option><option>Suceso 3</option></select><input type="submit" value="agregar"></input></td>							
-								<td>Suceso Esperado 1 <br></br>Suceso Esperado 2 <br></br></td>
-								<td><select><option>Dispistivo 1</option><option>Dispistivo 2</option><option>Dispistivo 3</option></select> </td>
-								<td><select><option>Encender</option><option>Apagar</option></select></td>																		
+								<td>NUEVA</td>
+								<td>
+									<select name="sucesoAgregar">										
+										<%for (String sucesoAgregar: listaMedicionesPosibles){ %>
+										<option value="<%=sucesoAgregar%>"><%=sucesoAgregar%></option>
+										<%} %>
+									</select>
+									<input type="submit" value="agregar"></input>
+								</td>							
+								<td>
+									<%for(String sucesoEsperado:listaMedicionesEsperadas){ %>
+										<%=sucesoEsperado%><br>
+									<%} %>									
+								</td>
+								<td>
+									<select name="dispositivoElegido">
+										<%int index =0 ; %>
+										<%for(Dispositivo dispositivo:dispositivos){ %>
+										<option value="<%=index%>"><%=dispositivo.obtenerDescripcion()%></option>
+										<% index++;
+										} %>
+									</select> 
+								</td>
+								<td><select name="accion">
+										<option value="encender">Encender</option>
+										<option value="apagar">Apagar</option>
+									</select>
+								</td>																		
 							</tr>	
 													
 						</table>
-						<input type="submit" value="Guardar" ></input>
+						</fieldset>
+						<input type="submit" value="Guardar" onclick="document.reglasConfiguracion.action='AgregarRegla!guardar'" ></input>
+						<a href="ListadorDeReglas">Cancelar</a>
 					</form> 
-				</fieldset>
+				
 				
 			</td>
 		</tr>

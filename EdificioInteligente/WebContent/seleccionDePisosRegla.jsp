@@ -6,7 +6,7 @@
 	List<Piso> listadoDePisos = edificio.obtenerListadoDePisos();
 %>
 <div class="contenido">
-	<div class="titulo"><h3>Pisos</h3></div>
+	<div class="titulo"><h3>Reglas</h3></div>
 	<div class="cuerpo" align="center">
 		<table width ="500" cellpadding="0" cellspacing="0"  >
 		<tr>
@@ -31,7 +31,7 @@
 															
 						</table>
 					</fieldset>
-					<input type="submit" value="Ver Dispositivos"></input>	
+					<input type="submit" value="Ver Reglas"></input>	
 				</form> 
 				
 				

@@ -13,7 +13,7 @@
 					<fieldset> <legend>Agregar Dispositivos </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >						
 						<tr>
-							<td>Elija Driver:</td>
+							<td class="listado_impar">Elija Driver:</td>
 							<td>
 								<select name="driverElegido">
 									<%for (DriverSensor driver: drivers){ %>
@@ -23,7 +23,7 @@
 							</td>
 						</tr>	
 						<tr>
-							<td>Descripci&oacute;n:</td>
+							<td class="listado_impar">Descripci&oacute;n:</td>
 							<td><input type="text" name="descripcionSensor"> </td>							
 						</tr>	
 										

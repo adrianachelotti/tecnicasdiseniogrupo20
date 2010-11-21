@@ -13,7 +13,7 @@ function cambiar(indice){
 </script>
 <% List<Dispositivo> dispositivos = piso.obtenerListadoDeDispositivos(); %>
 <div class="contenido">
-	<div class="titulo"><h3>Dispositivo</h3></div>
+	<div class="titulo"><h3>Dispositivos</h3></div>
 	<div class="cuerpo" align="center">
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>

@@ -4,7 +4,7 @@
 <jsp:useBean id="edificio" scope="session" class="controladores.beans.EdificioBean"/>
 <%List<DriverDispositivo> drivers = edificio.obtenerCatalogoDriversDeDisposititvos(); %>
 <div class="contenido">
-	<div class="titulo"><h3>Dispositivos</h3></div>
+	<div class="titulo"><h3>Pisos</h3></div>
 	<div class="cuerpo" align="center">
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
@@ -13,7 +13,7 @@
 					<fieldset> <legend>Agregar Dispositivos </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >						
 						<tr>
-							<td>Elija Driver:</td>
+							<td class="listado_impar">Elija Driver:</td>
 							<td>
 								<select name="driverElegido">
 									<%for (DriverDispositivo driver: drivers){ %>
@@ -23,7 +23,7 @@
 							</td>
 						</tr>	
 						<tr>
-							<td>Descripci&oacute;n:</td>
+							<td class="listado_impar">Descripci&oacute;n:</td>
 							<td><input type="text" name="descripcionDispositivo"> </td>							
 						</tr>	
 										
