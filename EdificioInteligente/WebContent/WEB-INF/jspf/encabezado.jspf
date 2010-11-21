@@ -11,7 +11,7 @@
 <div id="contenedor">
 <div>
 <ul class="menu">
-	<li class="top"><a href="home.jsp" class="top_link"><span>Home</span></a></li>
+	<li class="top"><a href="principal.jsp" class="top_link"><span>Home</span></a></li>
 
 	<li class="top"><a href="#" class="top_link"><span>Edificios</span></a>
 		<ul class="sub">
