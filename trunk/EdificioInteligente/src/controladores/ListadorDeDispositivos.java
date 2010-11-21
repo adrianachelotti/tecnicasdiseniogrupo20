@@ -20,39 +20,71 @@ public class ListadorDeDispositivos extends ActionSupport {
 	
 	private String accionEjecutar ="";
 	
+	/**
+	 * Obtiene el nivel seleccionado para ver los dispostivos
+	 * @return nivel de piso
+	 */
 	public int getNivel() {
 		return nivel;
 	}
-
+	
+	/**
+	 * Establece el nivel seleccionado
+	 * @param nivel nivel seleccionado
+	 */
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
 
 	/**
-	 * 
+	 * Obtiene la accion a ejecutar seleccionada por el usuario
 	 * @return
 	 */
 	public String getAccionEjecutar() {
 		return accionEjecutar;
 	}
 
+	/**
+	 * Establece la accion a ejecutar seleccionada por el usuario
+	 * @param accion accion a ejecutar
+	 */
 	public void setAccionEjecutar(String accion) {
 		this.accionEjecutar = accion;
 	}
+	
+	/**
+	 * Establece la session
+	 * @param session session actual
+	 */
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+	
+	/**
+	 * Obtiene el id del dispositivo seleccionado por el usuario
+	 * @return id del dispositivo
+	 */
 	public String getIdDispositivo() {
 		return idDispositivo;
 	}
 	
+	/**
+	 * Establece el id del dispositivo seleccionado
+	 * @param idDispositivo
+	 */
 	public void setIdDispositivo(String idDispositivo) {
 		this.idDispositivo = idDispositivo;
 	}
-	public String execute(){
+	
+	/**
+	 * Se pasa a traves de la session los dispositivos
+	 * del nivel seleccionado
+	 * @return "success"
+	 */
+	public String execute(){		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
-		EdificioBean contenedor = new EdificioBean();
+		EdificioBean contenedor = new EdificioBean();		
 		contenedor.establecerListadoDeDispositivos(edificio.getPisos().get(this.nivel).obtenerDispositivos());
 		contenedor.establecerNivel(this.nivel);
 		session.put("piso", contenedor);
@@ -60,6 +92,10 @@ public class ListadorDeDispositivos extends ActionSupport {
 		return "success";
 	}
 	
+	/**
+	 * Se listan los pisos del edificio 
+	 * @return "listarPisos"
+	 */
 	public String seleccionarPisos(){		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
@@ -69,6 +105,12 @@ public class ListadorDeDispositivos extends ActionSupport {
 		setSession(session);
 		return "listarPisos";
 	}
+	
+	/**
+	 * Segun la accion a ejecutar elegida por el usuario se
+	 * enciende o apaga el dispositivo
+	 * @return "success"
+	 */
 	public String ejecutar(){
 		Edificio edificio = Edificio.obtenerInstancia();
 		int indice = Integer.parseInt(idDispositivo);
