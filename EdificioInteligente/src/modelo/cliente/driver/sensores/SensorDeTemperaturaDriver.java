@@ -20,7 +20,7 @@ public class SensorDeTemperaturaDriver implements DriverSensor{
 	}
 
 	public void encender() {
-		this.sensor.apagar();
+		this.sensor.encender();
 	}
 
 	public boolean isEncendido() {
