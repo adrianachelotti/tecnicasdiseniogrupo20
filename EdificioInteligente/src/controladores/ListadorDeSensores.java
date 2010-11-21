@@ -22,34 +22,63 @@ public class ListadorDeSensores extends ActionSupport {
 	private String medicionCambiar;
 	
 	
-	
+	/**
+	 * Obtiene el nivel elegido 
+	 * @return nivel elegido
+	 */
 	public int getNivel() {
 		return nivel;
 	}
-
+	/**
+	 * Establece el nivel elegido
+	 * @param nivel nivel elegido
+	 */
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
 
-
+	/**
+	 * Establece la session
+	 * @param session session
+	 */
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+	
+	/**
+	 * Obtiene el id del sensor a cambiar la medicion
+	 * @return id del sensor
+	 */
 	public String getIdSensor() {
 		return idSensor;
 	}
 	
+	/**
+	 * Establece el id del sensor a cambiar la medicion
+	 * @param idSensor id del sensor
+	 */
 	public void setIdSensor(String idSensor) {
 		this.idSensor = idSensor;
 	}
+	/**
+	 * Obtiene la medicion a cambiar al sensor
+	 * @return medicion a cambiar
+	 */
 	public String getMedicionCambiar() {
 		return medicionCambiar;
 	}
-
+	
+	/**
+	 * Establece la medicio a cambiar al sensor 
+	 * @param medicionCambiar medicion a cambiar
+	 */
 	public void setMedicionCambiar(String medicionCambiar) {
 		this.medicionCambiar = medicionCambiar;
 	}
-
+	
+	/**
+	 * Carga  la lista de sensores existente en el piso
+	 */
 	public String execute(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
@@ -61,6 +90,10 @@ public class ListadorDeSensores extends ActionSupport {
 		return "success";
 	}
 	
+	/**
+	 * Carga  la lista de pisos para mostrar 
+	 * @return "listarPisos"
+	 */
 	public String seleccionarPisos(){		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
@@ -71,6 +104,10 @@ public class ListadorDeSensores extends ActionSupport {
 		return "listarPisos";
 	}
 	
+	/**
+	 * Cambia la medicion del sensor elegido
+	 * @return "sucees"
+	 */
 	public String cambiarMedicion(){
 		Edificio edificio = Edificio.obtenerInstancia();
 		int indice = Integer.parseInt(idSensor);
