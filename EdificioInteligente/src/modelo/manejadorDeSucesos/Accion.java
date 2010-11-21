@@ -16,6 +16,10 @@ public abstract class Accion {
 	private Dispositivo dispositivo;
 
 	/**
+	 * Nombre de la accion a realizar
+	 */
+	private  String nombre;
+	/**
 	 * Metodo en donde se deben implementar las acciones a realizar.
 	 */
 	public abstract void ejecutar();
@@ -38,4 +42,18 @@ public abstract class Accion {
 		this.dispositivo = dispositivo;
 	}
 
+	/**
+	 * Obtiene el nombre de la accion a realizar
+	 * @return el nombre de la accion 
+	 */
+	public String obtenerNombre(){
+		return nombre;	
+	}
+	/**
+	 * Metodo para establecer el nombre de la accion a ejecutar
+	 * @param nombre nombre de la accion
+	 */
+	public void establecerNombre(String nombre){
+		this.nombre = nombre;
+	}
 }
