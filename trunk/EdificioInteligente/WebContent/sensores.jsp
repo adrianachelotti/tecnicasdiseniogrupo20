@@ -10,6 +10,14 @@ function cambiar(indice){
 	accion.value=x;	
 	idSensor.value=indice;	
 }
+function habilitar(indice){
+	var idSensor = document.getElementById("idSensor");
+	var x = document.getElementById("cambio"+indice).value;
+	var accion =document.getElementById("estadoCambiar");
+	accion.value=x;	
+	idSensor.value=indice;
+	document.sensorListado.action="ListadorDeSensores!cambiarEstado";	
+}
 </script>
 <% List<Sensor> sensores = piso.obtenerListadoDeSensores(); %>
 <div class="contenido">
@@ -23,8 +31,10 @@ function cambiar(indice){
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
 								<td class="listado_par">Sensor</td>
-								<td class="listado_par">Estado</td>
-								<td class="listado_par">Estado Posibles</td>									
+								<td class="listado_par">Medicion Actual</td>
+								<td class="listado_par">Mediciones Posibles</td>
+								<td class="listado_par">Estado Actual</td>
+								<td class="listado_par">Cambiar Estado </td>																	
 							</tr>	
 						<%	
 							int index = 0 ;
@@ -34,12 +44,23 @@ function cambiar(indice){
 								<td><%=sensorActual.obtenerDescripcion() %></td>								
 								<td><%=sensorActual.obtenerMedicion() %></td>
 								<td>
-								<select id="accion<%=index%>">								
-									<%for(String medicion:sensorActual.obtenerMedicionesPosibles()){ %>
-										<option value="<%=medicion%>"><%=medicion%></option>
-									<%} %>
-								</select>
-								<input type="submit" value="cambiar" onclick="cambiar('<%=index%>')"></input>
+									<select id="accion<%=index%>">								
+										<%for(String medicion:sensorActual.obtenerMedicionesPosibles()){ %>
+											<option value="<%=medicion%>"><%=medicion%></option>
+										<%} %>
+									</select>
+									<input type="submit" value="cambiar" id="1" onclick="cambiar('<%=index%>')"></input>
+								</td>
+								<%String habilitado = sensorActual.estaHabilitado()?"Habilitado":"Deshabilitado"; %>
+								<td>
+									<%=habilitado%>
+								</td>
+								<td>
+									<select id="cambio<%=index%>">
+										<option value="habilitar">Habilitar</option>
+										<option value="deshabilitar">Deshabilitar</option>
+									</select>
+									<input type="submit" value="change" id="2" onclick="habilitar('<%=index%>')"></input>
 								</td>							
 							</tr>	
 						<%index++;
@@ -48,6 +69,7 @@ function cambiar(indice){
 						<input type="hidden" value="<%=piso.obtenerNivel()%>" name="nivel">
 						<input type="hidden" name="idSensor" id="idSensor"></input>
 						<input type="hidden" name="medicionCambiar" id="medicionCambiar"></input>
+						<input type="hidden" name="estadoCambiar" id="estadoCambiar"></input>
 					</form> 
 				</fieldset>
 				<a href="ListadorDeSensores!seleccionarPisos">Volver</a>

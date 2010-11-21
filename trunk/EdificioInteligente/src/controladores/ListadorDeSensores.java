@@ -21,6 +21,8 @@ public class ListadorDeSensores extends ActionSupport {
 	
 	private String medicionCambiar;
 	
+	private String estadoCambiar;
+	
 	
 	/**
 	 * Obtiene el nivel elegido 
@@ -75,7 +77,20 @@ public class ListadorDeSensores extends ActionSupport {
 	public void setMedicionCambiar(String medicionCambiar) {
 		this.medicionCambiar = medicionCambiar;
 	}
-	
+	/**
+	 * Obtiene el estado a cambiar 
+	 * @return el estado a cambiar
+	 */
+	public String getEstadoCambiar() {
+		return estadoCambiar;
+	}
+	/**
+	 * Establece el estado a cambiar por el sensor
+	 * @param estadoCambiar estado a cambiar
+	 */
+	public void setEstadoCambiar(String estadoCambiar) {
+		this.estadoCambiar = estadoCambiar;
+	}
 	/**
 	 * Carga  la lista de sensores existente en el piso
 	 */
@@ -114,6 +129,21 @@ public class ListadorDeSensores extends ActionSupport {
 		Sensor sensor = edificio.getPisos().get(this.nivel).obtenerSensores().get(indice);
 		sensor.establecerMedicion(medicionCambiar);
 		edificio.getPisos().get(this.nivel).obtenerManejadorDeSucesos().agregarSuceso(new Suceso(medicionCambiar));
+		
+		return execute();
+	}
+	
+	public String cambiarEstado(){
+		Edificio edificio = Edificio.obtenerInstancia();
+		int indice = Integer.parseInt(idSensor);
+		Sensor sensor = edificio.getPisos().get(this.nivel).obtenerSensores().get(indice);
+		if (estadoCambiar.equalsIgnoreCase("habilitar")){
+			sensor.habilitar();
+		}
+		if (estadoCambiar.equalsIgnoreCase("deshabilitar")){
+			sensor.deshabilitar();
+		}
+		
 		
 		return execute();
 	}
