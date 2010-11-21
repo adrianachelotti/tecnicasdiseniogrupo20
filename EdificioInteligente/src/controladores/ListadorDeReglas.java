@@ -15,6 +15,11 @@ public class ListadorDeReglas extends ActionSupport {
 
 	private int nivel;
 	
+	private String habilitacionRegla;
+	
+	private String reglaElegida;
+	
+	
 	/**
 	 * Obtiene el nivel seleccionado para ver las reglas
 	 * @return nivel de piso
@@ -39,6 +44,38 @@ public class ListadorDeReglas extends ActionSupport {
 		this.session = session;
 	}
 	
+	/**
+	 * Obtiene si la regla es habilitada
+	 * @return habilitacion de la regla
+	 */
+	public String getHabilitacionRegla() {
+		return habilitacionRegla;
+	}
+	
+	/**
+	 * Establece si la regla va a hacer habilitada o no
+	 * @param habilitacionRegla habilita o no la regla
+	 */
+	public void setHabilitacionRegla(String habilitacionRegla) {
+		this.habilitacionRegla = habilitacionRegla;
+	}
+
+	/**
+	 * Obtiene la regla elegida 
+	 * @return regla elegida
+	 */
+	public String getReglaElegida() {
+		return reglaElegida;
+	}
+	
+	/**
+	 * Establece la regla elegida
+	 * @param reglaElegida regla elegida
+	 */
+	public void setReglaElegida(String reglaElegida) {
+		this.reglaElegida = reglaElegida;
+	}
+
 	/**
 	 * Se pasa a traves de la session las reglas del nivel seleccionado
 	 */
@@ -65,6 +102,27 @@ public class ListadorDeReglas extends ActionSupport {
 		session.put("edificio", contenedor);
 		setSession(session);
 		return "listarPisos";
+	}
+	
+	/**
+	 * Habilita una regla seleccionada
+	 * @return "success"
+	 */
+	public String configurarRegla(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		Edificio edificio = Edificio.obtenerInstancia();
+		EdificioBean contenedor = new EdificioBean();
+		int indiceImplicacion = Integer.parseInt(reglaElegida);
+		if (this.habilitacionRegla.equalsIgnoreCase("habilitar")){
+			edificio.obtenerPiso(nivel).obtenerManejadorDeSucesos().habilitarImplicacion(indiceImplicacion);
+		}else{
+			edificio.obtenerPiso(nivel).obtenerManejadorDeSucesos().deshabilitarImplicacion(indiceImplicacion);
+		}
+		contenedor.establecerListadoDeReglas(edificio.obtenerPiso(nivel).obtenerManejadorDeSucesos().obtenerImplicaciones());
+		session.put("piso", contenedor);
+		setSession(session);
+		return "success";
+		
 	}
 	
 
