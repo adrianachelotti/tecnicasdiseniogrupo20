@@ -15,7 +15,7 @@ import controladores.beans.EdificioBean;
 
 @SuppressWarnings("serial")
 public class AgregarDispositivo extends ActionSupport {
-
+	
 	private int nivel;
 	
 	private String driverElegido;

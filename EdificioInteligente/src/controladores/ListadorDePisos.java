@@ -15,20 +15,18 @@ public class ListadorDePisos extends ActionSupport {
 	@SuppressWarnings("unused")
 	private Map<String,Object> session ;
 		
-	private List<Piso> pisos ;
-	
-	public List<Piso> getPisos() {
-		return pisos;
-	}
 
-	public void setPisos(List<Piso> pisos) {
-		this.pisos = pisos;
-	}
-
+	/**
+	 * Se establece la session 
+	 * @param session session actual
+	 */
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-
+	
+	/**
+	 * Se pasa a través de la session los pisos del edificio
+	 */
 	public String execute(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Edificio edificio = Edificio.obtenerInstancia();
