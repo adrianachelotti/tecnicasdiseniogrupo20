@@ -3,24 +3,15 @@
 <%@ page language="java" contentType="text/html" import="modelo.edificio.*"%>
 <%@ page language="java" contentType="text/html" import="modelo.manejadorDeSucesos.*"%>
 <jsp:useBean id="piso" scope="session" class="controladores.beans.EdificioBean"/>
-<script type="text/javascript">
-function cambiar(indice){
-	var idSensor = document.getElementById("idSensor");
-	var x = document.getElementById("accion"+indice).value;
-	var accion =document.getElementById("medicionCambiar");
-	accion.value=x;	
-	idSensor.value=indice;	
-}
-</script>
 <% List<Implicacion> reglas = piso.obtenerListadoDeReglas(); %>
 <div class="contenido">
 	<div class="titulo"><h3>Reglas</h3></div>
 	<div class="cuerpo" align="center">
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
-			<td width="800" align="center">
-			<fieldset> <legend>Listado de Reglas </legend>
+			<td width="800" align="center">			
 				<form class="elegante" id="sensorListado" name="sensorListado" action="ListadorDeReglas!cambiarMedicion">
+					<fieldset> <legend>Listado de Reglas </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
 								<td class="listado_par">Reglas</td>
@@ -42,20 +33,19 @@ function cambiar(indice){
 									<%=reglaActual.getAccion().obtenerDispositivo().obtenerDescripcion() %>
 								</td>
 								<td> 
-									<%--String accion = reglaActual.getClass().getName().equalsIgnoreCase("AccionApagarDispositivo")? "Apagar":"Encender";--%>
-									<%--=accion--%>
-									Encender
+									<%=reglaActual.getAccion().obtenerNombre()%>								
 								</td>							
 							</tr>	
 						<%index++;
 						} %>										
 						</table>
 						<input type="hidden" value="<%=piso.obtenerNivel()%>" name="nivel">
-						<input type="hidden" name="idSensor" id="idSensor"></input>
-						<input type="hidden" name="medicionCambiar" id="medicionCambiar"></input>
-					</form> 
-				</fieldset>
-				<a href="ListadorDeReglas!seleccionarPisos">Volver</a>
+						
+					</fieldset>
+						<input type="submit" value="Agregar Regla">
+						<a href="ListadorDeReglas!seleccionarPisos">Volver</a>		
+				</form> 
+				
 			</td>
 		</tr>
 		</table>
