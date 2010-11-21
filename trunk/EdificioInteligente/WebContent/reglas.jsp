@@ -10,8 +10,7 @@ function cambiar(indice){
 	var accion = document.getElementById("habilitacionRegla");
 	accion.value=x;	
 	idRegla.value=indice;
-	document.reglaListado.action ="ListadorDeReglas!configurarRegla";
-	alert(document.reglaListado.action);	
+	document.reglaListado.action ="ListadorDeReglas!configurarRegla";	
 }
 </script>
 <% List<Implicacion> reglas = piso.obtenerListadoDeReglas(); %>
