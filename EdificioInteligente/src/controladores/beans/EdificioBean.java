@@ -1,7 +1,7 @@
 package controladores.beans;
 
 import java.util.List;
-
+import modelo.manejadorDeSucesos.*;
 import modelo.driver.*;
 import modelo.edificio.*;
 
@@ -15,8 +15,12 @@ public class EdificioBean {
 	List<DriverSensor> catalogoDriversDeSensores;
 
 	List<Dispositivo> listadoDeDispositivos;
+	
+	List<Implicacion> listaDeReglas;
 
 	List<Sensor> listadoDeSensores;
+	
+	private int nivel;
 	
 	public List<DriverSensor> obtenerCatalogoDriversDeSensores() {
 		return catalogoDriversDeSensores;
@@ -33,10 +37,6 @@ public class EdificioBean {
 	public void establecerListadoDeDispositivos(List<Dispositivo> listadoDeDispositivos) {
 		this.listadoDeDispositivos = listadoDeDispositivos;
 	}
-
-	private int nivel;
-
-	
 
 	public List<DriverDispositivo> obtenerCatalogoDriversDeDisposititvos() {
 		return catalogoDriversDeDisposititvos;
@@ -69,6 +69,18 @@ public class EdificioBean {
 	public void establecerListadoDeSensores(List<Sensor> listadoDeSensores) {
 		this.listadoDeSensores = listadoDeSensores;
 	}
+
+	public List<Implicacion> obtenerListadoDeReglas() {
+		return listaDeReglas;
+	}
+
+	public void establecerListadoDeReglas(List<Implicacion> listaDeReglas) {
+		this.listaDeReglas = listaDeReglas;
+	}
+	
+	 
+	
+	
 	
 
 }
