@@ -2,8 +2,10 @@ package controladores;
 
 import modelo.cliente.driver.dispositivos.*;
 import modelo.cliente.driver.sensores.*;
-import modelo.edificio.Edificio;
-import modelo.edificio.Piso;
+import modelo.edificio.*;
+import modelo.manejadorDeSucesos.*;
+import modelo.accion.AccionPrenderDispositivo;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -50,8 +52,15 @@ public class Autenticador extends ActionSupport {
 	 * cargado por default 
 	 */
 	private void inicializarEdificio(){
-		Edificio edificio = Edificio.obtenerInstancia();	
-		edificio.agregarPiso(new Piso(0));
+		Edificio edificio = Edificio.obtenerInstancia();
+		Piso piso0 = new Piso(0);
+		Dispositivo dispositivo = new Dispositivo(new CalefactorDriver());
+		dispositivo.establecerDescripcion("Estufa");
+		piso0.agregarDispositivo(dispositivo);
+		AccionPrenderDispositivo accion = new AccionPrenderDispositivo();
+		accion.establecerDispositivo(dispositivo);
+		piso0.obtenerManejadorDeSucesos().suscribirImplicacion(accion, new Suceso("TEMPERATURA_BAJA"));
+		edificio.agregarPiso(piso0);
 		edificio.agregarPiso(new Piso(1));
 		//TODO: cambiar esta hardcodeado
 		edificio.agregarDriverDispositivo(new CalefactorDriver());
