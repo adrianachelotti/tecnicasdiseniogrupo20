@@ -10,7 +10,7 @@
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
 			<td width="800" align="center">			
-				<form class="elegante" id="sensorListado" name="sensorListado" action="ListadorDeReglas!cambiarMedicion">
+				<form class="elegante" id="sensorListado" name="sensorListado" action="AgregarRegla">
 					<fieldset> <legend>Listado de Reglas </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
