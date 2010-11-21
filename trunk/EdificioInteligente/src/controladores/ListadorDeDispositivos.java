@@ -38,7 +38,7 @@ public class ListadorDeDispositivos extends ActionSupport {
 
 	/**
 	 * Obtiene la accion a ejecutar seleccionada por el usuario
-	 * @return
+	 * @return accion a ejecutar
 	 */
 	public String getAccionEjecutar() {
 		return accionEjecutar;

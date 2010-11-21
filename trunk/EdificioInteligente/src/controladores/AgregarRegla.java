@@ -5,6 +5,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AgregarRegla extends ActionSupport {
 	
 	
-	public String 
+	public String execute(){
+		return "success";
+	}
 
 }
