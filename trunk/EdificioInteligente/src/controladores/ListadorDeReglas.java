@@ -118,7 +118,7 @@ public class ListadorDeReglas extends ActionSupport {
 		}else{
 			edificio.obtenerPiso(nivel).obtenerManejadorDeSucesos().deshabilitarImplicacion(indiceImplicacion);
 		}
-		contenedor.establecerListadoDeReglas(edificio.obtenerPiso(nivel).obtenerManejadorDeSucesos().obtenerImplicaciones());
+		contenedor.establecerListadoDeReglas(edificio.obtenerPiso(this.nivel).obtenerManejadorDeSucesos().obtenerImplicaciones());
 		session.put("piso", contenedor);
 		setSession(session);
 		return "success";
