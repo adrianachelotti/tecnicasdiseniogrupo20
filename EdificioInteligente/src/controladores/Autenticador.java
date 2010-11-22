@@ -82,8 +82,6 @@ public class Autenticador extends ActionSupport {
 			addActionError("Datos Incorrectos");
 			return "error";
 			
-		}
-			
-		
+		}	
 	}
 }
