@@ -13,7 +13,7 @@
 <ul class="menu">
 	<li class="top"><a href="principal.jsp" class="top_link"><span>Home</span></a></li>
 
-	<li class="top"><a href="#" class="top_link"><span>Edificios</span></a>
+	<li class="top"><a href="#" class="top_link"><span>Edificio</span></a>
 		<ul class="sub">
 			 <li><a href="ListadorDePisos" >Visualizar Pisos</a></li>			 
 		</ul>
