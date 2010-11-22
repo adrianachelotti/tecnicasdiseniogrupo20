@@ -104,7 +104,8 @@ public class ManejadorDeSucesos {
 			List<Suceso> sucesosANotificar = null;
 			for (Implicacion relacion : this.implicaciones) {
 				sucesosANotificar = filtrarSucesosPorTiempoDeImplicacion(relacion);
-				this.configuracion.obtenerEvaluador().avisarSucesosOcurridos(relacion, sucesosANotificar);
+				if(relacion.estaHabilitada())
+					this.configuracion.obtenerEvaluador().avisarSucesosOcurridos(relacion, sucesosANotificar);
 			}
 			notificado=false;
 		}
