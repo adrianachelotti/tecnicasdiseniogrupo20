@@ -60,7 +60,7 @@ function habilitar(indice){
 										<option value="habilitar">Habilitar</option>
 										<option value="deshabilitar">Deshabilitar</option>
 									</select>
-									<input type="submit" value="change" id="2" onclick="habilitar('<%=index%>')"></input>
+									<input type="submit" value="cambiar" id="2" onclick="habilitar('<%=index%>')"></input>
 								</td>							
 							</tr>	
 						<%index++;
