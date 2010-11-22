@@ -18,7 +18,6 @@
 					<fieldset> <legend>Configuraci&oacute;n de Reglas </legend>
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >
 							<tr>
-								<td class="listado_par">Regla</td>	
 								<td class="listado_par">Sucesos</td>	
 								<td class="listado_par">Suceso Esperados</td>
 								<td class="listado_par">Dispositivo</td>
@@ -26,7 +25,6 @@
 																								
 							</tr>	
 							<tr>
-								<td>NUEVA</td>
 								<td>
 									<select name="sucesoAgregar">										
 										<%for (String sucesoAgregar: listaMedicionesPosibles){ %>
