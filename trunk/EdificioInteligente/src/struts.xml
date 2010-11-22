@@ -4,35 +4,36 @@
 <package name="controladores" extends="struts-default">
 
 		<action name="Autenticador" class="controladores.Autenticador">
-			<result name="success">/principal.jsp</result>
-			<result name="error">/autenticacion.jsp</result>
+			<result name="success">principal.jsp</result>
+			<result name="error">autenticacion.jsp</result>
+			<result name="reiniciar">autenticacion.jsp</result>
 		</action>
 		<action name="ListadorDePisos" class="controladores.ListadorDePisos">
-			<result name="success">/pisos.jsp</result>			
+			<result name="success">pisos.jsp</result>			
 		</action>
 		<action name="ListadorDeDispositivos" class="controladores.ListadorDeDispositivos">
-			<result name="listarPisos">/seleccionDePisosDispositivo.jsp</result>
-			<result name="success">/dispositivo.jsp</result>
+			<result name="listarPisos">seleccionDePisosDispositivo.jsp</result>
+			<result name="success">dispositivo.jsp</result>
 		</action>
 		<action name="ListadorDeSensores" class="controladores.ListadorDeSensores">
-			<result name="listarPisos">/seleccionDePisosSensor.jsp</result>
-			<result name="success">/sensores.jsp</result>
+			<result name="listarPisos">seleccionDePisosSensor.jsp</result>
+			<result name="success">sensores.jsp</result>
 		</action>
 		<action name="ListadorDeReglas" class="controladores.ListadorDeReglas">
-			<result name="listarPisos">/seleccionDePisosRegla.jsp</result>
-			<result name="success">/reglas.jsp</result>
+			<result name="listarPisos">seleccionDePisosRegla.jsp</result>
+			<result name="success">reglas.jsp</result>
 		</action>
 		<action name="AgregarDispositivo" class="controladores.AgregarDispositivo">
-			<result name="success">/agregarDispositivos.jsp</result>
-			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
+			<result name="success">agregarDispositivos.jsp</result>
+			<result name="grabar" type="redirectAction">vista/ListadorDePisos</result>					
 		</action>
 		<action name="AgregarSensor" class="controladores.AgregarSensor">
-			<result name="success">/agregarSensor.jsp</result>
-			<result name="grabar" type="redirectAction">ListadorDePisos</result>					
+			<result name="success">agregarSensor.jsp</result>
+			<result name="grabar" type="redirectAction">vista/ListadorDePisos</result>					
 		</action>
 		<action name="AgregarRegla" class="controladores.AgregarRegla">
-			<result name="success">/agregarRegla.jsp</result>
-			<result name="guardar" type="redirectAction">ListadorDeReglas</result>					
+			<result name="success">agregarRegla.jsp</result>
+			<result name="guardar" type="redirectAction">vista/ListadorDeReglas</result>					
 		</action>
 </package>
 </struts>
