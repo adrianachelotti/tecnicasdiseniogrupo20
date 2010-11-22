@@ -58,8 +58,9 @@
 													
 						</table>
 						</fieldset>
+						<input type="hidden" name="nivel" value="<%=piso.obtenerNivel()%>">
 						<input type="submit" value="Guardar" onclick="document.reglasConfiguracion.action='AgregarRegla!guardar'" ></input>
-						<a href="ListadorDeReglas">Cancelar</a>
+						<a href="ListadorDeReglas?nivel=<%=piso.obtenerNivel()%>">Cancelar</a>
 					</form> 
 				
 				
