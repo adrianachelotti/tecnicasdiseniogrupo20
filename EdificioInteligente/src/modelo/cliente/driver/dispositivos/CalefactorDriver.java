@@ -4,7 +4,7 @@ import modelo.driver.DriverDispositivo;
 
 public class CalefactorDriver implements DriverDispositivo{
 
-	private boolean encendido;
+	private boolean encendido =false;
 	
 	private static final String nombre ="Calefactor";
 	
