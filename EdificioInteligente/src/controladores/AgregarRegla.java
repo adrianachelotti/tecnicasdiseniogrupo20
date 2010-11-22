@@ -133,7 +133,7 @@ public class AgregarRegla extends ActionSupport {
 		contenedor.establecerListadoDeDispositivos(piso.obtenerDispositivos());
 		contenedor.establecerMedicionesPosibles(piso.obtenerCatalogoMedicionesPosibles());
 		contenedor.establecerMedicionesEsperadas(this.sucesosEsperados);
-		
+		contenedor.establecerNivel(this.nivel);
 		session.put("piso",contenedor);
 		this.setSession(session);
 		
