@@ -1,22 +1,23 @@
 package controladores;
 
-import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.config.entities.ActionConfig;
-
-import modelo.manejadorDeSucesos.*;
-import modelo.edificio.*;
-import controladores.beans.*;
-import modelo.manejadorDeSucesos.*;
-import modelo.accion.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.ActionMap;
+import modelo.accion.AccionApagarDispositivo;
+import modelo.accion.AccionPrenderDispositivo;
+import modelo.edificio.Dispositivo;
+import modelo.edificio.Edificio;
+import modelo.edificio.Piso;
+import modelo.manejadorDeSucesos.Accion;
+import modelo.manejadorDeSucesos.Suceso;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+import controladores.beans.EdificioBean;
+
+@SuppressWarnings("serial")
 public class AgregarRegla extends ActionSupport {
 	
 	private int nivel;
