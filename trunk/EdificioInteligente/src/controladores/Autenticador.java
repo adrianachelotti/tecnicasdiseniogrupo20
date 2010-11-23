@@ -1,12 +1,16 @@
 package controladores;
 
-import modelo.cargador.CargadorDeDriver;
-import modelo.cliente.driver.dispositivos.*;
-import modelo.cliente.driver.sensores.*;
-import modelo.edificio.*;
-import modelo.manejadorDeSucesos.*;
 import modelo.accion.AccionPrenderDispositivo;
-
+import modelo.cliente.driver.dispositivos.CalefactorDriver;
+import modelo.cliente.driver.dispositivos.LucesDriver;
+import modelo.cliente.driver.dispositivos.PuertaDriver;
+import modelo.cliente.driver.sensores.SensorDeHumoDriver;
+import modelo.cliente.driver.sensores.SensorDeRuidoDriver;
+import modelo.cliente.driver.sensores.SensorDeTemperaturaDriver;
+import modelo.edificio.Dispositivo;
+import modelo.edificio.Edificio;
+import modelo.edificio.Piso;
+import modelo.manejadorDeSucesos.Suceso;
 
 import com.opensymphony.xwork2.ActionSupport;
 

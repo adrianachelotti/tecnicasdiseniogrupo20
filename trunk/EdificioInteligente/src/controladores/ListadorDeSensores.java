@@ -2,7 +2,6 @@ package controladores;
 
 import java.util.Map;
 
-import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
 import modelo.edificio.Sensor;
 import modelo.manejadorDeSucesos.Suceso;
@@ -12,7 +11,9 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import controladores.beans.EdificioBean;
 
+@SuppressWarnings("serial")
 public class ListadorDeSensores extends ActionSupport {
+	@SuppressWarnings("unused")
 	private Map<String, Object> session;
 	
 	private int nivel;

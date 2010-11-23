@@ -9,8 +9,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import controladores.beans.EdificioBean;
 
+@SuppressWarnings("serial")
 public class ListadorDeReglas extends ActionSupport {
 	
+	@SuppressWarnings("unused")
 	private Map<String, Object> session;
 
 	private int nivel;
