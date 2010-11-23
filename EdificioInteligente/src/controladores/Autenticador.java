@@ -1,5 +1,6 @@
 package controladores;
 
+import modelo.cargador.CargadorDeDriver;
 import modelo.cliente.driver.dispositivos.*;
 import modelo.cliente.driver.sensores.*;
 import modelo.edificio.*;
@@ -69,6 +70,8 @@ public class Autenticador extends ActionSupport {
 		edificio.agregarDriverSensor(new SensorDeHumoDriver());
 		edificio.agregarDriverSensor(new SensorDeRuidoDriver());
 		edificio.agregarDriverSensor(new SensorDeTemperaturaDriver());
+		//CargadorDeDriver cargador = new CargadorDeDriver();
+		//cargador.cargar();
 	}
 	
 	/**
