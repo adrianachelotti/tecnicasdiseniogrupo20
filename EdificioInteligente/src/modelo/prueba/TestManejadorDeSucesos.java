@@ -1,13 +1,13 @@
 package modelo.prueba;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import junit.framework.TestCase;
-import modelo.edificio.Dispositivo;
+import modelo.accion.AccionPrenderDispositivo;
 import modelo.cliente.driver.dispositivos.CalefactorDriver;
-import modelo.manejadorDeSucesos.*;
-import modelo.driver.*;
-import modelo.accion.*;
+import modelo.edificio.Dispositivo;
+import modelo.manejadorDeSucesos.ManejadorDeSucesos;
+import modelo.manejadorDeSucesos.Suceso;
 
 
 public class TestManejadorDeSucesos extends  TestCase {

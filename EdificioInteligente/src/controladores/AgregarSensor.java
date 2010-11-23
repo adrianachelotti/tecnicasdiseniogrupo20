@@ -2,14 +2,18 @@ package controladores;
 
 import java.util.List;
 import java.util.Map;
-import modelo.driver.DriverDispositivo;
+
 import modelo.driver.DriverSensor;
-import modelo.edificio.*;
+import modelo.edificio.Edificio;
+import modelo.edificio.Piso;
+import modelo.edificio.Sensor;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import controladores.beans.EdificioBean;
 
+@SuppressWarnings("serial")
 public class AgregarSensor extends ActionSupport {
 private int nivel;
 	

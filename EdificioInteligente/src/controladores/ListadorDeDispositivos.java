@@ -10,8 +10,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import controladores.beans.EdificioBean;
 
+@SuppressWarnings("serial")
 public class ListadorDeDispositivos extends ActionSupport {
 	
+	@SuppressWarnings("unused")
 	private Map<String, Object> session;
 	
 	private int nivel;
