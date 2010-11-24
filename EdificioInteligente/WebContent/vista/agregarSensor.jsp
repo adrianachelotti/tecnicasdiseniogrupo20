@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html" import="java.util.List"%>
 <%@ page language="java" contentType="text/html" import="modelo.driver.*"%>
 <jsp:useBean id="edificio" scope="session" class="controladores.beans.EdificioBean"/>
+<script type="text/javascript">
+function cargar(){
+	document.sensorAgregar.action = "AgregarSensor!cargarSensorDrivers";
+}
+</script>
 <%List<DriverSensor> drivers = edificio.obtenerCatalogoDriversDeSensores(); %>
 <div class="contenido">
 	<div class="titulo"><h3>Pisos</h3></div>
@@ -19,7 +24,7 @@
 									<%for (DriverSensor driver: drivers){ %>
 									<option><%=driver.obtenerNombre()%></option>
 									<%} %>		
-								</select>					
+								</select>&nbsp;&nbsp;<input type="submit" value="Cargar Driver" onclick="cargar()"></input>				
 							</td>
 						</tr>	
 						<tr>
