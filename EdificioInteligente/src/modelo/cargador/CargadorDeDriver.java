@@ -8,11 +8,14 @@ import modelo.edificio.Edificio;
 
 public class CargadorDeDriver{
 	
-	private static final String DIRECTORIO_BASE = "C:/Users/Dario/Desktop/TecnicasII/trunk/";
+	private static final String DIRECTORIO_BASE = "C:/Users/adriana/Desktop/tecnicasdiseniogrupo20/EdificioInteligente/";
+	private static final String DIRECTORIO_SERVER = "C:/Users/adriana/Desktop/tecnicasdiseniogrupo20/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/EdificioInteligente/WEB-INF/classes/";
+	//private static final String DIRECTORIO_BASE = "C:/Users/Dario/Desktop/TecnicasII/trunk";
+	//private static final String DIRECTORIO_SERVER = "C:/Users/Dario/Desktop/TecnicasII/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/trunk/WEB-INF/classes";
 	private static final String DIRECTORIO_ORIGEN_DISPOSITIVOS = DIRECTORIO_BASE+"drivers/dispositivos/";
 	private static final String DIRECTORIO_ORIGEN_SENSORES = DIRECTORIO_BASE+"drivers/sensores/";
-	private static final String DIRECTORIO_DESTINO_DISPOSITIVOS = DIRECTORIO_BASE+"drivers/dispositivos/cargados/";
-	private static final String DIRECTORIO_DESTINO_SENSORES = DIRECTORIO_BASE+"drivers/sensores/cargados/";
+	private static final String DIRECTORIO_DESTINO_DISPOSITIVOS = DIRECTORIO_SERVER;
+	private static final String DIRECTORIO_DESTINO_SENSORES = DIRECTORIO_SERVER;
 	private static final String EXT_CLASS = ".class";
 		
 	private void moverArchivos(String nombreArchivo,String directorioOrigen,String directorioDestino){
@@ -33,6 +36,7 @@ public class CargadorDeDriver{
 				try {
 					System.out.println("PISOS:"+edificio.getPisos().size());
 					Class clase = Class.forName(nombreClase);
+					System.out.println(((DriverDispositivo)clase.newInstance() ).obtenerNombre());
 					edificio.agregarDriverDispositivo((DriverDispositivo) clase.newInstance());
 				} catch (Exception e) {
 					//TODO ver manejo exception
