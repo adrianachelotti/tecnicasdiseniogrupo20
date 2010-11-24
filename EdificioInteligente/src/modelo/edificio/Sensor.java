@@ -7,18 +7,30 @@ import modelo.manejadorDeSucesos.Suceso;
 
 public class Sensor{
 	
+	/**
+	 * Ubicacion del Sensor en el piso
+	 */
 	private Ubicacion ubicacion;
 	
+	/**
+	 * Descripcion de sensor
+	 */
 	private String descripcion;
 	
+	/**
+	 * Driver del sensor
+	 */
 	private DriverSensor driver;
 	
 	/**
 	 * Constructor del sensor cuyo driver es pasado como parametro
+	 * Se lo inicializa en una medicion y se lo habilita
 	 * @param driver driver del sensor
 	 */
 	public Sensor(DriverSensor driver){
 		this.driver = driver;
+		this.driver.establecerMedicion(driver.medicionesPosibles().get(0));
+		this.driver.encender();
 	}
 	
 	/**

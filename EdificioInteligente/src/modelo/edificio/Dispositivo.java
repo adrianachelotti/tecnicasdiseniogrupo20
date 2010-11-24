@@ -4,10 +4,19 @@ import modelo.driver.DriverDispositivo;
 
 public class Dispositivo {
 	
+	/**
+	 * Ubicacion del dispositivo en el piso
+	 */
 	private Ubicacion ubicacion;
 	
+	/**
+	 * Descripcion del dispositivo
+	 */
 	private String descripcion;
 	
+	/**
+	 * Driver del dispositivo
+	 */
 	private DriverDispositivo driver;
 	
 	/**

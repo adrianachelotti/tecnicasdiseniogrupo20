@@ -11,14 +11,30 @@ import modelo.manejadorDeSucesos.Implicacion;
 
 public class Edificio {
 
+	/**
+	 * Lista de pisos que conforman al edificio
+	 */
 	private List<Piso> pisos;
 	
+	/**
+	 * Catalogo de drivers de sensores
+	 */
 	private List<DriverSensor> catalogoDriversDeSensores;
 	
+	/**
+	 * Catalogo de drivers de dispositivos
+	 */
 	private List<DriverDispositivo> catalogoDriversDeDispositivos;
 	
+	/**
+	 * Instancia unica de la clase
+	 */
 	private static Edificio instancia;
 	
+	/**
+	 * Constructor de Edifio
+	 * Se inicializan las listas
+	 */
 	private Edificio(){		
 		this.pisos = new ArrayList<Piso>();
 		this.catalogoDriversDeDispositivos = new ArrayList<DriverDispositivo>();
