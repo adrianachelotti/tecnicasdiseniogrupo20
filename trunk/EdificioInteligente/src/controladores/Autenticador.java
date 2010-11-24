@@ -17,8 +17,13 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class Autenticador extends ActionSupport {
 
+	/**
+	 * Nombre de usuario ingresado
+	 */
 	String usuario;
-	
+	/**
+	 * Password ingresada por el usuario
+	 */
 	String password;
 	/**
 	 * Obtiene el usuario ingresado en la autenticacion
@@ -77,8 +82,6 @@ public class Autenticador extends ActionSupport {
 			edificio.agregarDriverSensor(new SensorDeRuidoDriver());
 			edificio.agregarDriverSensor(new SensorDeTemperaturaDriver());
 		}
-		//CargadorDeDriver cargador = new CargadorDeDriver();
-		//cargador.cargar();
 	}
 	
 	/**
