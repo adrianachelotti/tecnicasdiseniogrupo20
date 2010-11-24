@@ -33,7 +33,10 @@
 		</action>
 		<action name="AgregarRegla" class="controladores.AgregarRegla">
 			<result name="success">agregarRegla.jsp</result>
-			<result name="guardar" type="redirectAction">vista/ListadorDeReglas</result>					
+			<result name="guardar" type="redirectAction">
+				<param name="actionName">vista/ListadorDeReglas</param>		
+				<param name="nivel">${nivel}</param>
+			</result>					
 		</action>
 </package>
 </struts>
