@@ -58,22 +58,25 @@ public class Autenticador extends ActionSupport {
 	 */
 	private void inicializarEdificio(){
 		Edificio edificio = Edificio.obtenerInstancia();
-		Piso piso0 = new Piso(0);
-		Dispositivo dispositivo = new Dispositivo(new CalefactorDriver());
-		dispositivo.establecerDescripcion("Estufa");
-		piso0.agregarDispositivo(dispositivo);
-		AccionPrenderDispositivo accion = new AccionPrenderDispositivo();
-		accion.establecerDispositivo(dispositivo);
-		piso0.obtenerManejadorDeSucesos().suscribirImplicacion(accion, new Suceso("TEMPERATURA_BAJA"));
-		edificio.agregarPiso(piso0);
-		edificio.agregarPiso(new Piso(1));
-		//TODO: cambiar esta hardcodeado
-		edificio.agregarDriverDispositivo(new CalefactorDriver());
-		edificio.agregarDriverDispositivo(new LucesDriver());
-		edificio.agregarDriverDispositivo(new PuertaDriver());
-		edificio.agregarDriverSensor(new SensorDeHumoDriver());
-		edificio.agregarDriverSensor(new SensorDeRuidoDriver());
-		edificio.agregarDriverSensor(new SensorDeTemperaturaDriver());
+		//Si no tiene piso inicializar el edificio con datos por default
+		if (edificio.getPisos().isEmpty()){
+			Piso piso0 = new Piso(0);
+			Dispositivo dispositivo = new Dispositivo(new CalefactorDriver());
+			dispositivo.establecerDescripcion("Estufa");
+			piso0.agregarDispositivo(dispositivo);
+			AccionPrenderDispositivo accion = new AccionPrenderDispositivo();
+			accion.establecerDispositivo(dispositivo);
+			piso0.obtenerManejadorDeSucesos().suscribirImplicacion(accion, new Suceso("TEMPERATURA_BAJA"));
+			edificio.agregarPiso(piso0);
+			edificio.agregarPiso(new Piso(1));
+			//TODO: cambiar esta hardcodeado
+			edificio.agregarDriverDispositivo(new CalefactorDriver());
+			edificio.agregarDriverDispositivo(new LucesDriver());
+			edificio.agregarDriverDispositivo(new PuertaDriver());
+			edificio.agregarDriverSensor(new SensorDeHumoDriver());
+			edificio.agregarDriverSensor(new SensorDeRuidoDriver());
+			edificio.agregarDriverSensor(new SensorDeTemperaturaDriver());
+		}
 		//CargadorDeDriver cargador = new CargadorDeDriver();
 		//cargador.cargar();
 	}
@@ -83,6 +86,7 @@ public class Autenticador extends ActionSupport {
 	 */
 	public String execute(){
 		if(this.usuario.equalsIgnoreCase("root")&&this.password.equalsIgnoreCase("root")){
+			
 			inicializarEdificio();
 			return SUCCESS;
 		}else{
