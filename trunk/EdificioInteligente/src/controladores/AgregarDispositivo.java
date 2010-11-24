@@ -2,6 +2,8 @@ package controladores;
 
 import java.util.List;
 import java.util.Map;
+
+import modelo.cargador.CargadorDeDriver;
 import modelo.driver.DriverDispositivo;
 import modelo.edificio.Dispositivo;
 import modelo.edificio.Edificio;
@@ -138,6 +140,16 @@ public class AgregarDispositivo extends ActionSupport {
 		}
 		piso.agregarDispositivo(dispositivoAgregar);
 		return "grabar";
+	}
+	
+	/**
+	 * Metodo que carga en run time driver de dispositivos
+	 * @return
+	 */
+	public String cargarDispositivoDrivers(){
+		CargadorDeDriver cargador = new CargadorDeDriver();
+		cargador.cargar();
+		return execute();
 	}
 	
 
