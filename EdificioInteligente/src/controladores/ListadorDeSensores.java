@@ -16,12 +16,24 @@ public class ListadorDeSensores extends ActionSupport {
 	@SuppressWarnings("unused")
 	private Map<String, Object> session;
 	
+	/**
+	 * Nivel del piso donde se encuentra la lista de sensores
+	 */
 	private int nivel;
 	
+	/**
+	 * Identificador del sensor a cambiar el estado o deshabilitar
+	 */
 	private String idSensor;
 	
+	/**
+	 * Medicion del sensor
+	 */
 	private String medicionCambiar;
 	
+	/**
+	 * Estado a cambiar al sensor 
+	 */
 	private String estadoCambiar;
 	
 	
@@ -121,16 +133,20 @@ public class ListadorDeSensores extends ActionSupport {
 	}
 	
 	/**
-	 * Cambia la medicion del sensor elegido
+	 * Cambia la medicion del sensor elegido si el mismo 
+	 * esta habilitado, en caso contrario muestra un mensaje de error
 	 * @return "sucees"
 	 */
 	public String cambiarMedicion(){
 		Edificio edificio = Edificio.obtenerInstancia();
 		int indice = Integer.parseInt(idSensor);
 		Sensor sensor = edificio.getPisos().get(this.nivel).obtenerSensores().get(indice);
-		sensor.establecerMedicion(medicionCambiar);
-		edificio.getPisos().get(this.nivel).obtenerManejadorDeSucesos().agregarSuceso(new Suceso(medicionCambiar));
-		
+		if(sensor.estaHabilitado()){
+			sensor.establecerMedicion(medicionCambiar);
+			edificio.getPisos().get(this.nivel).obtenerManejadorDeSucesos().agregarSuceso(new Suceso(medicionCambiar));
+		}else{
+			addActionError("Imposible cambiar la medición, el sensor se encuentra deshabilitado");
+		}
 		return execute();
 	}
 	
