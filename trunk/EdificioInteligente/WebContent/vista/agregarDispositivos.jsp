@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html" import="java.util.List"%>
 <%@ page language="java" contentType="text/html" import="modelo.driver.*"%>
 <jsp:useBean id="edificio" scope="session" class="controladores.beans.EdificioBean"/>
+<script type="text/javascript">
+function cargar(){
+	document.dispositivosAgregar.action = "AgregarDispositivo!cargarDispositivoDrivers";
+}
+</script>
 <%List<DriverDispositivo> drivers = edificio.obtenerCatalogoDriversDeDisposititvos(); %>
 <div class="contenido">
 	<div class="titulo"><h3>Pisos</h3></div>
@@ -9,8 +14,9 @@
 		<table height ="300" cellpadding="0" cellspacing="0"  >
 		<tr>
 			<td width="800" align="center">		
-				<form class="elegante" id="dispositivosAgregar" name="dispositivoAgregar" action="AgregarDispositivo!agregar">
+				<form class="elegante" id="dispositivosAgregar" name="dispositivosAgregar" action="AgregarDispositivo!agregar">
 					<fieldset> <legend>Agregar Dispositivos </legend>
+			
 						<table width="600" border="1" class="listado" cellpadding="0" cellspacing="0" >						
 						<tr>
 							<td class="listado_impar">Elija Driver:</td>
@@ -19,7 +25,7 @@
 									<%for (DriverDispositivo driver: drivers){ %>
 									<option><%=driver.obtenerNombre()%></option>
 									<%} %>		
-								</select>					
+								</select>&nbsp;&nbsp;<input type="submit" value="Cargar Driver" onclick="cargar()"></input>					
 							</td>
 						</tr>	
 						<tr>
