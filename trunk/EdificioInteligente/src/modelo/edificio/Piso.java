@@ -6,12 +6,24 @@ import modelo.manejadorDeSucesos.ManejadorDeSucesos;
 
 public class Piso {
 	
+	/**
+	 * Nivel donde se encuentra el piso en  el edificio
+	 */
 	private int nivel ;
 	
+	/**
+	 * Dispositivos existentes en el piso
+	 */
 	private List<Dispositivo> dispositivos;
 	
+	/**
+	 * Sensores existentes en  el piso
+	 */
 	private List<Sensor> sensores;
 	
+	/**
+	 * Manejador de sucesos del piso
+	 */
 	private ManejadorDeSucesos manejadorDeSucesos;
 	
 	/**
