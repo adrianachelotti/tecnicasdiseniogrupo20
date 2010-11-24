@@ -3,6 +3,7 @@ package controladores;
 import java.util.List;
 import java.util.Map;
 
+import modelo.cargador.CargadorDeDriver;
 import modelo.driver.DriverSensor;
 import modelo.edificio.Edificio;
 import modelo.edificio.Piso;
@@ -141,5 +142,14 @@ public class AgregarSensor extends ActionSupport {
 		return "grabar";
 	}
 	
+	/**
+	 * Metodo que carga el sensor en runtime
+	 * @return
+	 */
+	public String cargarSensorDrivers(){
+		CargadorDeDriver cargador = new CargadorDeDriver();
+		cargador.cargar();
+		return execute();
+	}
 
 }
