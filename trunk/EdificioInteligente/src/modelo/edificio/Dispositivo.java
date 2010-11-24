@@ -1,7 +1,14 @@
 package modelo.edificio;
 
 import modelo.driver.DriverDispositivo;
-
+/**
+ * Clase que representa los dispositivos fisicos que se encuentra
+ * en los pisos del edificio, como puede ser un calefactor, un televisor, etc.
+ * Sobre los dispositivos se ejecutan las acciones cuando se cumple la regla que tiene
+ * dicha accion
+ * @author grupo 20
+ *
+ */
 public class Dispositivo {
 	
 	/**

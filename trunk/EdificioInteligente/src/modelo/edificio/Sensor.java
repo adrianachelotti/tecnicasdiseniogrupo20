@@ -4,7 +4,13 @@ import java.util.List;
 
 import modelo.driver.DriverSensor;
 import modelo.manejadorDeSucesos.Suceso;
-
+/**
+ * Clase que modela un sensor dentro del edificio
+ * Los sensores puede tener un conjunto de mediciones
+ * posibles y son los encargados de notificar sucesos
+ * @author grupo 20
+ *
+ */
 public class Sensor{
 	
 	/**
