@@ -1,3 +1,4 @@
+<%@ taglib uri="/struts-tags" prefix="s" %>  
 <jsp:include page="encabezado.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html" import="java.util.List"%>
 <%@ page language="java" contentType="text/html" import="modelo.edificio.*"%>
@@ -72,6 +73,7 @@ function habilitar(indice){
 						<input type="hidden" name="estadoCambiar" id="estadoCambiar"></input>
 					</form> 
 				</fieldset>
+					<s:actionerror cssClass="error"/>
 				<a href="ListadorDeSensores!seleccionarPisos">Volver</a>
 			</td>
 		</tr>
