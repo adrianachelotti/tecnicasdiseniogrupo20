@@ -3,7 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.manejadorDeSucesos.ManejadorDeSucesos;
-
+/**
+ * Clase que modela un piso dentro del edificio
+ * En el mismo se encuentra un conjunto de dispositivos y sensores
+ * Los sensores notifican suceso a traves del manejador de sucesos. 
+ * Y sobre los dispositivos se puede encender o apagar segun si se
+ * cumple alguna regla que lo involucre.
+ * @author grupo 20
+ *
+ */
 public class Piso {
 	
 	/**

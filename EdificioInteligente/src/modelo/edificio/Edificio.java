@@ -8,7 +8,14 @@ import modelo.driver.DriverDispositivo;
 import modelo.driver.DriverSensor;
 import modelo.manejadorDeSucesos.Implicacion;
 
-
+/**
+ * Clase que modela al edificio, 
+ * Esta compuesto por pisos y una lista de drivers de sensores
+ * y dispositivos
+ *  
+ * @author grupo 20
+ *
+ */
 public class Edificio {
 
 	/**
