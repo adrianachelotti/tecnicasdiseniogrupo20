@@ -20,17 +20,32 @@ import controladores.beans.EdificioBean;
 @SuppressWarnings("serial")
 public class AgregarRegla extends ActionSupport {
 	
+	/**
+	 * Nivel del piso donde agrega la regla
+	 */
 	private int nivel;
 	
+	/**
+	 * Sucesos esperados agregados por el usuario
+	 */
 	private List<String> sucesosEsperados = new ArrayList<String>();
 	
 	@SuppressWarnings("unused")
 	private Map<String,Object> session ;
 	
+	/**
+	 * Suceso que se elije para agregar a los esperados
+	 */
 	private String sucesoAgregar;
 	
+	/**
+	 * Dispositivo elegido por el usuario para realizar la accion
+	 */
 	private String dispositivoElegido;
 	
+	/**
+	 * Accion elegida para la regla por el usuario
+	 */
 	private String accion;
 	
 	/**

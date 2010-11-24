@@ -16,10 +16,19 @@ public class ListadorDeDispositivos extends ActionSupport {
 	@SuppressWarnings("unused")
 	private Map<String, Object> session;
 	
+	/**
+	 * Nivel del piso donde se encuentran los dispositivos listados
+	 */
 	private int nivel;
 	
+	/**
+	 * Identificador del dispositivo 
+	 */
 	private String idDispositivo;
 	
+	/**
+	 * Accion a ejecutar sobre el dispositivo
+	 */
 	private String accionEjecutar ="";
 	
 	/**

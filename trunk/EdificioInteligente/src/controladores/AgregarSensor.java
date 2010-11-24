@@ -15,10 +15,20 @@ import controladores.beans.EdificioBean;
 
 @SuppressWarnings("serial")
 public class AgregarSensor extends ActionSupport {
-private int nivel;
 	
+	/**
+	 * Nivel del piso donde se agrega el sensor
+	 */
+	private int nivel;
+	
+	/**
+	 * Driver elegido para agregar el sensor
+	 */
 	private String driverElegido;
 	
+	/**
+	 * Descripcion del sensor ingresada por el usuario
+	 */
 	private String descripcionSensor;
 	
 	

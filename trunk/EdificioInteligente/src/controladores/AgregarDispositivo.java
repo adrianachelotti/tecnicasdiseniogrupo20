@@ -15,11 +15,19 @@ import controladores.beans.EdificioBean;
 
 @SuppressWarnings("serial")
 public class AgregarDispositivo extends ActionSupport {
-	
+	/**
+	 * Nivel del piso donde se agrega el dispositivo
+	 */
 	private int nivel;
 	
+	/**
+	 * Driver elegido para el dispositivo
+	 */
 	private String driverElegido;
 	
+	/**
+	 * Descripcion del dispositivo ingresada
+	 */
 	private String descripcionDispositivo;
 	
 	

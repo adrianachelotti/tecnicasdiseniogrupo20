@@ -14,11 +14,19 @@ public class ListadorDeReglas extends ActionSupport {
 	
 	@SuppressWarnings("unused")
 	private Map<String, Object> session;
-
+	/**
+	 * Nivel del piso del cual se listan las reglas
+	 */
 	private int nivel;
 	
+	/**
+	 *	Indica si el usuario quiere habilitar o no la regla
+	 */
 	private String habilitacionRegla;
 	
+	/**
+	 * Regla elegida por el usuario
+	 */
 	private String reglaElegida;
 	
 	
