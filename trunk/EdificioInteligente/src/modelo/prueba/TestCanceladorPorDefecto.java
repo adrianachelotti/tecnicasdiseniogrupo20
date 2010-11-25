@@ -26,7 +26,6 @@ public class TestCanceladorPorDefecto extends TestCase {
 		sucesosExistentes.add(new Suceso("muchaAgua"));
 		
 		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
-		
 		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosResultantes.add(new Suceso("muchaAgua"));
 					
@@ -43,7 +42,6 @@ public class TestCanceladorPorDefecto extends TestCase {
 		sucesosExistentes.add(new Suceso("muchaPresion","muchaTemperatura"));
 				
 		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
-		
 		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosResultantes.add(new Suceso("muchaPresion","muchaTemperatura"));
 							
@@ -61,7 +59,6 @@ public class TestCanceladorPorDefecto extends TestCase {
 		sucesosExistentes.add(new Suceso("muchaAgua"));
 		
 		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
-		
 		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosResultantes.add(new Suceso("muchaAgua"));
@@ -80,7 +77,6 @@ public class TestCanceladorPorDefecto extends TestCase {
 		sucesosExistentes.add(new Suceso("muchaAgua"));
 		
 		cancelador.cancelarSuceso(sucesosExistentes, sucesoCancelador);
-		
 		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosResultantes.add(new Suceso("muchaPresion","pocaAgua"));
@@ -91,24 +87,20 @@ public class TestCanceladorPorDefecto extends TestCase {
 	
 					
 	public void testCancelarMultiplesSucesosValidos(){
-	
 		CanceladorPorDefecto cancelador = CanceladorPorDefecto.obtenerInstancia();
 		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
 		List<Suceso> sucesosNuevosCanceladores = new ArrayList<Suceso>();
 		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
-		
 		sucesosExistentes.add(new Suceso("pocaAgua"));
 		sucesosExistentes.add(new Suceso("muchaPresion"));
 		sucesosExistentes.add(new Suceso("muchaAgua"));
 		sucesosExistentes.add(new Suceso("pocaPresion"));
 		sucesosExistentes.add(new Suceso("muchaTemperatura"));
-		
 		sucesosNuevosCanceladores.add(new Suceso("muchaAgua"));
 		sucesosNuevosCanceladores.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosNuevosCanceladores.add(new Suceso("muchaAgua","pocaAgua"));
-		
+	
 		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevosCanceladores);
-		
 		sucesosResultantes.add(new Suceso("muchaPresion"));
 		sucesosResultantes.add(new Suceso("muchaAgua"));
 		sucesosResultantes.add(new Suceso("muchaTemperatura"));
@@ -121,20 +113,17 @@ public class TestCanceladorPorDefecto extends TestCase {
 		List<Suceso> sucesosExistentes = new ArrayList<Suceso>();
 		List<Suceso> sucesosNuevosCanceladores = new ArrayList<Suceso>();
 		List<Suceso> sucesosResultantes = new ArrayList<Suceso>();
-		
 		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosExistentes.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
 		sucesosExistentes.add(new Suceso("muchaAgua","pocaAgua"));
 		sucesosExistentes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosExistentes.add(new Suceso("muchaAgua"));
-		
 		sucesosNuevosCanceladores.add(new Suceso("muchaAgua"));
 		sucesosNuevosCanceladores.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosNuevosCanceladores.add(new Suceso("pocaAgua","muchaTemperatura"));
 		
 		cancelador.cancelarSucesos(sucesosExistentes, sucesosNuevosCanceladores);
-		
 		sucesosResultantes.add(new Suceso("pocaAgua","muchaAgua"));
 		sucesosResultantes.add(new Suceso("muchaPresion","pocaPresion"));
 		sucesosResultantes.add(new Suceso("muchaAgua","pocaAgua"));
