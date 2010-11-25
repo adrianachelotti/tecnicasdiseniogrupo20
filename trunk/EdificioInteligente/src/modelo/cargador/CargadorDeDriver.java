@@ -18,6 +18,7 @@ public class CargadorDeDriver{
 	private static final String DIRECTORIO_SERVER = "C:/Users/Dario/Desktop/TecnicasII/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/trunk/WEB-INF/classes/";
 	private static final String DIRECTORIO_ORIGEN_DISPOSITIVOS = DIRECTORIO_BASE+"drivers/dispositivos/";
 	private static final String DIRECTORIO_ORIGEN_SENSORES = DIRECTORIO_BASE+"drivers/sensores/";
+	private static final String DIRECTORIO_ORIGEN_SENSORES_MOCK = DIRECTORIO_BASE+"drivers/sensores/sensor/";
 	private static final String DIRECTORIO_DESTINO_DISPOSITIVOS = DIRECTORIO_SERVER;
 	private static final String DIRECTORIO_DESTINO_SENSORES = DIRECTORIO_SERVER;
 	private static final String EXT_CLASS = ".class";
@@ -88,14 +89,32 @@ public class CargadorDeDriver{
 	}
 	
 	/**
+	 * Mueve los mocks de los sensores.
+	 * @param directorioDrivers directorio en donde se encuentran los mockups.
+	 * @param filtro filtro de los archivos a mover.
+	 */
+	private void moverMocksSensores(File directorioMocks,FiltroDeArchivos filtro){
+		String[] listaArchivos = directorioMocks.list(filtro);
+		if(listaArchivos!=null){
+			for(int i=0; i<listaArchivos.length; i++){
+				String nombreArchivo = listaArchivos[i]; 
+				moverArchivos(nombreArchivo,DIRECTORIO_ORIGEN_SENSORES_MOCK,DIRECTORIO_DESTINO_SENSORES);
+			}
+		}
+	}
+	
+	
+	/**
 	 * Carga los drivers existentes en forma dinamica.
 	 */
 	public void cargar() {
 		File directorioDispositivos=new File(DIRECTORIO_ORIGEN_DISPOSITIVOS);
 		File directorioSensores=new File(DIRECTORIO_ORIGEN_SENSORES);
+		File directorioSensoresMock=new File(DIRECTORIO_ORIGEN_SENSORES_MOCK);
 		FiltroDeArchivos filtro = new FiltroDeArchivos(EXT_CLASS);
 		moverDriversDispositivos(directorioDispositivos,filtro);
 		moverDriversSensores(directorioSensores,filtro);
+		moverMocksSensores(directorioSensoresMock,filtro);
 	}
 	
 }
