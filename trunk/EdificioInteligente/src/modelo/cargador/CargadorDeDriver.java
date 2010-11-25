@@ -18,7 +18,7 @@ public class CargadorDeDriver{
 	private static final String DIRECTORIO_SERVER = "C:/Users/Dario/Desktop/TecnicasII/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/trunk/WEB-INF/classes/";
 	private static final String DIRECTORIO_ORIGEN_DISPOSITIVOS = DIRECTORIO_BASE+"drivers/dispositivos/";
 	private static final String DIRECTORIO_ORIGEN_SENSORES = DIRECTORIO_BASE+"drivers/sensores/";
-	private static final String DIRECTORIO_ORIGEN_SENSORES_MOCK = DIRECTORIO_BASE+"drivers/sensores/sensor/";
+	private static final String DIRECTORIO_ORIGEN_SENSORES_MOCK = DIRECTORIO_BASE+"drivers/sensores/mockups/";
 	private static final String DIRECTORIO_DESTINO_DISPOSITIVOS = DIRECTORIO_SERVER;
 	private static final String DIRECTORIO_DESTINO_SENSORES = DIRECTORIO_SERVER;
 	private static final String EXT_CLASS = ".class";
@@ -51,9 +51,7 @@ public class CargadorDeDriver{
 	       		moverArchivos(listaArchivos[i],DIRECTORIO_ORIGEN_DISPOSITIVOS,DIRECTORIO_DESTINO_DISPOSITIVOS);
 	       		String nombreClase = nombreArchivo.substring(0, nombreArchivo.lastIndexOf("."));
 				try {
-					System.out.println("PISOS:"+edificio.getPisos().size());
 					Class clase = Class.forName(nombreClase);
-					System.out.println(((DriverDispositivo)clase.newInstance() ).obtenerNombre());
 					edificio.agregarDriverDispositivo((DriverDispositivo) clase.newInstance());
 				} catch (Exception e) {
 					//TODO ver manejo exception
@@ -113,8 +111,8 @@ public class CargadorDeDriver{
 		File directorioSensoresMock=new File(DIRECTORIO_ORIGEN_SENSORES_MOCK);
 		FiltroDeArchivos filtro = new FiltroDeArchivos(EXT_CLASS);
 		moverDriversDispositivos(directorioDispositivos,filtro);
-		moverDriversSensores(directorioSensores,filtro);
 		moverMocksSensores(directorioSensoresMock,filtro);
+		moverDriversSensores(directorioSensores,filtro);
 	}
 	
 }
