@@ -125,7 +125,6 @@ public class Piso {
 	}
 	
 	/**
-	 * TODO: ver de sacar repetidas
 	 * Obtiene el catalago de todas las mediciones posibles
 	 * @return
 	 */
