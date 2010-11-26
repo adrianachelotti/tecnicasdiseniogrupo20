@@ -122,16 +122,15 @@ public class AgregarSensor extends ActionSupport {
 		Piso piso = edificio.getPisos().get(this.nivel);
 		Sensor sensorAgregar = null;
 		for (DriverSensor driver: edificio.obtenerCatalogoDriversDeSensores()){
-			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
 				try {
 					sensorAgregar = new Sensor(driver.getClass().newInstance());
 					sensorAgregar.establecerDescripcion(descripcionSensor);
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
+					//TODO ver jerarquia de excepciones
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
+					//TODO ver jerarquia de excepciones
 					e.printStackTrace();
 				}
 				

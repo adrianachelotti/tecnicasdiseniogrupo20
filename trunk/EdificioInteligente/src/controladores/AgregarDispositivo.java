@@ -122,16 +122,15 @@ public class AgregarDispositivo extends ActionSupport {
 		Piso piso = edificio.getPisos().get(this.nivel);
 		Dispositivo dispositivoAgregar = null;
 		for (DriverDispositivo driver: edificio.obtenerCataloDriversDeDispositivos()){
-			//Todo: clonar el driver
 			if (driverElegido.equals(driver.obtenerNombre())){
 				try {
 					dispositivoAgregar = new Dispositivo((DriverDispositivo)driver.getClass().newInstance());
 					dispositivoAgregar.establecerDescripcion(descripcionDispositivo);
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
+					// TODO ver jerarquia de excepciones
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
+					// TODO TODO ver jerarquia de excepciones
 					e.printStackTrace();
 				}
 				

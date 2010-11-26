@@ -74,7 +74,6 @@ public class Autenticador extends ActionSupport {
 			piso0.obtenerManejadorDeSucesos().suscribirImplicacion(accion, new Suceso("TEMPERATURA_BAJA"));
 			edificio.agregarPiso(piso0);
 			edificio.agregarPiso(new Piso(1));
-			//TODO: cambiar esta hardcodeado
 			edificio.agregarDriverDispositivo(new CalefactorDriver());
 			edificio.agregarDriverDispositivo(new LucesDriver());
 			edificio.agregarDriverDispositivo(new PuertaDriver());

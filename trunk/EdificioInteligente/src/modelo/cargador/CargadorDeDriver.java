@@ -54,7 +54,7 @@ public class CargadorDeDriver{
 					Class clase = Class.forName(nombreClase);
 					edificio.agregarDriverDispositivo((DriverDispositivo) clase.newInstance());
 				} catch (Exception e) {
-					//TODO ver manejo exception
+					//TODO ver jerarquia de excepciones
 					e.printStackTrace();
 				}
 			}
@@ -79,7 +79,7 @@ public class CargadorDeDriver{
 					Class clase = Class.forName(nombreClase);
 					edificio.agregarDriverSensor((DriverSensor)clase.newInstance());
 				} catch (Exception e) {
-					//TODO ver manejo exception
+					//TODO ver jerarquia de excepciones
 					e.printStackTrace();
 				}
 			}
